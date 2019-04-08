@@ -1,0 +1,54 @@
+$spaceamounts: (5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 75, 100); // Adjust this to include the pixel amounts you need.
+$sides: (top, bottom, left, right); // Leave this variable alone
+
+@each $space in $spaceamounts {
+  @each $side in $sides {
+    .m-#{str-slice($side, 0, 1)}-#{$space} {
+      margin-#{$side}: #{$space}px !important;
+    }
+
+    .p-#{str-slice($side, 0, 1)}-#{$space} {
+      padding-#{$side}: #{$space}px !important;
+    }
+  }
+}
+
+#cropme-img {
+    width: 300px;
+    height: 300px;
+    background: #2a2a2a;
+}
+
+.change-photo-btn {
+    position: relative !important;
+    bottom: 0px !important;
+    margin-top: 30px !important;
+    clear: both;
+}
+
+#cropping {
+    display: none;
+    top: 25px;
+    position: relative;
+    li {
+        float: left;
+        padding: 5px !important;
+        display: block;
+        margin-right: 10px;
+        a {
+            display: block;
+        }
+    }
+}
+
+.edit-profile-photo img {
+    max-width: 100% !important;
+}
+
+#upload-errors{
+  display: none;
+}
+
+#profile-pic-actions{
+    margin-top: 30px;
+}
