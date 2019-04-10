@@ -18,15 +18,72 @@ class UserSeed extends Seeder
         $users = [
             [
                 'user' => [
-                    'name'=>'Kevin',
-                    'last_name'=>'Jimenez',
-                    'email' => 'kevin@inweb.mx',
+                    'name'=>'Administrador',
+                    'last_name'=>'RICSA',
+                    'email' => 'admin@ricsa.com',
                     'password' => '12345678',
-                    'role_id' => $role->id
-                ]
+                    'role_id' => 1,
+                ],
+                'u
+                ser' => [
+                    'name'=>'Dirección General',
+                    'last_name'=>'RICSA',
+                    'email' => 'dg@ricsa.com',
+                    'password' => '12345678',
+                    'role_id' => 2,
+                ],
+                'user' => [
+                    'name'=>'Tena',
+                    'last_name'=>'RICSA',
+                    'email' => 'gerencia@ricsa.com',
+                    'password' => '12345678',
+                    'role_id' => 3,
+                ],
+                'user' => [
+                    'name'=>'Ingeniería',
+                    'last_name'=>'RICSA',
+                    'email' => 'ingenieria@ricsa.com',
+                    'password' => '12345678',
+                    'role_id' => 4,
+                ],
+                'user' => [
+                    'name'=>'Almacen',
+                    'last_name'=>'RICSA',
+                    'email' => 'almacen@ricsa.com',
+                    'password' => '12345678',
+                    'role_id' => 4,
+                ],
+                'user' => [
+                    'name'=>'Producción',
+                    'last_name'=>'RICSA',
+                    'email' => 'produccion@ricsa.com',
+                    'password' => '12345678',
+                    'role_id' => 4,
+                ],
+                'user' => [
+                    'name'=>'Contabilidad',
+                    'last_name'=>'RICSA',
+                    'email' => 'contabilidad@ricsa.com',
+                    'password' => '12345678',
+                    'role_id' => 5,
+                ],
+                'user' => [
+                    'name'=>'Compras',
+                    'last_name'=>'RICSA',
+                    'email' => 'compras@ricsa.com',
+                    'password' => '12345678',
+                    'role_id' => 6,
+                ],
+                'user' => [
+                    'name'=>'Cotización',
+                    'last_name'=>'RICSA',
+                    'email' => 'cotizacion@ricsa.com',
+                    'password' => '12345678',
+                    'role_id' => 6,
+                ],
             ]
-        ];
 
+        ];
         foreach($users as $user){
             if(App\User::where('email',$user['user']['email'])->count() < 1){
                 $user['user']['password'] = bcrypt($user['user']['password']);

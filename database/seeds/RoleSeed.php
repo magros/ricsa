@@ -14,7 +14,12 @@ class RoleSeed extends Seeder
     {
         $roles = [
             'Super Administrador',
-            'Encargado'
+            'Direccion General',
+            'Gerencia',
+            'Encargado',
+            'Consulta',
+            'Contador',
+
         ];
         foreach($roles as $role){
             Role::firstOrCreate(['name'=>$role]);
