@@ -18,7 +18,6 @@ Route::get('/', function () {
 });
 Auth::routes();
 Route::get('home', ['as'=>'dashboard', 'uses'=>'Admin\DashboardController@index'])->name('home');
-
 // Route::prefix('Admin')->group(function(){
 //     Route::middleware(['admin'])->name('admin.')->namespace('Admin')->group(function(){
 //         Route::get('/',['as'=>'dashboard','uses'=>'DashboardController@index']);
@@ -29,6 +28,9 @@ Route::get('home', ['as'=>'dashboard', 'uses'=>'Admin\DashboardController@index'
 //         Route::resource('categories','CategoriesController');
 //         Route::resource('contabilidad','ContabilidadController');
 //     });
+Route::get('cotizador', 'CotizacionController@index')->name('cotizador');
+// Route::get('/', function () {
+//     return view('welcome');
 // });
 
 Route::get('cotizador', 'Admin\DashboardController@cotizador')->name('cotizador');
