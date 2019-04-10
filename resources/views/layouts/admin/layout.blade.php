@@ -205,7 +205,7 @@
 
         });
     </script>
-
+    @stack('scripts')
     @yield('dyn_js')
 
 

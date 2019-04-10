@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use App\Libraries\Helpers;
+use Illuminate\Support\Facades\Auth;
+
 
 class DashboardController extends Controller
 {
@@ -19,10 +21,5 @@ class DashboardController extends Controller
     {
 
         return view('admin.dashboard.index');
-    }
-    public function cotizador()
-    {
-
-        return view('cotizaciones.cotizador');
     }
 }

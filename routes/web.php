@@ -19,7 +19,7 @@ Route::get('/', function () {
 Auth::routes();
 Route::get('home', ['as'=>'dashboard', 'uses'=>'Admin\DashboardController@index'])->name('home');
 
-Route::get('cotizador', 'Admin\DashboardController@cotizador')->name('cotizador');
+Route::get('cotizador', 'CotizacionController@index')->name('cotizador');
 // Route::get('/', function () {
 //     return view('welcome');
 // });
