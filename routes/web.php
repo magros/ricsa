@@ -38,4 +38,3 @@ Route::prefix('cotizacion')->group(function(){
 
     });
 });
-
