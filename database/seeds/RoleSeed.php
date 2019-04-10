@@ -16,7 +16,7 @@ class RoleSeed extends Seeder
             'Super Administrador',
             'Direccion General',
             'Gerencia',
-            'Encargado',
+            'Cotizacion',
             'Consulta',
             'Contador',
 

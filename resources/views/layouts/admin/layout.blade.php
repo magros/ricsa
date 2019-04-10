@@ -72,7 +72,7 @@
                         <a href="#"><i class="fa fa-cogs "></i> <span class="nav-label">Cotizacones</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li class="{{isset($subtab)&&$subtab=='users'?'active':''}}">
-                            <a href="{{route('cotizador')}}">Cotizador</a>
+                            {{-- <a href="{{route('cotizador')}}">Cotizador</a> --}}
                             </li>
                             <li class="{{isset($subtab)&&$subtab=='roles'?'active':''}}">
                             <a href="#">Roles</a>

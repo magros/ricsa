@@ -17,19 +17,25 @@ Route::get('/', function () {
     return view('admin/login');
 });
 Auth::routes();
-Route::get('home', ['as'=>'dashboard', 'uses'=>'Admin\DashboardController@index'])->name('home');
 
-// Route::prefix('Admin')->group(function(){
-//     Route::middleware(['admin'])->name('admin.')->namespace('Admin')->group(function(){
-//         Route::get('/',['as'=>'dashboard','uses'=>'DashboardController@index']);
-//         Route::resource('ingeniera','IngenieriaController');
-//         Route::resource('almacen','AlmacenController');
-//         Route::resource('calidad','CalidadController');
-//         Route::resource('compras','ComprasController');
-//         Route::resource('categories','CategoriesController');
-//         Route::resource('contabilidad','ContabilidadController');
-//     });
-// });
+Route::prefix('admin')->group(function(){
 
-Route::get('cotizador', 'Admin\DashboardController@cotizador')->name('cotizador');
+    Route::prefix('login')->namespace('Auth')->group(function(){
+        Route::get('/',['as'=>'admin.login','uses'=>'LoginController@adminLogin']);
+    });
+
+
+    Route::middleware(['admin'])->name('admin.')->namespace('Admin')->group(function()
+    {
+        Route::get('/', ['as'=>'dashboard', 'uses'=>'DashboardController@index']);
+    });
+});
+
+Route::prefix('cotizacion')->group(function(){
+    Route::middleware(['cotizador'])->name('.cotizacion')->namespace('Cotizacion')->group(function()
+    {
+        Route::get('/', 'CotizacionCotroller@index');
+
+    });
+});
 

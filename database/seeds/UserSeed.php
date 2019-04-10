@@ -24,14 +24,17 @@ class UserSeed extends Seeder
                     'password' => '12345678',
                     'role_id' => 1,
                 ],
-                'u
-                ser' => [
+            ],
+            [
+                'user' => [
                     'name'=>'Dirección General',
                     'last_name'=>'RICSA',
                     'email' => 'dg@ricsa.com',
                     'password' => '12345678',
                     'role_id' => 2,
                 ],
+            ],
+            [
                 'user' => [
                     'name'=>'Tena',
                     'last_name'=>'RICSA',
@@ -39,6 +42,17 @@ class UserSeed extends Seeder
                     'password' => '12345678',
                     'role_id' => 3,
                 ],
+            ],
+            [
+                'user' => [
+                    'name'=>'Cotizacion',
+                    'last_name'=>'RICSA',
+                    'email' => 'cotizacion@ricsa.com',
+                    'password' => '12345678',
+                    'role_id' => 4,
+                ],
+            ],
+            [
                 'user' => [
                     'name'=>'Ingeniería',
                     'last_name'=>'RICSA',
@@ -46,6 +60,8 @@ class UserSeed extends Seeder
                     'password' => '12345678',
                     'role_id' => 4,
                 ],
+            ],
+            [
                 'user' => [
                     'name'=>'Almacen',
                     'last_name'=>'RICSA',
@@ -53,6 +69,8 @@ class UserSeed extends Seeder
                     'password' => '12345678',
                     'role_id' => 4,
                 ],
+            ],
+            [
                 'user' => [
                     'name'=>'Producción',
                     'last_name'=>'RICSA',
@@ -60,6 +78,8 @@ class UserSeed extends Seeder
                     'password' => '12345678',
                     'role_id' => 4,
                 ],
+            ],
+            [
                 'user' => [
                     'name'=>'Contabilidad',
                     'last_name'=>'RICSA',
@@ -67,6 +87,8 @@ class UserSeed extends Seeder
                     'password' => '12345678',
                     'role_id' => 5,
                 ],
+            ],
+            [
                 'user' => [
                     'name'=>'Compras',
                     'last_name'=>'RICSA',
@@ -74,6 +96,8 @@ class UserSeed extends Seeder
                     'password' => '12345678',
                     'role_id' => 6,
                 ],
+            ],
+            [
                 'user' => [
                     'name'=>'Cotización',
                     'last_name'=>'RICSA',
