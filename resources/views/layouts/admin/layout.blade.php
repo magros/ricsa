@@ -71,14 +71,23 @@
                     <li class="{{isset($tab)&&$tab=='system'?'active':''}}">
                         <a href="#"><i class="fa fa-cogs "></i> <span class="nav-label">Cotizacones</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
+                            <li class="{{isset($subtab)&&$subtab=='clients'?'active':''}}">
+                                <a href="#">Clientes</a>
+                            </li>
+                            <li class="{{isset($subtab)&&$subtab=='quotations'?'active':''}}">
+                                <a href="#">Cotizaciones</a>
+                            </li>
+                            <li class="{{isset($subtab)&&$subtab=='reports'?'active':''}}">
+                                <a href="#">Reportes</a>
+                            </li>
                             <li class="{{isset($subtab)&&$subtab=='users'?'active':''}}">
                             {{-- <a href="{{route('cotizador')}}">Cotizador</a> --}}
                             </li>
                             <li class="{{isset($subtab)&&$subtab=='roles'?'active':''}}">
-                            <a href="#">Roles</a>
+                                <a href="#">Roles</a>
                             </li>
                             <li class="{{isset($subtab)&&$subtab=='permissions'?'active':''}}">
-                            <a href="#">Permisos</a>
+                                <a href="#">Permisos</a>
                             </li>
 
                         </ul>
