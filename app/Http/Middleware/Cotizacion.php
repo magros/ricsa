@@ -15,7 +15,7 @@ class Cotizacion
      */
     public function handle($request, Closure $next)
     {
-        if(auth()->check()&&auth()->user()->role_id == 4){
+        if(auth()->check()&&auth()->user()->role_id == 4 || auth()->user()->role_id == 1){
             return $next($request);
         }
 

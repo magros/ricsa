@@ -82,4 +82,8 @@ class CotizacionCotroller extends Controller
     {
         //
     }
+
+    public function propuesta(){
+        return view('propuestas.createoredit');
+    }
 }
