@@ -16,6 +16,7 @@ class CreateMachineriesTable extends Migration
         Schema::create('machineries', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

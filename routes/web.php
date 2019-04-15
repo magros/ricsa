@@ -32,9 +32,16 @@ Route::prefix('admin')->group(function(){
 });
 
 Route::prefix('cotizacion')->group(function(){
-    Route::middleware(['cotizador'])->name('.cotizacion')->namespace('Cotizacion')->group(function()
+    Route::middleware(['cotizador'])->name('cotizacion.')->namespace('Cotizacion')->group(function()
     {
         Route::get('/', 'CotizacionCotroller@index');
+        Route::get('com', 'CotizacionCotroller@propuesta')->name('complejidad');
+        Route::get('cliente','ClientController@index')->name('client');
+        Route::get('cliente/create','ClientController@create')->name('client.alta');
+        Route::post('cliente/save','ClientController@store')->name('client.save');
+        Route::get('cliente/{id}','ClientController@edit')->name('client.edit');
+        Route::patch('cliente/update/{id}','ClientController@update')->name('client.update');
+        route::DELETE('cliente/delet/{id}','ClientController@destroy');
 
     });
 });

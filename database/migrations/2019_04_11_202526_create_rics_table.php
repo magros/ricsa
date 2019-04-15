@@ -16,6 +16,7 @@ class CreateRicsTable extends Migration
         Schema::create('rics', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
