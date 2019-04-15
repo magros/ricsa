@@ -76,7 +76,7 @@
                                 <a href="{{route('cotizacion.client')}}">Clientes</a>
                             </li>
                             <li class="{{isset($subtab)&&$subtab=='quotations'?'active':''}}">
-                                <a href="{{route('cotizacion.complejidad')}}">Cotizaciones</a>
+                                <a href="{{route('cotizacion.index')}}">Cotizaciones</a>
                             </li>
                             <li class="{{isset($subtab)&&$subtab=='reports'?'active':''}}">
                                 <a href="#">Reportes</a>
