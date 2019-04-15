@@ -17,9 +17,6 @@ class CreateInventoriesTable extends Migration
             $table->bigIncrements('id');
             $table->timestamps();
         });
-        Schema::table('material_engineering',function(Blueprint $table){
-            $table->foreign('inventory_id')->references('id')->on('inventories');
-        });
     }
 
     /**

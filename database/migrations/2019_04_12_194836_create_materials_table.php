@@ -17,9 +17,6 @@ class CreateMaterialsTable extends Migration
             $table->bigIncrements('id');
             $table->timestamps();
         });
-        Schema::table('material_engineering',function(Blueprint $table){
-            $table->foreign('material_id')->references('id')->on('materials');
-        });
     }
 
     /**
