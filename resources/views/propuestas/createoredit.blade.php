@@ -1,102 +1,193 @@
 @extends('layouts.admin.layout')
 
 @section('meta_title')
-    Dashboard
+    @if(!isset($ric))
+        Propuesta
+    @else
+        Editando {{$ric->ric}}
+    @endif
+@endsection
+
+@section('page_title')
+    @if(!isset($ric))
+        Crear Propuesta
+    @else
+        Editando {{$ric->ric}}
+    @endif
+@endsection
+
+@section('page_action')
+<a href="{{route('cotizacion.index')}}" class="btn btn-white">&lt; Regresar a propuestas</a>
 @endsection
 
 @section('content')
 <div class="row">
-    <div class="col-lg-12">
-        <div class="ibox float-e-margins">
-            <div class="ibox-title">
-                <h5>Datos de la cotizacion</h5>
-                <div class="ibox-tools">
-                    <a class="collapse-link">
-                        <i class="fa fa-chevron-up"></i>
-                    </a>
+    @if(!isset($ric))
+        {!! Form::open(['route'=>'cotizacion.store','id'=>'user-form', 'files'=>true,'data-toggle' => 'validator',]) !!}
+    @else
+        {!! Form::model($ric, [
+            'method' => 'PATCH',
+            'route' => ['admin.users.update', $ric->id],
+            'id'=>'category-form',
+            'files' => true,
+            'data-toggle' => 'validator',
+        ]) !!}
+    @endif
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Datos de la cotizacion</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="ibox-content">
-                <form>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="ibox float-e-margins">
-                                <div class="col-sm-6">
+                <div class="ibox-content">
+                    <form>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="ibox float-e-margins">
+                                    <div class="col-sm-6">
 
-                                    <div class="form-group">
-                                        <label for="cropme">Cliente:</label>
-                                        <select class="form-control">
-                                            <option value="volvo">Volvo</option>
-                                            <option value="saab">Saab</option>
-                                            <option value="mercedes">Mercedes</option>
-                                            <option value="audi">Audi</option>
-                                        </select>
-                                        <div class="help-block with-errors"></div>
+                                        <div class="form-group">
+                                            <label for="contract_id">Cliente:</label>
+                                            <div class="clearfix"></div>
+                                            {!! Form::select('customer_id',[null=>'---Seleciona un cliente---']+$clients->toArray(),old('customer_id'),[
+                                                'class'=>'form-control','id'=>'customer_id',
+                                                'data-required-error' => 'Este campo es obligatorio',
+                                            ]) !!}
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="email">Cotizacion No:</label>
+                                            {!! Form::text('ric',old('ric'),[
+                                                'class'=>'form-control','placeholder'=>'Propuesta',
+                                                'required'=>'', 'autocomplete'=>'off', 'id' => 'ric',
+                                                'data-required-error' => 'Este campo es obligatorio',
+                                                'data-error' => 'Introduce un ric',
+                                                'maxlength' => '100', 'disabled'
+                                            ]) !!}
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="email">Equipo:</label>
+                                            {!! Form::text('name_proyect',old('name_proyect'),[
+                                                'class'=>'form-control','placeholder'=>'Nombre del proyecto',
+                                                'required'=>'', 'autocomplete'=>'off', 'id' => 'name_proyect',
+                                                'data-required-error' => 'Este campo es obligatorio',
+                                                'data-error' => 'Introduce un nombre',
+                                                'maxlength' => '100'
+                                            ]) !!}
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="email">Fecha de presupuesto:</label>
+                                            {!! Form::date('budget_date',\Carbon\Carbon::now()->format('Y-m-d'),[
+                                                'class'=>'form-control','placeholder'=>'Nombre del proyecto',
+                                                'required'=>'', 'autocomplete'=>'off', 'id' => 'budget_date',
+                                                'data-required-error' => 'Este campo es obligatorio',
+                                                'data-error' => 'Introduce una fecha','disabled'
+                                            ]) !!}
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="email">Elaborado Por:</label>
+                                            {!! Form::text('user_id',old('user_id'),[
+                                                'class'=>'form-control','placeholder'=>'Nombre del proyecto',
+                                                'required'=>'', 'autocomplete'=>'off', 'id' => 'user_id',
+                                                'data-required-error' => 'Este campo es obligatorio',
+                                                'data-error' => 'Introduce un nombre',
+                                                'maxlength' => '100', 'disabled'
+                                            ]) !!}
+                                            <div class="help-block with-errors"></div>
+                                        </div>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label for="cropme">Cotizacion No:</label>
-                                        <input type="text" class="form-control" value="">
-                                        <div class="help-block with-errors"></div>
-                                    </div>
 
-                                    <div class="form-group">
-                                        <label for="cropme">Equipo:</label>
-                                        <input type="text" class="form-control" value="">
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="cropme">Fecha de presupuesto:</label>
-                                        <input type="date" class="form-control" value=""">
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="cropme">Elaborado Por:</label>
-                                        <input type="text" class="form-control" value="{{auth()->user()->full_name}}"  disabled>
-                                        <div class="help-block with-errors"></div>
+                                    <div class="col-sm-6">
+
+                                        <div class="form-group">
+                                            <label for="email">Numero de pedido:</label>
+                                            {!! Form::text('Npedido',old('Npedido'),[
+                                                'class'=>'form-control','placeholder'=>'Nombre del proyecto',
+                                                'required'=>'', 'autocomplete'=>'off', 'id' => 'Npedido',
+                                                'data-required-error' => 'Este campo es obligatorio',
+                                                'data-error' => 'Introduce un nombre',
+                                                'maxlength' => '100','disabled'
+                                            ]) !!}
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="email">Fecha de pedido:</label>
+                                            {!! Form::date('date_start',old('date_start'),[
+                                                'class'=>'form-control','placeholder'=>'Nombre del proyecto',
+                                                'required'=>'', 'autocomplete'=>'off', 'id' => 'date_start',
+                                                'data-required-error' => 'Este campo es obligatorio',
+                                                'data-error' => 'Introduce una fecha',
+                                                'maxlength' => '100'
+                                            ]) !!}
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="email">Fecha de entrega:</label>
+                                            {!! Form::date('date_start',old('date_start'),[
+                                                'class'=>'form-control','placeholder'=>'Nombre del proyecto',
+                                                'required'=>'', 'autocomplete'=>'off', 'id' => 'date_start',
+                                                'data-required-error' => 'Este campo es obligatorio',
+                                                'data-error' => 'Introduce una fecha',
+                                                'maxlength' => '100'
+                                            ]) !!}
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="email">Lugar de entrega:</label>
+                                            {!! Form::text('delivery_place',old('delivery_place'),[
+                                                'class'=>'form-control','placeholder'=>'Lugar de entrega',
+                                                'required'=>'', 'autocomplete'=>'off', 'id' => 'delivery_place',
+                                                'data-required-error' => 'Este campo es obligatorio',
+                                                'data-error' => 'Introduce un nombre',
+                                                'maxlength' => '100',
+                                            ]) !!}
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            {!! Form::hidden('complexity',old('complexity'),[
+                                                'class'=>'form-control','placeholder'=>'Lugar de entrega',
+                                                'required'=>'', 'autocomplete'=>'off', 'id' => 'complexity',
+                                                'data-required-error' => 'Este campo es obligatorio',
+                                                'data-error' => 'Introduce un nombre',
+                                                'maxlength' => '100',
+                                            ]) !!}
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+
+                                        <div>
+                                            <button class="btn btn-lg btn-primary pull-right m-t-n-xs" type="submit"><strong>Guardar</strong></button>
+                                        </div>
                                     </div>
 
                                 </div>
-
-
-                                <div class="col-sm-6">
-
-                                    <div class="form-group">
-                                        <label for="">Numero de pedido:</label>
-                                        <input type="text" class="form-control">
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="status">Fecha de pedido:</label>
-                                        <input type="date" class="form-control">
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="featured">Fecha de entrega:</label>
-                                        <input type="date" class="form-control" name="" id="">
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="cropme">Lugar de entrega:</label>
-                                        <input type="text" class="form-control" name="" id="">
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                </div>
-
                             </div>
                         </div>
-                    </div>
 
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
 
                 <div class="ibox-title">
-                    <h5>Datos de la cotizacion</h5>
+                    <h5>Complejidad del proyecto</h5>
                     <div class="ibox-tools">
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
@@ -191,7 +282,7 @@
                         <div class="col-sm-3">
                             <h3>Tipo proyecto</h3>
                             <div class="form-group" style="margin-top: 70%;">
-                                <h2>Tipo proyecto</h2>
+                                <h2 class="tipo">Tipo proyecto</h2>
                             </div>
                         </div>
 
@@ -199,20 +290,27 @@
                 </div>
             </div>
         </div>
-
-    </div>
+    {!! Form::close() !!}
 </div>
 
 @endsection
 
 @push('scripts')
 <script type="text/javascript">
+
     $(function(){
         var re = 0;
         var t = 0;
         var m = 0;
         var d = 0;
         var p = 0;
+        var total=0;
+        $('#ric').ready(function(){
+            // var ric = '{{$Nric}}'
+            // $('#ric').val(ric);
+            var pe = '{{$Npedido}}'
+            alert(pe);
+        });
         $("#recursos").on('change',function(){
             var valor = $(this).val();
             if(valor == 15){
@@ -310,7 +408,19 @@
         });
         function promedio(){
             if(re!=0 && t!=0 && m != 0 && d != 0 && p != 0){
-                $(".calificaion").text(re+t+m+d+p);
+                total = re+t+m+d+p;
+                $(".calificaion").text(total);
+                if(total == 15 || total < 23){
+                    $(".tipo").text('Baja Complejidad');
+                    $('#complexity').val(1);
+                    $('#user_id').val('Kevin')
+                }
+                if(total > 23 && total < 49){
+                    $(".tipo").text('Mediana Complejidad');
+                }
+                if(total>50 && total < 100){
+                    $(".tipo").text('Alta Complejidad');
+                }
             }
         }
     });

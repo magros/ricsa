@@ -35,7 +35,11 @@ Route::prefix('cotizacion')->group(function(){
     Route::middleware(['cotizador'])->name('cotizacion.')->namespace('Cotizacion')->group(function()
     {
         Route::get('/', 'CotizacionCotroller@index');
-        Route::get('com', 'CotizacionCotroller@propuesta')->name('complejidad');
+        Route::get('propuestas', 'CotizacionCotroller@proyectos')->name('index');
+        Route::get('propuesta', 'CotizacionCotroller@create')->name('create');
+        Route::post('propuesta', 'CotizacionCotroller@store')->name('store');
+
+
         Route::get('cliente','ClientController@index')->name('client');
         Route::get('cliente/create','ClientController@create')->name('client.alta');
         Route::post('cliente/save','ClientController@store')->name('client.save');

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Cotizacion;
 
+use App\Ric;
+use App\Customer;
+use Carbon\Traits\Date;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -24,7 +27,19 @@ class CotizacionCotroller extends Controller
      */
     public function create()
     {
-        //
+        $con = count(Ric::all()->where('status','=','3'))+1;
+        $pe = count(Ric::all()->where('status','=','1'))+1;
+
+        $Ric = 'Ric-'.date('y').'-'.$con;
+        $p = 'Pedido-'.date('y').'-'.$pe;
+        $data = [
+            'clients' => Customer::pluck('company','id'),
+            'Nric' => $Ric,
+            'Npedido'=> $p,
+            'tab' => 'system',
+            'subtab' => 'quotations'
+        ];
+        return view('propuestas.createoredit')->with($data);
     }
 
     /**
@@ -35,7 +50,7 @@ class CotizacionCotroller extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request);
     }
 
     /**
@@ -83,7 +98,12 @@ class CotizacionCotroller extends Controller
         //
     }
 
-    public function propuesta(){
-        return view('propuestas.createoredit');
+    public function proyectos(){
+        $data = [
+            'clients' => Ric::all(),
+            'tab' => 'system',
+            'subtab' => 'quotations'
+        ];
+        return view('cotizacion.index')->with($data);
     }
 }
