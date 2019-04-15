@@ -17,6 +17,9 @@ class CreateEngineeriesTable extends Migration
             $table->bigIncrements('id');
             $table->timestamps();
         });
+        Schema::table('material_engineering',function(Blueprint $table){
+            $table->foreing('engineering_id')->references('id')->on('engineeries');
+        });
     }
 
     /**

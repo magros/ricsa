@@ -34,7 +34,7 @@ Route::prefix('admin')->group(function(){
 Route::prefix('cotizacion')->group(function(){
     Route::middleware(['cotizador'])->name('cotizacion.')->namespace('Cotizacion')->group(function()
     {
-        Route::get('/', 'CotizacionCotroller@index');
+        Route::get('/', 'CotizacionController@index');
         Route::get('com', 'CotizacionCotroller@propuesta')->name('complejidad');
         Route::get('cliente','ClientController@index')->name('client');
         Route::get('cliente/create','ClientController@create')->name('client.alta');
@@ -45,3 +45,20 @@ Route::prefix('cotizacion')->group(function(){
 
     });
 });
+
+Route::prefix('ingenieria')->group(function(){
+    Route::middleware(['ingenieria'])->name('ingenieria.')->namespace('Ingenieria')->group(function()
+    {
+
+        // Route::resource('proyects','ProyectoController');
+        Route::get('/', 'ProyectoController@index');
+        Route::get('proyecto','ProyectoController@index')->name('proyect');
+        Route::get('proyecto/create','ProyectoController@create')->name('proyect.create');
+        Route::post('proyecto/save','ProyectoController@store')->name('proyect.save');
+        Route::get('proyecto/{id}','ProyectoController@edit')->name('proyect.edit');
+        Route::patch('proyecto/update/{id}','ProyectoController@update')->name('proyect.update');
+        route::DELETE('proyecto/delet/{id}','ProyectoController@destroy');
+
+    });
+});
+

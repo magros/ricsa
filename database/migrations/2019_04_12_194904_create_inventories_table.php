@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateInventoriessTable extends Migration
+class CreateInventoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -16,6 +16,9 @@ class CreateInventoriessTable extends Migration
         Schema::create('inventories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
+        });
+        Schema::table('material_engineering',function(Blueprint $table){
+            $table->foreign('inventory_id')->references('id')->on('inventories');
         });
     }
 

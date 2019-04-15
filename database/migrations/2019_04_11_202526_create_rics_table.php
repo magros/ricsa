@@ -14,7 +14,14 @@ class CreateRicsTable extends Migration
     public function up()
     {
         Schema::create('rics', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->String('id');
+            $table->String('name');
+            $table->String('complexity');
+            $table->double('cost');
+            $table->date('time');
+            $table->String('description');
+            $table->date('date_start');
+            $table->date('date_finish');
             $table->timestamps();
             $table->softDeletes();
         });

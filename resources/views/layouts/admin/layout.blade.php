@@ -68,6 +68,7 @@
                             <i class="fa fa-th-large"></i> <span class="nav-label">Dashboard</span>
                         </a>
                     </li>
+                    {{-- Cotizaciones --}}
                     <li class="{{isset($tab)&&$tab=='system'?'active':''}}">
                         <a href="#"><i class="fa fa-cogs "></i> <span class="nav-label">Cotizacones</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
@@ -90,6 +91,18 @@
                                 <a href="#">Permisos</a>
                             </li>
 
+                        </ul>
+                    </li>
+                    {{-- Ingeniería --}}
+                    <li class="{{isset($tab)&&$tab=='system'?'active':''}}">
+                        <a href="#"><i class="fa fa-cogs "></i> <span class="nav-label">Ingeniería</span> <span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li class="{{isset($subtab)&&$subtab=='proyects'?'active':''}}">
+                                <a href="{{route('ingenieria.proyect')}}">Proyectos</a>
+                            </li>
+                            <li class="{{isset($subtab)&&$subtab=='reports'?'active':''}}">
+                                <a href="#">Reportes</a>
+                            </li>
                         </ul>
                     </li>
                     {{-- <li class="{{isset($tab)&&$tab=='wedding'?'active':''}}">
