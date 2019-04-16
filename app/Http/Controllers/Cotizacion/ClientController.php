@@ -54,7 +54,7 @@ class ClientController extends Controller
             'phone' => 'required',
          ]);
 
-         $client = Customer::create([
+        $client = Customer::create([
             'name' => $request->name,
             'company' => $request->company,
             'email' => $request->email,

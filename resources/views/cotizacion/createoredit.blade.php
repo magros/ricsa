@@ -64,7 +64,7 @@
                                             <label for="email">Cotizacion No:</label>
                                             {!! Form::text('ric',old('ric'),[
                                                 'class'=>'form-control','placeholder'=>'Propuesta',
-                                                'required'=>'', 'autocomplete'=>'off', 'id' => 'ric',
+                                                'autocomplete'=>'off', 'id' => 'ric',
                                                 'data-required-error' => 'Este campo es obligatorio',
                                                 'data-error' => 'Introduce un ric',
                                                 'maxlength' => '100', 'disabled'
@@ -113,9 +113,9 @@
 
                                         <div class="form-group">
                                             <label for="email">Numero de pedido:</label>
-                                            {!! Form::text('Npedido',old('Npedido'),[
-                                                'class'=>'form-control','placeholder'=>'Nombre del proyecto',
-                                                'required'=>'', 'autocomplete'=>'off', 'id' => 'Npedido',
+                                            {!! Form::text('n_pedido',old('n_pedido'),[
+                                                'class'=>'form-control','placeholder'=>'Numero de pedido',
+                                                'required'=>'', 'autocomplete'=>'off', 'id' => 'n_pedido',
                                                 'data-required-error' => 'Este campo es obligatorio',
                                                 'data-error' => 'Introduce un nombre',
                                                 'maxlength' => '100','disabled'
@@ -125,9 +125,9 @@
 
                                         <div class="form-group">
                                             <label for="email">Fecha de pedido:</label>
-                                            {!! Form::date('date_start',old('date_start'),[
+                                            {!! Form::date('estimated_time',old('estimated_time'),[
                                                 'class'=>'form-control','placeholder'=>'Nombre del proyecto',
-                                                'required'=>'', 'autocomplete'=>'off', 'id' => 'date_start',
+                                                'required'=>'', 'autocomplete'=>'off', 'id' => 'estimated_time',
                                                 'data-required-error' => 'Este campo es obligatorio',
                                                 'data-error' => 'Introduce una fecha',
                                                 'maxlength' => '100'
@@ -137,9 +137,9 @@
 
                                         <div class="form-group">
                                             <label for="email">Fecha de entrega:</label>
-                                            {!! Form::date('date_start',old('date_start'),[
+                                            {!! Form::date('definite_time',old('definite_time'),[
                                                 'class'=>'form-control','placeholder'=>'Nombre del proyecto',
-                                                'required'=>'', 'autocomplete'=>'off', 'id' => 'date_start',
+                                                'required'=>'', 'autocomplete'=>'off', 'id' => 'definite_time',
                                                 'data-required-error' => 'Este campo es obligatorio',
                                                 'data-error' => 'Introduce una fecha',
                                                 'maxlength' => '100'
@@ -305,11 +305,13 @@
         var d = 0;
         var p = 0;
         var total=0;
-        $('#ric').ready(function(){
-            // var ric = '{{$Nric}}'
-            // $('#ric').val(ric);
-            var pe = '{{$Npedido}}'
-            alert(pe);
+        $('#n_pedido').ready(function(){
+            var pe = '{{$Npedido}}';
+            var name = '{{auth()->user()->full_name}}'
+            //var ric = '{{$Nric}}';
+            $("#n_pedido").val(pe);
+            $('#user_id').val(name)
+
         });
         $("#recursos").on('change',function(){
             var valor = $(this).val();
@@ -413,13 +415,14 @@
                 if(total == 15 || total < 23){
                     $(".tipo").text('Baja Complejidad');
                     $('#complexity').val(1);
-                    $('#user_id').val('Kevin')
                 }
                 if(total > 23 && total < 49){
                     $(".tipo").text('Mediana Complejidad');
+                    $('#complexity').val(2);
                 }
                 if(total>50 && total < 100){
                     $(".tipo").text('Alta Complejidad');
+                    $('#complexity').val(3);
                 }
             }
         }
