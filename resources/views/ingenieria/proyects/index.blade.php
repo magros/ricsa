@@ -35,7 +35,8 @@
                             <th>RIC</th>
                             <th>Proyecto</th>
                             <th>Complejidad</th>
-                            <th>Tiempo</th>
+                            <th>Tiempo estiamdo</th>
+                            <th>Estatus</th>
                             <th>Acciones</th>
                         </tr>
                         </thead>
@@ -52,7 +53,10 @@
                                     {{$proyect->complexity}}
                                 </td>
                                 <td>
-                                    {{$proyect->time}}
+                                    {{$proyect->estimated_time}}
+                                </td>
+                                <td>
+                                    {{$proyect->status}}
                                 </td>
                                 <td>
                                     <a href="#" class="btn btn-white">
@@ -61,7 +65,7 @@
                                     <a href="#" class="btn btn-white">
                                         <i class="fa fa-pencil-square-o"></i>
                                     </a>
-                                    <a href="#" class="btn btn-white">
+                                    <a href="{{route('ingenieria.proyect.create')}}" class="btn btn-white">
                                         <i class="fa fa-plus"></i>
                                     </a>
                                 </td>

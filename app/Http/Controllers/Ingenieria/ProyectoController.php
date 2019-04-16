@@ -31,13 +31,13 @@ class ProyectoController extends Controller
      */
     public function create()
     {
-        $data = [
-            'tab' => 'system',
-            'materials' => Materials::all(),
-            'material_engineering' => Material_engineering::all(),
-            'subtab' => 'proyects',
-        ];
-        return view('ingenieria.proyects.createoredit')->with($data);
+        // $data = [
+        //     'tab' => 'system',
+        //     'materials' => Materials::all(),
+        //     'material_engineering' => Material_engineering::all(),
+        //     'subtab' => 'proyects',
+        // ];
+        return view('ingenieria.proyects.createoredit');
     }
 
     /**

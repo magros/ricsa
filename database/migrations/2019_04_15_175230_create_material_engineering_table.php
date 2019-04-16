@@ -16,13 +16,13 @@ class CreateMaterialEngineeringTable extends Migration
         Schema::create('material_engineering', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
-            $table->double('quantity');
-            $table->double('price');
-            $table->double('total');
-            $table->double('missing');
-            $table->integer('material_id');
-            $table->integer('engineering_id');
-            $table->integer('inventory_id');
+            $table->double('quantity')->nullable();
+            $table->double('price')->nullable();
+            $table->double('total')->nullable();
+            $table->double('missing')->nullable();
+            $table->integer('material_id')->nullable();
+            $table->integer('engineering_id')->nullable();
+            $table->integer('inventory_id')->nullable();
         });
     }
 

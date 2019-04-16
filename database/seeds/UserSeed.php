@@ -105,6 +105,15 @@ class UserSeed extends Seeder
                     'password' => '12345678',
                     'role_id' => 6,
                 ],
+            ],
+            [
+                'user' => [
+                    'name'=>'Carlos',
+                    'last_name'=>'BPM',
+                    'email' => 'carlos@bpm.com',
+                    'password' => '12345678',
+                    'role_id' => 1,
+                ],
             ]
 
         ];

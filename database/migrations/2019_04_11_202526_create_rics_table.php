@@ -15,21 +15,21 @@ class CreateRicsTable extends Migration
     {
         Schema::create('rics', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->String('name');
-            $table->integer('customer_id')->unsigned();
-            $table->integer('user_id')->unsigned();
-            $table->string('Nric');
-            $table->string('Npedido');
-            $table->string('name_proyect');
-            $table->integer('complexity');
-            $table->integer('status');
-            $table->double('cost');
-            $table->string('delivery_place');
-            $table->string('description');
-            $table->date('estimated_time');
-            $table->date('definite_time');
-            $table->dateTime('date_start');
-            $table->dateTime('date_finish');
+            $table->String('name')->nullable();
+            $table->integer('customer_id')->unsigned()->nullable();
+            $table->integer('user_id')->unsigned()->nullable();
+            $table->string('Nric')->nullable();
+            $table->string('Npedido')->nullable();
+            $table->string('name_proyect')->nullable();
+            $table->integer('complexity')->nullable();
+            $table->integer('status')->nullable();
+            $table->double('cost')->nullable();
+            $table->string('delivery_place')->nullable();
+            $table->string('description')->nullable();
+            $table->date('estimated_time')->nullable();
+            $table->date('definite_time')->nullable();
+            $table->dateTime('date_start')->nullable();
+            $table->dateTime('date_finish')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
