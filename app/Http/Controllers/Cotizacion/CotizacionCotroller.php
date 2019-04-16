@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Cotizacion;
 
 use App\Ric;
 use App\Customer;
+use App\Material;
 use Carbon\Traits\Date;
+use App\Libraries\Helpers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -39,7 +41,7 @@ class CotizacionCotroller extends Controller
             'tab' => 'system',
             'subtab' => 'quotations'
         ];
-        return view('propuestas.createoredit')->with($data);
+        return view('cotizacion.createoredit')->with($data);
     }
 
     /**
@@ -50,7 +52,32 @@ class CotizacionCotroller extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        $request->validate([
+            'customer_id' => 'required',
+            'name_proyect' => 'required',
+            'delivery_place' => 'required',
+            'estimated_time' => 'required',
+            'definite_time'=> 'required',
+            'complexity' => 'required'
+         ]);
+
+        $pe = count(Ric::all()->where('status','=','1'))+1;
+        $p = 'Pedido-'.date('y').'-'.$pe;
+
+        $client = Ric::create([
+            'customer_id' => $request->customer_id,
+            'user_id' => auth()->user()->id,
+            'Npedido' => $p,
+            'name_proyect' => $request->name_proyect,
+            'complexity' => $request->complexity,
+            'status' => 1,
+            'delivery_place'=> $request->delivery_place,
+            'estimated_time' => $request->estimated_time,
+            'definite_time' => $request->definite_time
+        ]);
+
+        return redirect()->route('cotizacion.create')->with('alert',Helpers::alertData('success','','saveSuccess'));
+
     }
 
     /**
@@ -100,10 +127,19 @@ class CotizacionCotroller extends Controller
 
     public function proyectos(){
         $data = [
-            'clients' => Ric::all(),
+            'rics' => Ric::all(),
             'tab' => 'system',
             'subtab' => 'quotations'
         ];
         return view('cotizacion.index')->with($data);
+    }
+
+    public function cotizador(){
+        $data = [
+            'materials' => Material::pluck('description','id'),
+            'tab' => 'system',
+            'subtab' => 'quotations'
+        ];
+        return view('cotizacion.quoting')->with($data);
     }
 }

@@ -12,8 +12,7 @@ class Ric extends Model
     use SoftDeletes;
     protected $dates = ['deleted_at'];
     protected $fillable = [
-        'id','name', 'complexity', 'time',
-        'customer_id', 'user_id', 'ric','name_proyect','complexity','status','cost',
+        'Nric','Npedido','customer_id', 'user_id', 'ric','name_proyect','complexity','status','cost',
         'delivery_place','description', 'estimated_time', 'definite_time','date_start','date_finish'
     ];
 

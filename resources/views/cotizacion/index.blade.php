@@ -41,31 +41,56 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {{-- @foreach($clients as $client)
-                            <tr class="gradeA" id="item-{{$client->id}}">
+                        @foreach($rics as $ric)
+                            <tr class="gradeA" id="item-{{$ric->id}}">
                                 <td>
-                                    {{$client->name}}
+                                    {{$ric->name_proyect}}
                                 </td>
                                 <td>
-                                    {{$client->company}}
+                                    {{$ric->customer->company}}
                                 </td>
                                 <td>
-                                    {{$client->email}}
+                                    @if($ric->complexity == 1)
+                                        Baja Complejidad
+                                    @endif
+                                    @if($ric->complexity == 2)
+                                        Mediana Complejidad
+                                    @endif
+                                    @if($ric->complexity == 3)
+                                        Alta Complejidad
+                                    @endif
                                 </td>
                                 <td>
-                                    {{$client->phone}}
+                                    @if($ric->status == 1)
+                                        Propuesta
+                                    @endif
+                                    @if($ric->status == 2)
+                                        Aprubado
+                                    @endif
+                                    @if($ric->status == 3)
+                                        Ric
+                                    @endif
                                 </td>
                                 <td>
-                                    <a href="{{route('cotizacion.client.edit',[$client->id])}}" class="btn btn-white">
+                                    <a href="{{route('cotizacion.client.edit',[$ric->id])}}" class="btn btn-white">
                                         <i class="fa fa-pencil-square-o"></i>
                                     </a>
-                                    <a href="#" class="btn btn-white delete" data-id="{{$client->id}}">
+                                    <a href="#" class="btn btn-white delete" data-id="{{$ric->id}}">
                                         <i class="fa fa-trash"></i>
                                     </a>
-
+                                    @if($ric->complexity > 1)
+                                        <a href="#" class="btn btn-white delete" data-id="{{$ric->id}}">
+                                            <i class="fa fa-check"></i>
+                                        </a>
+                                    @endif
+                                    @if ($ric->complexity == 1 || $ric->status == 2)
+                                        <a href="{{route('cotizacion.quoting')}}" class="btn btn-white" data-id="{{$ric->id}}">
+                                            <i class="glyphicon glyphicon-plus"></i>
+                                        </a>
+                                    @endif
                                 </td>
                             </tr>
-                        @endforeach --}}
+                        @endforeach
                         </tbody>
                     </table>
 
