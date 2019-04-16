@@ -15,6 +15,7 @@ class CreateRicsTable extends Migration
     {
         Schema::create('rics', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->String('name');
             $table->integer('customer_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->string('Nric');
