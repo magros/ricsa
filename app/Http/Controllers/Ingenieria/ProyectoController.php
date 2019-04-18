@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Ingenieria;
 
 use App\Ric;
+use App\MaterialQuotation;
+use App\Material;
 use Illuminate\Http\Request;
 use App\Libraries\Helpers;
 use App\Http\Controllers\Controller;
@@ -31,13 +33,13 @@ class ProyectoController extends Controller
      */
     public function create()
     {
-        // $data = [
-        //     'tab' => 'system',
-        //     'materials' => Materials::all(),
-        //     'material_engineering' => Material_engineering::all(),
-        //     'subtab' => 'proyects',
-        // ];
-        return view('ingenieria.proyects.createoredit');
+        $data = [
+            'material_quotation' => MaterialQuotation::all(),
+            'materials' => Materials::all(),
+            'tab' => 'system',
+            'subtab' => 'proyects',
+        ];
+        return view('ingenieria.proyects.createoredit')->with($data);
     }
 
     /**
@@ -70,7 +72,13 @@ class ProyectoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = [
+            'material_quotation' => MaterialQuotation::all(),
+            'materials' => Materials::all(),
+            'tab' => 'system',
+            'subtab' => 'proyects',
+        ];
+        return view('ingenieria.proyects.createoredit')->with($data);
     }
 
     /**

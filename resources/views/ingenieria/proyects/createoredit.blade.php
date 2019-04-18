@@ -1,9 +1,17 @@
 @extends('layouts.admin.layout')
 @section('meta_title')
-    Agregar lista de materiales
+    @if(!isset($proyect))
+        Crear lista de materiales
+    @else
+        Editando lista de materiales
+    @endif
 @endsection
 @section('page_title')
-    Agregar lista de materiales
+    @if(!isset($proyect))
+        Crear lista de materiales
+    @else
+        Editando lista de materiales
+    @endif
 @endsection
 @section('page_action')
 <a href="{{route('ingenieria.proyect')}}" class="btn btn-white">&lt; Regresar</a>
@@ -33,7 +41,8 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="gradeA">
+                                @foreach($materia_quotation as $quotation)
+                                <tr class="gradeA" id="item-{{$quotation->id}}">
                                         <td>
                                             Placas
                                         </td>
@@ -44,6 +53,7 @@
                                             3/8
                                         </td>
                                     </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>

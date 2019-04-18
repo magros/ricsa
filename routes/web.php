@@ -67,3 +67,24 @@ Route::prefix('ingenieria')->group(function(){
     });
 });
 
+Route::prefix('precio')->group(function(){
+    Route::middleware(['precio'])->name('precio.')->namespace('Precio')->group(function()
+    {
+        Route::get('/', 'DolarController@index');
+        Route::get('dolar','DolarController@index')->name('dollar');
+        Route::get('dolar/create','DolarController@create')->name('dollar.create');
+        Route::post('dolar/save','DolarController@store')->name('dollar.save');
+        Route::get('dolar/{id}','DolarController@edit')->name('dollar.edit');
+        Route::patch('dolar/update/{id}','DolarController@update')->name('dollar.update');
+        route::DELETE('dolar/delet/{id}','DolarController@destroy');
+
+        Route::get('metal','MetalController@index')->name('metal');
+        Route::get('metal/create','MetalController@create')->name('metal.alta');
+        Route::post('metal/save','MetalController@store')->name('metal.save');
+        Route::get('metal/{id}','MetalController@edit')->name('metal.edit');
+        Route::patch('metal/update/{id}','MetalController@update')->name('metal.update');
+        route::DELETE('metal/delet/{id}','MetalController@destroy');
+
+    });
+});
+
