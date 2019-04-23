@@ -25,6 +25,9 @@ class Ric extends Model
     {
         return $this->belongsTo(Customer::class);
     }
+    public function materialQuotation(){
+        return $this->hasOne(MaterialQuotation::class);
+    }
 
     public function scopeByClients($q, $clients_id){
         if(!is_null($clients_id)) return $q->whereIn('customer_id',$clients_id);

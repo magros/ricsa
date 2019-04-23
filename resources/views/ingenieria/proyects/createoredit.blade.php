@@ -1,9 +1,17 @@
 @extends('layouts.admin.layout')
 @section('meta_title')
-    Agregar lista de materiales
+    @if(!isset($proyect))
+        Crear lista de materiales
+    @else
+        Editando lista de materiales
+    @endif
 @endsection
 @section('page_title')
-    Agregar lista de materiales
+    @if(!isset($proyect))
+        Crear lista de materiales
+    @else
+        Editando lista de materiales
+    @endif
 @endsection
 @section('page_action')
 <a href="{{route('ingenieria.proyect')}}" class="btn btn-white">&lt; Regresar</a>
@@ -33,17 +41,19 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="gradeA">
+                                @foreach($material_quotation as $quotation)
+                                <tr class="gradeA" id="item-{{$quotation->id}}">
                                         <td>
-                                            Placas
+                                            {{$quotation->material->name}}
                                         </td>
                                         <td>
-                                            6
+                                            {{$quotation->quantity}}
                                         </td>
                                         <td>
-                                            3/8
+                                            {{$quotation->material->dimension}}
                                         </td>
                                     </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -63,9 +73,10 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="gradeA">
+                                @foreach($materials as $material)
+                                    <tr class="gradeA" id="item-{{$material->$id}}">
                                         <td>
-                                            Placas
+                                            {{$quotation->material->name}}
                                         </td>
                                         <td>
                                             6
@@ -83,6 +94,7 @@
 
                                         </td>
                                     </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>

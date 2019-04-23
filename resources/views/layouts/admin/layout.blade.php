@@ -116,6 +116,21 @@
                             </li>
                         </ul>
                     </li> --}}
+                    {{-- Ingeniería --}}
+                    <li class="{{isset($tab)&&$tab=='system'?'active':''}}">
+                        <a href="#"><i class="fa fa-cogs "></i> <span class="nav-label">Actualización precios</span> <span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li class="{{isset($subtab)&&$subtab=='dollars'?'active':''}}">
+                                <a href="{{route('precio.dollar')}}">Dolar</a>
+                            </li>
+                            <li class="{{isset($subtab)&&$subtab=='metals'?'active':''}}">
+                                <a href="{{route('precio.metal')}}">Metales</a>
+                            </li>
+                            <li class="{{isset($subtab)&&$subtab=='reports'?'active':''}}">
+                                <a href="#">Reportes</a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
 
             </div>

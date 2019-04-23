@@ -47,7 +47,7 @@
                                     {{$proyect->id}}
                                 </td>
                                 <td>
-                                    {{$proyect->name}}
+                                    {{$proyect->name_proyect}}
                                 </td>
                                 <td>
                                     {{$proyect->complexity}}

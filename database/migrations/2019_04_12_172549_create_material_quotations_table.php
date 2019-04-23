@@ -15,8 +15,19 @@ class CreateMaterialQuotationsTable extends Migration
     {
         Schema::create('material_quotations', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->double('quantity')->nullable();
+            $table->double('price')->nullable();
+            $table->double('total')->nullable();
+            $table->unsignedInteger('quotation_id')->unsigned();
+            $table->unsignedInteger('material_id')->unsigned();
+            $table->unsignedInteger('ric_id')->unsigned();
             $table->timestamps();
         });
+
+        // Schema::table('material_quotations', function (Blueprint $table) {
+        //     $table->foreign('material_id')->references('id')->on('materials');
+        //     $table->foreign('quotation_id')->references('id')->on('quotations');
+        // });
     }
 
     /**
