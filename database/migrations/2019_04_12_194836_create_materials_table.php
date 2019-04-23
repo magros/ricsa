@@ -15,16 +15,16 @@ class CreateMaterialsTable extends Migration
     {
         Schema::create('materials', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
             $table->string('description');
+            $table->string('specification');
+            $table->string('thickness');
+            $table->string('dimension');
+            $table->string('length');
+            $table->string('net_weight');
+            $table->string('gross_weight');
             $table->string('trademark');
             $table->double('price');
-            $table->string('magnitude');
-            $table->string('specification');
-            $table->string('material');
-            $table->string('r/rc');
-            $table->string('dimension');
-            $table->string('weight');
+            $table->string('r_rc');
             $table->integer('provider_id');
             $table->integer('material_type_id');
             $table->integer('family_id');

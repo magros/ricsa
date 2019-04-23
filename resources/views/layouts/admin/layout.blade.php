@@ -75,26 +75,19 @@
                             <li class="{{isset($subtab)&&$subtab=='clients'?'active':''}}">
                                 <a href="{{route('cotizacion.client')}}">Clientes</a>
                             </li>
+                            <li class="{{isset($subtab)&&$subtab=='materials'?'active':''}}">
+                                <a href="{{route('cotizacion.material')}}">Materiales</a>
+                            </li>
                             <li class="{{isset($subtab)&&$subtab=='quotations'?'active':''}}">
                                 <a href="{{route('cotizacion.index')}}">Cotizaciones</a>
                             </li>
-                            <li class="{{isset($subtab)&&$subtab=='reports'?'active':''}}">
-                                <a href="#">Reportes</a>
+                            <li class="{{isset($subtab)&&$subtab=='por_rics'?'active':''}}">
+                                <a href="/cotizacion/rics">Portafolio de RIC'S</a>
                             </li>
-                            <li class="{{isset($subtab)&&$subtab=='users'?'active':''}}">
-                            {{-- <a href="{{route('cotizador')}}">Cotizador</a> --}}
-                            </li>
-                            <li class="{{isset($subtab)&&$subtab=='roles'?'active':''}}">
-                                <a href="#">Roles</a>
-                            </li>
-                            <li class="{{isset($subtab)&&$subtab=='permissions'?'active':''}}">
-                                <a href="#">Permisos</a>
-                            </li>
-
                         </ul>
                     </li>
                     {{-- Ingeniería --}}
-                    <li class="{{isset($tab)&&$tab=='system'?'active':''}}">
+                    <li class="{{isset($tab)&&$tab=='ing'?'active':''}}">
                         <a href="#"><i class="fa fa-cogs "></i> <span class="nav-label">Ingeniería</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li class="{{isset($subtab)&&$subtab=='proyects'?'active':''}}">

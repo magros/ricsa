@@ -26,4 +26,14 @@ class Ric extends Model
         return $this->belongsTo(Customer::class);
     }
 
+    public function scopeByClients($q, $clients_id){
+        if(!is_null($clients_id)) return $q->whereIn('customer_id',$clients_id);
+    }
+    public function scopeByStatus($q, $status){
+        if(!is_null($status)) return $q->where('status',$status);
+    }
+    public function scopeByComplexity($q, $complexity){
+        if(!is_null($complexity)) return $q->where('complexity',$complexity);
+    }
+
 }

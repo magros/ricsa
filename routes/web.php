@@ -39,7 +39,14 @@ Route::prefix('cotizacion')->group(function(){
         Route::get('propuesta', 'CotizacionCotroller@create')->name('create');
         Route::post('propuesta', 'CotizacionCotroller@store')->name('store');
         Route::get('cotizador','CotizacionCotroller@cotizador')->name('quoting');
+        Route::get('material/{id}','CotizacionCotroller@material');
 
+        Route::get('material','MaterialController@index')->name('material');
+        Route::get('create','MaterialController@create')->name('material.create');
+        Route::post('save','MaterialController@store')->name('material.save');
+
+
+        Route::get('rics', ['as'=>'rics', 'uses'=>'CotizacionCotroller@rics']);
 
         Route::get('cliente','ClientController@index')->name('client');
         Route::get('cliente/create','ClientController@create')->name('client.alta');

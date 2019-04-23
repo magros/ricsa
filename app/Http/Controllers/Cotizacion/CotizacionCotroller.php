@@ -8,6 +8,7 @@ use App\Material;
 use Carbon\Traits\Date;
 use App\Libraries\Helpers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class CotizacionCotroller extends Controller
@@ -141,5 +142,50 @@ class CotizacionCotroller extends Controller
             'subtab' => 'quotations'
         ];
         return view('cotizacion.quoting')->with($data);
+    }
+
+    public function material($id){
+
+        $client = Material::find($id);
+        if(!is_null($client)){
+            // $specification = $client->specification;
+            return response()->json($client);
+        }
+        return abort(500);
+    }
+
+    public function rics(Request $request){
+        DB::connection()->enableQueryLog();
+        $clients = null;
+        if($request->has('c')){
+            $clients = $request->get('c');
+            if(!is_array($clients)) $clients = [$clients];
+        }
+        $staus = null;
+        if($request->has('e')){
+            $staus = $request->get('e');
+        }
+        $complexity = null;
+        if($request->has('o')){
+            $complexity = $request->get('o');
+        }
+
+        // dd(Ric::byClients($clients)
+        //     ->byStatus($staus)
+        //     ->byComplexity($complexity)
+        //     ->get());
+        $data = [
+            'rics' => Ric::byClients($clients)
+            ->byStatus($staus)
+            ->byComplexity($complexity)
+            ->get(),
+            'tab' => 'system',
+            'subtab' => 'por_rics',
+            'clients'=> $clients,
+            'clients_in_system' => Customer::all()
+        ];
+        $queries = DB::getQueryLog();
+        // dd($queries);
+        return view('reportes.portafoliorics')->with($data);
     }
 }
