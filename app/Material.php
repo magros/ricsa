@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Inventory;
 use Illuminate\Database\Eloquent\Model;
 
 class Material extends Model
@@ -12,5 +13,8 @@ class Material extends Model
     ];
     public function materialQuotation(){
         return $this->hasMany(MaterialQuotation::class);
+    }
+    public function inventory(){
+        return $this->hasMany(Inventory::class);
     }
 }

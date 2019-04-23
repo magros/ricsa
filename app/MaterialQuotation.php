@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 class MaterialQuotation extends Model
 {
     protected $fillable = [
-        'quantity', 'price','total','quotatio_id','material_id'
+        'quantity', 'price','total','quotation_id','material_id'
     ];
     public function quotation(){
         return $this->belongsTo(Quotation::class);
