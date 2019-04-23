@@ -35,7 +35,7 @@ class ProyectoController extends Controller
     {
         $data = [
             'material_quotation' => MaterialQuotation::all(),
-            'materials' => Materials::all(),
+            'materials' => Material::all(),
             'tab' => 'system',
             'subtab' => 'proyects',
         ];
@@ -73,8 +73,8 @@ class ProyectoController extends Controller
     public function edit($id)
     {
         $data = [
-            'material_quotation' => MaterialQuotation::all(),
-            'materials' => Materials::all(),
+            'material_quotation' => MaterialQuotation::find($id),
+            'materials' => Material::all(),
             'tab' => 'system',
             'subtab' => 'proyects',
         ];

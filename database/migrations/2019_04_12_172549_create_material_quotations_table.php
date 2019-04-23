@@ -18,13 +18,16 @@ class CreateMaterialQuotationsTable extends Migration
             $table->double('quantity')->nullable();
             $table->double('price')->nullable();
             $table->double('total')->nullable();
-            $table->integer('quotation_id')->nullable();
-            $table->integer('material_id')->nullable();
+            $table->unsignedInteger('quotation_id')->unsigned();
+            $table->unsignedInteger('material_id')->unsigned();
+            $table->unsignedInteger('ric_id')->unsigned();
             $table->timestamps();
         });
-        Schema::table('materials',function(Blueprint $table){
-            $table->foreign('material_id')->references('id')->on('material_quotations');
-        });
+
+        // Schema::table('material_quotations', function (Blueprint $table) {
+        //     $table->foreign('material_id')->references('id')->on('materials');
+        //     $table->foreign('quotation_id')->references('id')->on('quotations');
+        // });
     }
 
     /**
@@ -34,9 +37,6 @@ class CreateMaterialQuotationsTable extends Migration
      */
     public function down()
     {
-        Schema::table('materials',function(Blueprint $table){
-            $table->dropForeign('materials_material_id_foreign');
-        });
         Schema::dropIfExists('material_quotations');
     }
 }

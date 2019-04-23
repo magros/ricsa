@@ -41,16 +41,16 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($materia_quotation as $quotation)
+                                @foreach($material_quotation as $quotation)
                                 <tr class="gradeA" id="item-{{$quotation->id}}">
                                         <td>
-                                            Placas
+                                            {{$quotation->material->name}}
                                         </td>
                                         <td>
-                                            6
+                                            {{$quotation->quantity}}
                                         </td>
                                         <td>
-                                            3/8
+                                            {{$quotation->material->dimension}}
                                         </td>
                                     </tr>
                                 @endforeach
@@ -73,9 +73,10 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="gradeA">
+                                @foreach($materials as $material)
+                                    <tr class="gradeA" id="item-{{$material->$id}}">
                                         <td>
-                                            Placas
+                                            {{$quotation->material->name}}
                                         </td>
                                         <td>
                                             6
@@ -93,6 +94,7 @@
 
                                         </td>
                                     </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>

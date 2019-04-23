@@ -25,5 +25,8 @@ class Ric extends Model
     {
         return $this->belongsTo(Customer::class);
     }
+    public function materialQuotation(){
+        return $this->hasOne(MaterialQuotation::class);
+    }
 
 }
