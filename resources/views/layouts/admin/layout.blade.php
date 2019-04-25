@@ -70,7 +70,7 @@
                         </a>
                     </li>
                     {{-- Cotizaciones --}}
-                    <li class="{{isset($tab)&&$tab=='system'?'active':''}}">
+                    <li class="{{isset($tab)&&$tab=='quotation'?'active':''}}">
                         <a href="#"><i class="fa fa-cogs "></i> <span class="nav-label">Cotizacones</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li class="{{isset($subtab)&&$subtab=='clients'?'active':''}}">
@@ -104,7 +104,7 @@
                     </li>
                     {{-- Almacen --}}
                     <li class="{{isset($tab)&&$tab=='warehouse'?'active':''}}">
-                        <a href="#"><i class="fa fa-cogs "></i> <span class="nav-label">Alamcen</span> <span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-cogs "></i> <span class="nav-label">Almacen</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li class="{{isset($subtab)&&$subtab=='proyects'?'active':''}}">
                                 <a href="{{route('almacen.proyect')}}">Proyectos</a>
@@ -118,7 +118,7 @@
                         </ul>
                     </li>
                     {{-- Precios/Tena --}}
-                    <li class="{{isset($tab)&&$tab=='system'?'active':''}}">
+                    <li class="{{isset($tab)&&$tab=='price'?'active':''}}">
                         <a href="#"><i class="fa fa-cogs "></i> <span class="nav-label">Actualización precios</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li class="{{isset($subtab)&&$subtab=='dollars'?'active':''}}">

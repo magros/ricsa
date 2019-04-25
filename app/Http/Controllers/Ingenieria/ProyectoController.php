@@ -21,7 +21,7 @@ class ProyectoController extends Controller
     {
         $data = [
             'proyects' => Ric::all(),
-            'tab' => 'system',
+            'tab' => 'engineering',
             'subtab' => 'proyects'
         ];
         return view('ingenieria.proyects.index')->with($data);
@@ -38,7 +38,7 @@ class ProyectoController extends Controller
             'material_quotation' => MaterialQuotation::all(),
             'materials' => Material::all(),
             'inventories' => Inventory::all(),
-            'tab' => 'system',
+            'tab' => 'engineering',
             'subtab' => 'proyects',
         ];
         return view('ingenieria.proyects.createoredit')->with($data);
@@ -78,7 +78,7 @@ class ProyectoController extends Controller
             'material_quotation' => MaterialQuotation::find($id),
             'materials' => Material::all(),
             'inventories' => Inventory::all(),
-            'tab' => 'system',
+            'tab' => 'engineering',
             'subtab' => 'proyects',
         ];
         return view('ingenieria.proyects.createoredit')->with($data);

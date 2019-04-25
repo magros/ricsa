@@ -28,6 +28,9 @@ class Ric extends Model
     public function materialQuotation(){
         return $this->hasOne(MaterialQuotation::class);
     }
+    public function inventory(){
+        return $this->hasMany(Inventory::class);
+    }
 
     public function scopeByClients($q, $clients_id){
         if(!is_null($clients_id)) return $q->whereIn('customer_id',$clients_id);
