@@ -44,6 +44,7 @@ Route::prefix('cotizacion')->group(function(){
         Route::get('material','MaterialController@index')->name('material');
         Route::get('create','MaterialController@create')->name('material.create');
         Route::post('save','MaterialController@store')->name('material.save');
+        Route::post('list/material','MaterialController@list')->name('material.cotizador');
 
 
         Route::get('rics', ['as'=>'rics', 'uses'=>'CotizacionCotroller@rics']);

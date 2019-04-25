@@ -124,4 +124,14 @@ class MaterialController extends Controller
     {
         //
     }
+    public function list(Request $request)
+    {
+        // $client = Customer::find($id);
+        if(!is_null($request)){
+
+            // return response()->json($request);
+        }
+        return abort(500);
+    }
+
 }

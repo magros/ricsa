@@ -24,7 +24,7 @@ class CreateMaterialsTable extends Migration
             $table->string('gross_weight');
             $table->string('trademark');
             $table->double('price');
-            $table->string('r_rc');
+            $table->string('r_rc')->nullable();
             $table->integer('provider_id')->nullable();
             $table->integer('material_type_id');
             $table->integer('family_id')->nullable();
