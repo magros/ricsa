@@ -84,7 +84,7 @@
                                         </a>
                                     @endif
                                     @if ($ric->complexity == 1 || $ric->status == 2)
-                                        <a href="{{route('cotizacion.quoting')}}" class="btn btn-white" data-id="{{$ric->id}}">
+                                        <a href="{{route('cotizacion.quoting',[$ric->id])}}" class="btn btn-white" data-id="{{$ric->id}}">
                                             <i class="glyphicon glyphicon-plus"></i>
                                         </a>
                                     @endif

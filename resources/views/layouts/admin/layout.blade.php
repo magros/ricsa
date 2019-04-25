@@ -61,7 +61,7 @@
                             </form>
                         </div>
                         <div class="logo-element">
-                           :)
+                           ;)
                         </div>
                     </li>
                     <li class="{{isset($tab)&&$tab=='dashboard'?'active':''}}">
