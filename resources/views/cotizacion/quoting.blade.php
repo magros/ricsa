@@ -17,6 +17,10 @@
 @endsection
 
 @section('content')
+<div class="alert alert-danger fade">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    Llena todos los campos.
+</div>
 <div class="row">
     <div class="col-lg-12">
         <div class="ibox float-e-margins">
@@ -30,12 +34,12 @@
             </div>
             <div class="ibox-content">
                 <div class="row">
-
+                    {!! Form::open(['id'=>'user-form', 'files'=>true,'data-toggle' => 'validator',])!!}
                     <div class="col-sm-3">
                         <div class="form-group">
-                            <label for="contract_id">Descripcion:</label>
+                            <label for="material_id">Descripcion:</label>
                             <div class="clearfix"></div>
-                            {!! Form::select('material_id',[null=>'---Seleciona un cliente---']+$materials->toArray(),old('material_id'),[
+                            {!! Form::select('material_id',[null=>'---Selecionar---']+$materials->toArray(),old('material_id'),[
                                 'class'=>'form-control','id'=>'material_id',
                                 'data-required-error' => 'Este campo es obligatorio',
                             ]) !!}
@@ -45,14 +49,11 @@
 
                     <div class="col-sm-3">
                         <div class="form-group">
-                            <label for="contract_id">Especificacion Material:</label>
-                            <div class="clearfix"></div>
+                            <label for="specification">Especificación</label>
                             {!! Form::text('specification',old('specification'),[
-                                'class'=>'form-control','placeholder'=>'Espesificacion',
-                                'autocomplete'=>'off', 'id' => 'specification',
-                                'data-required-error' => 'Este campo es obligatorio',
-                                'data-error' => 'Introduce un ric',
-                                'maxlength' => '100', 'disabled'
+                                'class'=>'form-control','placeholder'=>'specification',
+                                'required'=>'', 'autocomplete'=>'off', 'id' => 'specification',
+                                'data-required-error' => 'Este campo es obligatorio','maxlength' => '100','disabled'
                             ]) !!}
                             <div class="help-block with-errors"></div>
                         </div>
@@ -60,14 +61,14 @@
 
                     <div class="col-sm-3">
                         <div class="form-group">
-                            <label for="contract_id">cantidad:</label>
+                            <label for="quantity">cantidad:</label>
                             <div class="clearfix"></div>
-                            {!! Form::text('ric',old('ric'),[
-                                'class'=>'form-control','placeholder'=>'Propuesta',
-                                'autocomplete'=>'off', 'id' => 'ric',
+                            {!! Form::text('quantity',old('quantity'),[
+                                'class'=>'form-control','placeholder'=>'Cantidad',
+                                'autocomplete'=>'off', 'id' => 'quantity',
                                 'data-required-error' => 'Este campo es obligatorio',
-                                'data-error' => 'Introduce un ric',
-                                'maxlength' => '100', 'disabled'
+                                'data-error' => 'Introduce una cantidad',
+                                'maxlength' => '100',
                             ]) !!}
                             <div class="help-block with-errors"></div>
                         </div>
@@ -77,12 +78,11 @@
                         <div class="form-group">
                             <label for="contract_id">Esp Pulg:</label>
                             <div class="clearfix"></div>
-                            {!! Form::text('ric',old('ric'),[
-                                'class'=>'form-control','placeholder'=>'Propuesta',
-                                'autocomplete'=>'off', 'id' => 'ric',
+                            {!! Form::text('thickness',old('thickness'),[
+                                'class'=>'form-control','placeholder'=>'thickness',
+                                'required'=>'', 'autocomplete'=>'off', 'id' => 'thickness',
                                 'data-required-error' => 'Este campo es obligatorio',
-                                'data-error' => 'Introduce un ric',
-                                'maxlength' => '100', 'disabled'
+                                'maxlength' => '100','disabled'
                             ]) !!}
                             <div class="help-block with-errors"></div>
                         </div>
@@ -92,12 +92,10 @@
                         <div class="form-group">
                             <label for="contract_id">Di mm:</label>
                             <div class="clearfix"></div>
-                            {!! Form::text('ric',old('ric'),[
-                                'class'=>'form-control','placeholder'=>'Propuesta',
-                                'autocomplete'=>'off', 'id' => 'ric',
-                                'data-required-error' => 'Este campo es obligatorio',
-                                'data-error' => 'Introduce un ric',
-                                'maxlength' => '100', 'disabled'
+                            {!! Form::text('dimension',old('dimension'),[
+                                'class'=>'form-control','placeholder'=>'dimension',
+                                'required'=>'', 'autocomplete'=>'off', 'id' => 'dimension',
+                                'data-required-error' => 'Este campo es obligatorio', 'maxlength' => '15','disabled'
                             ]) !!}
                             <div class="help-block with-errors"></div>
                         </div>
@@ -107,12 +105,10 @@
                         <div class="form-group">
                             <label for="contract_id">Long mm:</label>
                             <div class="clearfix"></div>
-                            {!! Form::text('ric',old('ric'),[
-                                'class'=>'form-control','placeholder'=>'Propuesta',
-                                'autocomplete'=>'off', 'id' => 'ric',
-                                'data-required-error' => 'Este campo es obligatorio',
-                                'data-error' => 'Introduce un ric',
-                                'maxlength' => '100', 'disabled'
+                            {!! Form::text('length',old('length'),[
+                                'class'=>'form-control','placeholder'=>'length',
+                                'required'=>'', 'autocomplete'=>'off', 'id' => 'length',
+                                'data-required-error' => 'Este campo es obligatorio', 'maxlength' => '15','disabled'
                             ]) !!}
                             <div class="help-block with-errors"></div>
                         </div>
@@ -122,12 +118,10 @@
                         <div class="form-group">
                             <label for="contract_id">Peso neto:</label>
                             <div class="clearfix"></div>
-                            {!! Form::text('ric',old('ric'),[
-                                'class'=>'form-control','placeholder'=>'Propuesta',
-                                'autocomplete'=>'off', 'id' => 'ric',
-                                'data-required-error' => 'Este campo es obligatorio',
-                                'data-error' => 'Introduce un ric',
-                                'maxlength' => '100', 'disabled'
+                            {!! Form::text('net_weight',old('net_weight'),[
+                                'class'=>'form-control','placeholder'=>'net_weight',
+                                'required'=>'', 'autocomplete'=>'off', 'id' => 'net_weight',
+                                'data-required-error' => 'Este campo es obligatorio', 'maxlength' => '15','disabled'
                             ]) !!}
                             <div class="help-block with-errors"></div>
                         </div>
@@ -137,12 +131,10 @@
                         <div class="form-group">
                             <label for="contract_id">Peso bruto:</label>
                             <div class="clearfix"></div>
-                            {!! Form::text('ric',old('ric'),[
-                                'class'=>'form-control','placeholder'=>'Propuesta',
-                                'autocomplete'=>'off', 'id' => 'ric',
-                                'data-required-error' => 'Este campo es obligatorio',
-                                'data-error' => 'Introduce un ric',
-                                'maxlength' => '100', 'disabled'
+                            {!! Form::text('gross_weight',old('gross_weight'),[
+                                'class'=>'form-control','placeholder'=>'gross_weight',
+                                'required'=>'', 'autocomplete'=>'off', 'id' => 'gross_weight',
+                                'data-required-error' => 'Este campo es obligatorio', 'maxlength' => '15','disabled'
                             ]) !!}
                             <div class="help-block with-errors"></div>
                         </div>
@@ -152,12 +144,10 @@
                         <div class="form-group">
                             <label for="contract_id">Precio unitario:</label>
                             <div class="clearfix"></div>
-                            {!! Form::text('ric',old('ric'),[
-                                'class'=>'form-control','placeholder'=>'Propuesta',
-                                'autocomplete'=>'off', 'id' => 'ric',
-                                'data-required-error' => 'Este campo es obligatorio',
-                                'data-error' => 'Introduce un ric',
-                                'maxlength' => '100', 'disabled'
+                            {!! Form::text('price',old('price'),[
+                                'class'=>'form-control','placeholder'=>'price',
+                                'required'=>'', 'autocomplete'=>'off', 'id' => 'price',
+                                'data-required-error' => 'Este campo es obligatorio', 'maxlength' => '15','disabled'
                             ]) !!}
                             <div class="help-block with-errors"></div>
                         </div>
@@ -168,7 +158,7 @@
                         <button id="adicionar" class="btn btn-lg btn-primary pull-right m-t-n-xs" type="button"><strong>Guardar</strong></button>
 
                     </div>
-
+                    {!! Form::close() !!}
                 </div>
 
                 <div class="row">
@@ -185,7 +175,6 @@
                                 <th>Precio unitario</th>
                                 <th>Total</th>
                                 <th>Acciones</th>
-
                             </tr>
                         </table>
 
@@ -209,7 +198,8 @@
     $(function(){
         $("#material_id").change(function(){
             var idM =$("#material_id").val();
-            $.ajax({
+            if(idM){
+                $.ajax({
                 url: '{{url('cotizacion/material')}}/'+idM,
                 type: 'get',
                 dataType: 'json',
@@ -217,30 +207,49 @@
                 .done(function(data) {
 
                     $("#specification").val(data.specification)
+                    $("#thickness").val(data.thickness)
+                    $("#dimension").val(data.dimension)
+                    $("#length").val(data.length)
+                    $("#net_weight").val(data.net_weight)
+                    $("#gross_weight").val(data.gross_weight)
+                    $("#price").val(data.price)
                 })
                 .fail(function() {
                     console.log(data);
                 });
+            }else{
+                $("#specification").val("")
+                $("#thickness").val("")
+                $("#dimension").val("")
+                $("#length").val("")
+                $("#net_weight").val("")
+                $("#gross_weight").val("")
+                $("#price").val("")
+            }
         });
         $('#adicionar').click(function() {
-        var contract_id = $("#contract_id").text();
-        alert(contract_id);
-        // var apellido = document.getElementById("apellido").value;
-        // var cedula = document.getElementById("cedula").value;
-        // var i = 1; //contador para asignar id al boton que borrara la fila
-        // var fila = '<tr id="row' + i + '"><td>' + nombre + '</td><td>' + apellido + '</td><td>' + cedula + '</td><td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">Quitar</button></td></tr>'; //esto seria lo que contendria la fila
+            if($("#material_id").val() && $("#quantity").val()){
+                var formData = new FormData();
+                formData.append('material_id', $("#material_id").val());
+                formData.append('cantidad', $("#quantity").val())
+                $.ajax({
+                    url : '{{route('cotizacion.material.cotizador')}}',
+                    type : 'POST',
+                    data : formData,
+                    datatype:'json',
+                    processData: false,  // tell jQuery not to process the data
+                    contentType: false,  // tell jQuery not to set contentType
+                }).done(function(data){
+                    console.log(data);
+                }).fail(function(data){
+                    var message = data.responseJSON.errors.cropme;
+                    console.log(message);
+                });
+            }else{
+                $(".alert").removeClass("in").show();
+	            $(".alert").delay(200).addClass("in").fadeOut(3000);
+            }
 
-        // i++;
-
-        // $('#mytable tr:first').after(fila);
-        //     $("#adicionados").text(""); //esta instruccion limpia el div adicioandos para que no se vayan acumulando
-        //     var nFilas = $("#mytable tr").length;
-        //     $("#adicionados").append(nFilas - 1);
-        //     //le resto 1 para no contar la fila del header
-        //     document.getElementById("apellido").value ="";
-        //     document.getElementById("cedula").value = "";
-        //     document.getElementById("nombre").value = "";
-        //     document.getElementById("nombre").focus();
         });
     });
 </script>

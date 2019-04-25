@@ -81,7 +81,6 @@
                             			'class'=>'form-control','placeholder'=>'thickness',
                             			'required'=>'', 'autocomplete'=>'off', 'id' => 'thickness',
                             			'data-required-error' => 'Este campo es obligatorio',
-                            			'data-error' => 'Introduce una dirección de correo válida',
                                         'maxlength' => '100'
                             		]) !!}
                                     <div class="help-block with-errors"></div>

@@ -16,9 +16,9 @@ class CreateMaterialQuotationsTable extends Migration
         Schema::create('material_quotations', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->double('quantity')->nullable();
-            $table->double('price')->nullable();
+            $table->string('name')->nullable();
             $table->double('total')->nullable();
-            $table->unsignedInteger('quotation_id')->unsigned();
+            $table->unsignedInteger('quotation_id')->nullable();
             $table->unsignedInteger('material_id')->unsigned();
             $table->unsignedInteger('ric_id')->unsigned();
             $table->timestamps();
