@@ -1,0 +1,14 @@
+.back-login{
+    background-image: url('../img/tanques.jpg') !important;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+.con-login{
+    margin-left: -150%;
+}
+
+.white-text{
+    color:white;
+    font-weight: bold;
+}
