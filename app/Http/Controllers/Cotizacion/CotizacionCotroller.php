@@ -135,9 +135,10 @@ class CotizacionCotroller extends Controller
         return view('cotizacion.index')->with($data);
     }
 
-    public function cotizador(){
+    public function cotizador($id){
         $data = [
             'materials' => Material::pluck('description','id'),
+            'ric' => $id,
             'tab' => 'system',
             'subtab' => 'quotations'
         ];

@@ -38,7 +38,7 @@ Route::prefix('cotizacion')->group(function(){
         Route::get('propuestas', 'CotizacionCotroller@proyectos')->name('index');
         Route::get('propuesta', 'CotizacionCotroller@create')->name('create');
         Route::post('propuesta', 'CotizacionCotroller@store')->name('store');
-        Route::get('cotizador','CotizacionCotroller@cotizador')->name('quoting');
+        Route::get('cotizador/{id}','CotizacionCotroller@cotizador')->name('quoting');
         Route::get('material/{id}','CotizacionCotroller@material');
 
         Route::get('material','MaterialController@index')->name('material');
