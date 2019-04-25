@@ -18,6 +18,7 @@
     {!! HTML::style('static/admin/css/animate.css') !!}
     {!! HTML::style('static/admin/css/style.css') !!}
     {!! HTML::style('static/admin/css/custom.css') !!}
+    {!! HTML::style('static/cotizacion/css/cotizacion.css') !!}
 
     {!! HTML::style('static/admin/css/plugins/toastr/toastr.min.css') !!}
 
