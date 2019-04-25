@@ -1,11 +1,11 @@
 @extends('layouts.admin.layout')
 
 @section('meta_title')
-    Materiales
+    Proyectos
 @endsection
 
 @section('page_title')
-    Materiales
+    Proyectos
 @endsection
 
 @section('meta_extra')
@@ -13,7 +13,6 @@
 @stop
 
 @section('page_action')
-    <a href="{{route('ingenieria.material.create')}}" class="btn btn-primary">+ Agregar Material</a>
 @endsection
 
 @section('content')
@@ -21,7 +20,7 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Materiales en sistema</h5>
+                    <h5>RICS en sistema</h5>
                     <div class="ibox-tools">
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
@@ -33,36 +32,36 @@
                     <table class="table table-striped table-bordered table-hover dataTables-users" >
                         <thead>
                         <tr>
-                            <th>Descipcion</th>
-                            <th>Especificación</th>
-                            <th>Precio</th>
-                            <th>Recurso / Consumible</th>
+                            <th>RIC</th>
+                            <th>Proyecto</th>
+                            <th>Complejidad</th>
+                            <th>Tiempo estiamdo</th>
+                            <th>Estatus</th>
                             <th>Acciones</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($materials as $material)
-                            <tr class="gradeA" id="item-{{$material->id}}">
+                        @foreach($proyects as $proyect)
+                            <tr class="gradeA" id="item-{{$proyect->id}}">
                                 <td>
-                                    {{$material->description}}
+                                    {{$proyect->id}}
                                 </td>
                                 <td>
-                                    {{$material->specification}}
+                                    {{$proyect->name_proyect}}
                                 </td>
                                 <td>
-                                    {{$material->price}}
+                                    {{$proyect->complexity}}
                                 </td>
                                 <td>
-                                    {{$material->r_rc}}
+                                    {{$proyect->estimated_time}}
                                 </td>
                                 <td>
-                                    <a href="{{route('ingenieria.material.edit',[$material->id])}}" class="btn btn-white">
-                                        <i class="fa fa-pencil-square-o"></i>
+                                    {{$proyect->status}}
+                                </td>
+                                <td>
+                                    <a href="#" class="btn btn-white">
+                                        <i class="fa fa-eye"></i>
                                     </a>
-                                    <a href="#" class="btn btn-white delete" data-id="{{$material->id}}">
-                                        <i class="fa fa-trash"></i>
-                                    </a>
-
                                 </td>
                             </tr>
                         @endforeach

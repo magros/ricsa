@@ -13,7 +13,7 @@
 @stop
 
 @section('page_action')
-    <a href="{{route('ingenieria.material.create')}}" class="btn btn-primary">+ Agregar Material</a>
+    <a href="{{route('almacen.inventory.create')}}" class="btn btn-primary">+ Agregar Material</a>
 @endsection
 
 @section('content')
@@ -35,28 +35,28 @@
                         <tr>
                             <th>Descipcion</th>
                             <th>Especificación</th>
-                            <th>Precio</th>
-                            <th>Recurso / Consumible</th>
+                            <th>RIC</th>
+                            <th>Proyecto</th>
                             <th>Acciones</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($materials as $material)
-                            <tr class="gradeA" id="item-{{$material->id}}">
+                        @foreach($inventories as $inventory)
+                            <tr class="gradeA" id="item-{{$inventory->id}}">
                                 <td>
-                                    {{$material->description}}
+                                    {{$inventory->material->description}}
                                 </td>
                                 <td>
-                                    {{$material->specification}}
+                                    {{$inventory->material->specification}}
                                 </td>
                                 <td>
-                                    {{$material->price}}
+                                    {{$inventory->ric->Nric}}
                                 </td>
                                 <td>
-                                    {{$material->r_rc}}
+                                    {{$inventory->ric->name_proyect}}
                                 </td>
                                 <td>
-                                    <a href="{{route('ingenieria.material.edit',[$material->id])}}" class="btn btn-white">
+                                    <a href="{{route('almacen.inventory.edit',[$material->id])}}" class="btn btn-white">
                                         <i class="fa fa-pencil-square-o"></i>
                                     </a>
                                     <a href="#" class="btn btn-white delete" data-id="{{$material->id}}">

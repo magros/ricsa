@@ -18,7 +18,7 @@ class MetalController extends Controller
     {
         $data = [
             'metals' => Metal::all(),
-            'tab' => 'system',
+            'tab' => 'price',
             'subtab' => 'metals',
         ];
         return view('precio.metals.index')->with($data);
@@ -32,7 +32,7 @@ class MetalController extends Controller
     public function create()
     {
         $data = [
-            'tab' => 'system',
+            'tab' => 'price',
             'subtab' => 'metals'
         ];
         return view('precio.metals.createoredit')->with($data);
@@ -81,7 +81,7 @@ class MetalController extends Controller
     {
         $data = [
             'metal' => Metal::find($id),
-            'tab' => 'system',
+            'tab' => 'price',
             'subtab' => 'metals',
         ];
         return view('precio.metals.createoredit')->with($data);

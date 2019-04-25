@@ -54,7 +54,7 @@ Route::prefix('cotizacion')->group(function(){
         Route::post('cliente/save','ClientController@store')->name('client.save');
         Route::get('cliente/{id}','ClientController@edit')->name('client.edit');
         Route::patch('cliente/update/{id}','ClientController@update')->name('client.update');
-        route::DELETE('cliente/delet/{id}','ClientController@destroy');
+        Route::DELETE('cliente/delet/{id}','ClientController@destroy');
 
     });
 });
@@ -70,7 +70,16 @@ Route::prefix('ingenieria')->group(function(){
         Route::post('proyecto/save','ProyectoController@store')->name('proyect.save');
         Route::get('proyecto/{id}','ProyectoController@edit')->name('proyect.edit');
         Route::patch('proyecto/update/{id}','ProyectoController@update')->name('proyect.update');
-        route::DELETE('proyecto/delet/{id}','ProyectoController@destroy');
+        Route::DELETE('proyecto/delet/{id}','ProyectoController@destroy');
+
+        Route::get('material','MaterialController@index')->name('material');
+        Route::get('create','MaterialController@create')->name('material.create');
+        Route::post('store','MaterialController@store')->name('material.store');
+        Route::get('material/{id}','MaterialController@edit')->name('material.edit');
+        Route::patch('material/update/{id}','MaterialController@update')->name('material.update');
+        Route::DELETE('material/delet/{id}','MaterialController@destroy');
+
+
 
     });
 });
@@ -84,15 +93,34 @@ Route::prefix('precio')->group(function(){
         Route::post('dolar/save','DolarController@store')->name('dollar.save');
         Route::get('dolar/{id}','DolarController@edit')->name('dollar.edit');
         Route::patch('dolar/update/{id}','DolarController@update')->name('dollar.update');
-        route::DELETE('dolar/delet/{id}','DolarController@destroy');
+        Route::DELETE('dolar/delet/{id}','DolarController@destroy');
 
         Route::get('metal','MetalController@index')->name('metal');
         Route::get('metal/create','MetalController@create')->name('metal.alta');
         Route::post('metal/save','MetalController@store')->name('metal.save');
         Route::get('metal/{id}','MetalController@edit')->name('metal.edit');
         Route::patch('metal/update/{id}','MetalController@update')->name('metal.update');
-        route::DELETE('metal/delet/{id}','MetalController@destroy');
+        Route::DELETE('metal/delet/{id}','MetalController@destroy');
 
     });
 });
 
+Route::prefix('almacen')->group(function(){
+    Route::middleware(['alamcen'])->name('almacen.')->namespace('Almacen')->group(function()
+    {
+        Route::get('/', 'ProyectoController@index');
+        Route::get('proyecto','ProyectoController@index')->name('proyect');
+        Route::get('proyecto/create','ProyectoController@create')->name('proyect.create');
+        Route::post('proyecto/save','ProyectoController@store')->name('proyect.save');
+        Route::get('proyecto/{id}','ProyectoController@edit')->name('proyect.edit');
+        Route::patch('proyecto/update/{id}','ProyectoController@update')->name('proyect.update');
+        Route::DELETE('proyecto/delet/{id}','ProyectoController@destroy');
+
+        Route::get('inventory','InventoryController@index')->name('inventory');
+        Route::get('inventory/create','InventoryController@create')->name('inventory.create');
+        Route::post('inventory/store','InventoryController@store')->name('inventory.store');
+        Route::get('inventory/{id}','InventoryController@edit')->name('inventory.edit');
+        Route::patch('inventory/update/{id}','InventoryController@update')->name('inventory.update');
+        Route::DELETE('inventory/delet/{id}','InventoryController@destroy');
+    });
+});

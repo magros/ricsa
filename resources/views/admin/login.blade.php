@@ -5,6 +5,7 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/login/css/login.css">
 
     <title>Administración | Login</title>
 
@@ -17,19 +18,19 @@
 
 </head>
 
-<body class="gray-bg">
-
+<body class="back-login">
+    
     <div class="middle-box text-center loginscreen  animated fadeInDown">
-        <div>
+        <div class="col-md-12 col-lg-12 con-login">
             <div>
 
                 <h1 class="logo-name">
-                    <img src="{{asset('static/images/logo.png')}}" alt="{{ config('app.name')}}">
+                    <img src="static/login/img/login.png" alt="{{ config('app.name')}}" style="width:10vw;">
                 </h1>
 
             </div>
-            <h3>Panel administrativo</h3>
-            <p>
+            <h2 class="white-text">Panel administrativo</h2>
+            <p class="white-text">
                 Iniciar sesión
             </p>
             {!! Form::open(['url'=>'login', 'method'=>'post', 'id'=>'admin-login-form', 'class'=>'m-t', 'role'=>'form']) !!}
@@ -50,7 +51,7 @@
                 </div>
                 <div class="form-group">
                     {!! Form::password('password',
-                    [
+                    [   
                         'class'=>'form-control',
                         'required'=>'true',
                         'data-required-error'=>'El campo no puede estar vacío.',
@@ -59,11 +60,12 @@
                         'placeholder' => 'Contraseña'
                     ]) !!}
                 </div>
+
                 <button type="submit" class="btn btn-primary block full-width m-b">Iniciar sesión</button>
 
-                <a href="#"><small>¿Olvidaste la contraseña?</small></a>
+                <a href="#" class="white-text"><small>¿Olvidaste la contraseña?</small></a>
             {!! Form::close() !!}
-            <p class="m-t"> <small>&copy; {{date('Y')}}</small> </p>
+            <p class="m-t white-text"> <small>&copy; {{date('Y')}}</small> </p>
         </div>
     </div>
 

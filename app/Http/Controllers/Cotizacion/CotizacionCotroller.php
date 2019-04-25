@@ -39,7 +39,7 @@ class CotizacionCotroller extends Controller
             'clients' => Customer::pluck('company','id'),
             'Nric' => $Ric,
             'Npedido'=> $p,
-            'tab' => 'system',
+            'tab' => 'quotation',
             'subtab' => 'quotations'
         ];
         return view('cotizacion.createoredit')->with($data);
@@ -129,7 +129,7 @@ class CotizacionCotroller extends Controller
     public function proyectos(){
         $data = [
             'rics' => Ric::all(),
-            'tab' => 'system',
+            'tab' => 'quotation',
             'subtab' => 'quotations'
         ];
         return view('cotizacion.index')->with($data);
@@ -138,8 +138,7 @@ class CotizacionCotroller extends Controller
     public function cotizador($id){
         $data = [
             'materials' => Material::pluck('description','id'),
-            'ric' => $id,
-            'tab' => 'system',
+            'tab' => 'quotation',
             'subtab' => 'quotations'
         ];
         return view('cotizacion.quoting')->with($data);
@@ -180,7 +179,7 @@ class CotizacionCotroller extends Controller
             ->byStatus($staus)
             ->byComplexity($complexity)
             ->get(),
-            'tab' => 'system',
+            'tab' => 'quotation',
             'subtab' => 'por_rics',
             'clients'=> $clients,
             'clients_in_system' => Customer::all()
