@@ -19,7 +19,7 @@ class MaterialController extends Controller
     {
         $data = [
             'materials' => Material::all(),
-            'tab' => 'system',
+            'tab' => 'quotation',
             'subtab' => 'materials'
         ];
         return view('cotizacion.materiales.index')->with($data);
@@ -34,7 +34,7 @@ class MaterialController extends Controller
     {
         $data = [
             'material_types' => MaterialType::pluck('name','id'),
-            'tab' =>'system',
+            'tab' =>'quotation',
             'subtab' => 'materials'
         ];
         return view('cotizacion.materiales.createoredit')->with($data);

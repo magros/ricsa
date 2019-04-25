@@ -19,7 +19,7 @@ class DolarController extends Controller
     {
         $data = [
             'dollars' => Dollar::all(),
-            'tab' => 'system',
+            'tab' => 'price',
             'subtab' => 'dollars',
         ];
         return view('precio.dollars.index')->with($data);
@@ -33,7 +33,7 @@ class DolarController extends Controller
     public function create()
     {
         $data = [
-            'tab' => 'system',
+            'tab' => 'price',
             'subtab' => 'dollars',
         ];
         return view('precio.dollars.createoredit')->with($data);
@@ -80,7 +80,7 @@ class DolarController extends Controller
     {
         $data = [
             'dollar' => Dollar::find($id),
-            'tab' => 'system',
+            'tab' => 'price',
             'subtab' => 'dollars'
         ];
         return view('precio.dollars.createoredit')->with($data);

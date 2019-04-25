@@ -13,4 +13,8 @@ class Inventory extends Model
     public function material(){
         return $this->belongsTo(Material::class);
     }
+
+    public function ric(){
+        return $this->belongsTo(Ric::class);
+    }
 }

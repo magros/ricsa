@@ -19,7 +19,7 @@ class MaterialController extends Controller
     {
         $data = [
             'materials' => Material::all(),
-            'tab' => 'system',
+            'tab' => 'engineering',
             'subtab' => 'materials',
         ];
         return view('ingenieria.materials.index')->with($data);
@@ -34,7 +34,7 @@ class MaterialController extends Controller
     {
         $data = [
             'material_types' => MaterialType::pluck('name','id'),
-            'tab' => 'system',
+            'tab' => 'engineering',
             'subtab' => 'materials'
         ];
         return view('ingenieria.materials.createoredit')->with($data);
@@ -102,7 +102,7 @@ class MaterialController extends Controller
         $data = [
             'materials' => Material::find($id),
             'material_types' => MaterialType::pluck('name','id'),
-            'tab' => 'system',
+            'tab' => 'engineering',
             'subtab' => 'materials',
         ];
         return view('ingenieria.materials.createoredit')->with($data);

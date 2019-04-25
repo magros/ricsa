@@ -19,7 +19,7 @@ class ClientController extends Controller
     {
         $data = [
             'clients' => Customer::all(),
-            'tab' => 'system',
+            'tab' => 'quotation',
             'subtab' => 'clients'
         ];
         return view('cotizacion.clients.index')->with($data);
@@ -33,7 +33,7 @@ class ClientController extends Controller
     public function create()
     {
         $data = [
-            'tab' =>'system',
+            'tab' =>'quotation',
             'subtab' => 'clients'
         ];
         return view('cotizacion.clients.createoredit')->with($data);
@@ -86,7 +86,7 @@ class ClientController extends Controller
     {
         $data = [
             'client' => Customer::find($id),
-            'tab' => 'system',
+            'tab' => 'quotation',
             'subtab' => 'clients'
         ];
         return view('cotizacion.clients.createoredit')->with($data);
