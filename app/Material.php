@@ -19,4 +19,7 @@ class Material extends Model
     public function materialQuotation(){
         return $this->hasMany(MaterialQuotation::class);
     }
+    public function inventory(){
+        return $this->hasMany(Inventory::class);
+    }
 }
