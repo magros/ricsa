@@ -15,7 +15,7 @@
     @endif
 @endsection
 @section('page_action')
-<a href="{{route('ingenieria.material')}}" class="btn btn-white">&lt; Regresar a materiales</a>
+<a href="{{route('almacen.inventory')}}" class="btn btn-white">&lt; Regresar a materiales</a>
 @endsection
 @section('content')
     <div class="row">
@@ -33,11 +33,11 @@
                     <div class="row">
                         <div class="col-sm-12">
                             @if(!isset($material))
-                                {!! Form::open(['route'=>'ingenieria.material.store','id'=>'material-form', 'files'=>true,'data-toggle' => 'validator',]) !!}
+                                {!! Form::open(['route'=>'almacen.inventory.store','id'=>'material-form', 'files'=>true,'data-toggle' => 'validator',]) !!}
                             @else
                                 {!! Form::model($material, [
                                     'method' => 'patch',
-                                    'route' => ['ingenieria.material.update', $material->id],
+                                    'route' => ['almacen.inventory.update', $material->id],
                                     'id'=>'material-form',
                                     'files' => true,
                                     'data-toggle' => 'validator',

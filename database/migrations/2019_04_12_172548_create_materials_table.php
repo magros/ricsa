@@ -25,9 +25,9 @@ class CreateMaterialsTable extends Migration
             $table->string('trademark');
             $table->double('price');
             $table->string('r_rc');
-            $table->integer('provider_id');
+            $table->integer('provider_id')->nullable();
             $table->integer('material_type_id');
-            $table->integer('family_id');
+            $table->integer('family_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

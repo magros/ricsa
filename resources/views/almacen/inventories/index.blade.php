@@ -13,7 +13,7 @@
 @stop
 
 @section('page_action')
-    <a href="{{route('ingenieria.material.create')}}" class="btn btn-primary">+ Agregar Material</a>
+    <a href="{{route('almacen.inventory.create')}}" class="btn btn-primary">+ Agregar Material</a>
 @endsection
 
 @section('content')
@@ -56,7 +56,7 @@
                                     {{$material->r_rc}}
                                 </td>
                                 <td>
-                                    <a href="{{route('ingenieria.material.edit',[$material->id])}}" class="btn btn-white">
+                                    <a href="{{route('almacen.inventory.edit',[$material->id])}}" class="btn btn-white">
                                         <i class="fa fa-pencil-square-o"></i>
                                     </a>
                                     <a href="#" class="btn btn-white delete" data-id="{{$material->id}}">

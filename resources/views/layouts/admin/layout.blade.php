@@ -87,36 +87,36 @@
                         </ul>
                     </li>
                     {{-- Ingeniería --}}
-                    <li class="{{isset($tab)&&$tab=='ing'?'active':''}}">
+                    <li class="{{isset($tab)&&$tab=='engineering'?'active':''}}">
                         <a href="#"><i class="fa fa-cogs "></i> <span class="nav-label">Ingeniería</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li class="{{isset($subtab)&&$subtab=='proyects'?'active':''}}">
                                 <a href="{{route('ingenieria.proyect')}}">Proyectos</a>
+                            </li>
+                            <li class="{{isset($subtab)&&$subtab=='materials'?'active':''}}">
+                                <a href="{{route('ingenieria.material')}}">Materiales</a>
                             </li>
                             <li class="{{isset($subtab)&&$subtab=='reports'?'active':''}}">
                                 <a href="#">Reportes</a>
                             </li>
                         </ul>
                     </li>
-                    {{-- <li class="{{isset($tab)&&$tab=='wedding'?'active':''}}">
-                        <a href="#"><i class="fa fa-folder-open-o "></i> <span class="nav-label">Bodas</span> <span class="fa arrow"></span></a>
+                    {{-- Almacen --}}
+                    <li class="{{isset($tab)&&$tab=='warehouse'?'active':''}}">
+                        <a href="#"><i class="fa fa-cogs "></i> <span class="nav-label">Alamcen</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li class="{{isset($subtab)&&$subtab=='contracts'?'active':''}}">
-                            <a href="{{route('admin.contracts.index')}}">Contratos</a>
+                            <li class="{{isset($subtab)&&$subtab=='proyects'?'active':''}}">
+                                <a href="{{route('almacen.proyect')}}">Proyectos</a>
                             </li>
-                            <li class="{{isset($subtab)&&$subtab=='galleries'?'active':''}}">
-                            <a href="{{route('admin.galleries.index')}}">Galeria</a>
+                            <li class="{{isset($subtab)&&$subtab=='inventory'?'active':''}}">
+                                <a href="{{route('almacen.inventory')}}">Inventario</a>
+                            </li>
+                            <li class="{{isset($subtab)&&$subtab=='reports'?'active':''}}">
+                                <a href="#">Reportes</a>
                             </li>
                         </ul>
-                    </li> --}}
-                    {{-- <li class="{{isset($tab)&&$tab=='walls'?'active':''}}">
-                        <a href="#"><i class="fa fa-gift "></i><span class="nav-label">Mesa de Regalos</span> <span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li class="{{isset($subtab)&&$subtab=='walls'?'active':''}}">
-                            </li>
-                        </ul>
-                    </li> --}}
-                    {{-- Ingeniería --}}
+                    </li>
+                    {{-- Precios/Tena --}}
                     <li class="{{isset($tab)&&$tab=='system'?'active':''}}">
                         <a href="#"><i class="fa fa-cogs "></i> <span class="nav-label">Actualización precios</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">

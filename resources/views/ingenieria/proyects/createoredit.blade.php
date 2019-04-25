@@ -172,7 +172,6 @@
             var cantidad = document.getElementById("cantidad").value;
             var i = 1; //contador para asignar id al boton que borrara la fila
             var fila = '<tr id="row' + i + '"><td>' + material + '</td><td>' + medida + '</td><td>0</td><td>x</td><td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">Quitar</button></td></tr>'; //esto seria lo que contendria la fila
-
             i++;
             if(material=='' || cantidad=='' || medida==''){
                 $(".alert").removeClass("in").show();
