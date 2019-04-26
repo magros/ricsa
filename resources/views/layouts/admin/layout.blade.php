@@ -10,7 +10,7 @@
 
     <title>@yield('meta_title') | Administración</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-
+    <script src="{{asset('components/bootstrap/js/bootstrap.min.js')}}" type="text/javascript"></script>
     {!! HTML::style('static/bower_components/bootstrap/dist/css/bootstrap.min.css') !!}
 
     {!! HTML::style('static/bower_components/font-awesome/css/font-awesome.min.css') !!}
@@ -83,7 +83,7 @@
                                 <a href="{{route('cotizacion.index')}}">Cotizaciones</a>
                             </li>
                             <li class="{{isset($subtab)&&$subtab=='por_rics'?'active':''}}">
-                                <a href="/cotizacion/rics">Portafolio de RIC'S</a>
+                                <a href="#">Portafolio de RIC'S</a>
                             </li>
                         </ul>
                     </li>
@@ -111,6 +111,9 @@
                             </li>
                             <li class="{{isset($subtab)&&$subtab=='inventory'?'active':''}}">
                                 <a href="{{route('almacen.inventory')}}">Inventario</a>
+                            </li>
+                            <li class="{{isset($subtab)&&$subtab=='exitmaterials'?'active':''}}">
+                                <a href="{{route('almacen.exit')}}">Salida de materiales</a>
                             </li>
                             <li class="{{isset($subtab)&&$subtab=='reports'?'active':''}}">
                                 <a href="#">Reportes</a>
