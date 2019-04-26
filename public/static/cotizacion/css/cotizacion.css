@@ -3,9 +3,14 @@
     font-weight: bold;
 }
 
+.w-100{
+    width: 100%;
+}
+
 /*Este es el color de todo el wrapper*/
 .back-dash{
     background-color: #4B610B !important;
+    width: 100%;
 }
 
 /*Este es el estilo para cuando se activa un menu*/

@@ -31,7 +31,7 @@
                 <div class="ibox-content">
 
                     <table class="table table-striped table-bordered table-hover dataTables-users" >
-                        <thead>
+                        <thead class="thead-dark">
                         <tr>
                             <th>Nombre</th>
                             <th>Cliente</th>
@@ -72,10 +72,10 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{route('cotizacion.client.edit',[$ric->id])}}" class="btn btn-white">
+                                    <a href="{{route('cotizacion.client.edit',[$ric->id])}}" class="btn btn-dark">
                                         <i class="fa fa-pencil-square-o"></i>
                                     </a>
-                                    <a href="#" class="btn btn-white delete" data-id="{{$ric->id}}">
+                                    <a href="#" class="btn btn-dark delete" data-id="{{$ric->id}}">
                                         <i class="fa fa-trash"></i>
                                     </a>
                                     @if($ric->complexity > 1)

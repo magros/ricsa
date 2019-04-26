@@ -30,8 +30,8 @@
                 </div>
                 <div class="ibox-content">
 
-                    <table class="table table-striped table-hover dataTables-users" >
-                        <thead>
+                    <table class="table table-striped table-hover table-dark dataTables-users" >
+                        <thead class="thead-dark">
                         <tr>
                             <th>Nombre</th>
                             <th>Empresa</th>
@@ -56,10 +56,10 @@
                                     {{$client->phone}}
                                 </td>
                                 <td>
-                                    <a href="{{route('cotizacion.client.edit',[$client->id])}}" class="btn btn-white">
+                                    <a href="{{route('cotizacion.client.edit',[$client->id])}}" class="btn btn-dark">
                                         <i class="fa fa-pencil-square-o"></i>
                                     </a>
-                                    <a href="#" class="btn btn-white delete" data-id="{{$client->id}}">
+                                    <a href="#" class="btn btn-dark delete" data-id="{{$client->id}}">
                                         <i class="fa fa-trash"></i>
                                     </a>
 

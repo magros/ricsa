@@ -30,7 +30,7 @@
                 </div>
                 <div class="ibox-content">
 
-                    <table class="table table-striped table-bordered table-hover dataTables-users" >
+                    <table class="table table-striped table-hover table-dark dataTables-users" >
                         <thead>
                         <tr>
                             <th>Descipcion</th>
@@ -56,10 +56,10 @@
                                     {{$material->r_rc}}
                                 </td>
                                 <td>
-                                    {{-- <a href="{{route('cotizacion.client.edit',[$client->id])}}" class="btn btn-white">
+                                    {{-- <a href="{{route('cotizacion.client.edit',[$client->id])}}" class="btn btn-black">
                                         <i class="fa fa-pencil-square-o"></i>
                                     </a>
-                                    <a href="#" class="btn btn-white delete" data-id="{{$client->id}}">
+                                    <a href="#" class="btn btn-black delete" data-id="{{$client->id}}">
                                         <i class="fa fa-trash"></i>
                                     </a> --}}
 

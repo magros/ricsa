@@ -10,7 +10,8 @@
 
     <title>@yield('meta_title') | Administración</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-    <script src="{{asset('components/bootstrap/js/bootstrap.min.js')}}" type="text/javascript"></script>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     {!! HTML::style('static/bower_components/bootstrap/dist/css/bootstrap.min.css') !!}
 
     {!! HTML::style('static/bower_components/font-awesome/css/font-awesome.min.css') !!}
@@ -64,13 +65,13 @@
                            R
                         </div>
                     </li>
-                    <li class="{{isset($tab)&&$tab=='dashboard'?'active':''}}">
+                    <li class="{{isset($tab)&&$tab=='dashboard'?'active':''}} w-100" >
                         <a href="#">
                             <i class="fa fa-th-large"></i> <span class="nav-label">Dashboard</span>
                         </a>
                     </li>
                     {{-- Cotizaciones --}}
-                    <li class="{{isset($tab)&&$tab=='quotation'?'active':''}}">
+                    <li class="{{isset($tab)&&$tab=='quotation'?'active':''}} w-100" >
                         <a href="#"><i class="fa fa-cogs "></i> <span class="nav-label">Cotizacones</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li class="{{isset($subtab)&&$subtab=='clients'?'active':''}}">
@@ -88,7 +89,7 @@
                         </ul>
                     </li>
                     {{-- Ingeniería --}}
-                    <li class="{{isset($tab)&&$tab=='engineering'?'active':''}}">
+                    <li class="{{isset($tab)&&$tab=='engineering'?'active':''}} w-100">
                         <a href="#"><i class="fa fa-cogs "></i> <span class="nav-label">Ingeniería</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li class="{{isset($subtab)&&$subtab=='proyects'?'active':''}}">
@@ -103,7 +104,7 @@
                         </ul>
                     </li>
                     {{-- Almacen --}}
-                    <li class="{{isset($tab)&&$tab=='warehouse'?'active':''}}">
+                    <li class="{{isset($tab)&&$tab=='warehouse'?'active':''}} w-100">
                         <a href="#"><i class="fa fa-cogs "></i> <span class="nav-label">Almacen</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li class="{{isset($subtab)&&$subtab=='proyects'?'active':''}}">
@@ -121,7 +122,7 @@
                         </ul>
                     </li>
                     {{-- Precios/Tena --}}
-                    <li class="{{isset($tab)&&$tab=='price'?'active':''}}">
+                    <li class="{{isset($tab)&&$tab=='price'?'active':''}} w-100">
                         <a href="#"><i class="fa fa-cogs "></i> <span class="nav-label">Actualización precios</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li class="{{isset($subtab)&&$subtab=='dollars'?'active':''}}">
@@ -146,7 +147,7 @@
         <div class="navbar-header">
             <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
         </div>
-            <ul class="nav navbar-top-links navbar-right">
+            <ul class="navbar-nav mr-auto">
                 <li>
                     <span class="m-r-sm text-muted welcome-message">Sistema de administración {{config('app.name')}}.</span>
                 </li>
