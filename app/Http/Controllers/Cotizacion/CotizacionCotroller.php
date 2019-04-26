@@ -7,6 +7,7 @@ use App\Customer;
 use App\Material;
 use Carbon\Traits\Date;
 use App\Libraries\Helpers;
+use App\MaterialQuotation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -136,8 +137,33 @@ class CotizacionCotroller extends Controller
     }
 
     public function cotizador($id){
+        $peso_neto = 0;
+                $peso_bruto = 0;
+                $total = 0;
+                $precio_kilo = 0;
+
+                $pe = MaterialQuotation::where('ric_id',$id)->get();
+                foreach ($pe as $p ) {
+                    $peso_neto = $peso_neto + $p->material->net_weight;
+                    $peso_bruto = $peso_bruto + $p->material->gross_weight;
+                    $total = $total + $p->total;
+                }
+                if($total>0 && $peso_neto>0){
+                    $precio_kilo = $total/$peso_neto;
+                }                
         $data = [
+            'cuerpo'=>MaterialQuotation::where('ric_id',$id)->where('name','cuerpo')->get(),
+            'tapas'=>MaterialQuotation::where('ric_id',$id)->where('name','tapas')->get(),
+            'soportes'=>MaterialQuotation::where('ric_id',$id)->where('name','soporte')->get(),
+            'escalera'=>MaterialQuotation::where('ric_id',$id)->where('name','escalera')->get(),
+            'registro'=>MaterialQuotation::where('ric_id',$id)->where('name','registro')->get(),
+            'boquillas'=>MaterialQuotation::where('ric_id',$id)->where('name','boquillas')->get(),
+            'peso_neto'=>$peso_neto,
+            'peso_burto'=>$peso_bruto,
+            'precio_kilo'=>$precio_kilo,
+            'total' => $total,
             'materials' => Material::pluck('description','id'),
+            'ric'=>$id,
             'tab' => 'quotation',
             'subtab' => 'quotations'
         ];
