@@ -30,7 +30,7 @@
                 </div>
                 <div class="ibox-content">
 
-                    <table class="table table-striped table-bordered table-hover dataTables-users" >
+                    <table class="table table-striped table-hover dataTables-users" >
                         <thead>
                         <tr>
                             <th>Nombre</th>
@@ -102,6 +102,7 @@
             </div>
         </div>
     </div>
+
 @endsection
 
 @push('scripts')

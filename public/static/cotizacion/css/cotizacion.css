@@ -1,3 +1,8 @@
+.white-text{
+    color:white;
+    font-weight: bold;
+}
+
 /*Este es el color de todo el wrapper*/
 .back-dash{
     background-color: #4B610B !important;
@@ -15,3 +20,18 @@
   background-color: #7DA018 !important;
   color: white !important;
 }
+
+/*Color de la barra de arriba (clientes)*/
+.bg-black{
+    background-color: black!important;
+}
+
+.img-clientes{
+    height: 40vh;
+}
+
+/*largo del menu lateral*/
+#page-wrapper{
+    min-height: 1006px !important;
+}
+

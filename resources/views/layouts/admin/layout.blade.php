@@ -156,9 +156,9 @@
 
         </nav>
         </div>
-            <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="row wrapper border-bottom bg-black page-heading">
                 <div class="col-sm-4">
-                    <h2>
+                    <h2 class="white-text">
                         @yield('page_title')
                     </h2>
                 </div>
