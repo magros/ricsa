@@ -37,7 +37,7 @@
                             @else
                                 {!! Form::model($material, [
                                     'method' => 'patch',
-                                    'route' => ['almacen.inventory.update', $material->id],
+                                    'route' => ['almacen.inventory.update', $inventory->id],
                                     'id'=>'material-form',
                                     'files' => true,
                                     'data-toggle' => 'validator',
@@ -128,7 +128,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="dimension">Marca</label>
+                                    <label for="trademark">Marca</label>
                                     {!! Form::text('trademark',old('trademark'),[
                             			'class'=>'form-control','placeholder'=>'trademark',
                             			'required'=>'', 'autocomplete'=>'off', 'id' => 'trademark',
