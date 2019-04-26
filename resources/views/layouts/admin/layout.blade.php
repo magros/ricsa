@@ -29,14 +29,14 @@
 
 <body>
 
-    <div id="wrapper">
+    <div id="wrapper" class="back-dash">
 
         <nav class="navbar-default navbar-static-side" role="navigation">
             <div class="sidebar-collapse">
-                <ul class="nav" id="side-menu">
-                    <li class="nav-header">
+                <ul class="nav " id="side-menu">
+                    <li class="nav-header back-dash">
                         <div class="dropdown profile-element"> <span>
-                            <img alt="image" class="img-circle" src="/img/login.png" style="width:100px; height:100px"/>
+                            <img alt="image" class="" src="/static/login/img/logo_ricsa.png" style="margin-left:-9%;"/>
                              </span>
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="clear">
@@ -61,7 +61,7 @@
                             </form>
                         </div>
                         <div class="logo-element">
-                           :)
+                           R
                         </div>
                     </li>
                     <li class="{{isset($tab)&&$tab=='dashboard'?'active':''}}">

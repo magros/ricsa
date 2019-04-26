@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Cotizacion;
 use App\Material;
 use App\MaterialType;
 use App\Libraries\Helpers;
+use App\MaterialQuotation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -128,8 +129,19 @@ class MaterialController extends Controller
     {
         // $client = Customer::find($id);
         if(!is_null($request)){
-
-            // return response()->json($request);
+            $total = $request->peso * $request->price;
+            $material_cuatation = MaterialQuotation::create([
+                'quantity'=>$request->cantidad,
+                'name'=>'cuerpo',
+                'total'=>$total,
+                'ric_id'=>$request->id_ric,
+                'material_id'=>$request->material_id
+            ]);
+            if($material_cuatation){
+                $materials = MaterialQuotation::with('material')->where('ric_id',$request->id_ric)->get();
+                return response()->json($materials);
+            }
+            return abort(500);
         }
         return abort(500);
     }

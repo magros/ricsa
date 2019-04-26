@@ -20,6 +20,15 @@
 
 <body class="back-login">
     
+
+
+    <div class="row padd-top">
+        <div class="col col-md-6 col-lg-6">
+            <img src="static/login/img/logo_ricsa.png" alt="logon">
+        </div>
+    </div>
+
+
     <div class="middle-box text-center loginscreen  animated fadeInDown">
         <div class="col-md-12 col-lg-12 con-login">
             <div>
