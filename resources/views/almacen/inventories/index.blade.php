@@ -56,13 +56,9 @@
                                     {{$inventory->ric->name_proyect}}
                                 </td>
                                 <td>
-                                    <a href="{{route('almacen.inventory.edit',[$material->id])}}" class="btn btn-white">
-                                        <i class="fa fa-pencil-square-o"></i>
+                                    <a href="{{route('almacen.inventory.edit',[$inventory->id])}}" class="btn btn-white">
+                                        <i class="fa fa-eye"></i>
                                     </a>
-                                    <a href="#" class="btn btn-white delete" data-id="{{$material->id}}">
-                                        <i class="fa fa-trash"></i>
-                                    </a>
-
                                 </td>
                             </tr>
                         @endforeach
