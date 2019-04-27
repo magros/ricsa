@@ -30,7 +30,7 @@
                 </div>
                 <div class="ibox-content">
 
-                    <table class="table table-striped table-hover table-dark dataTables-users" >
+                    <table id="data-spanish" class="table table-striped table-hover table-dark dataTables-users" >
                         <thead class="thead-dark">
                         <tr>
                             <th>Nombre</th>

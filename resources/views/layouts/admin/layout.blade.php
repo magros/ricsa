@@ -10,7 +10,7 @@
 
     <title>@yield('meta_title') | Administración</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-    
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     {!! HTML::style('static/bower_components/bootstrap/dist/css/bootstrap.min.css') !!}
 
@@ -37,7 +37,7 @@
                 <ul class="nav " id="side-menu">
                     <li class="nav-header back-dash">
                         <div class="dropdown profile-element"> <span>
-                            <img alt="image" class="" src="/static/login/img/logo_ricsa.png" style="margin-left:-9%;"/>
+                            <img alt="image" class="" src="{{asset('/static/login/img/logo_ricsa.png')}}" style="margin-left:-9%;"/>
                              </span>
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="clear">
@@ -239,6 +239,15 @@
             @endif
 
         });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#data-spanish').DataTable( {
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+                }
+            } );
+         } );
     </script>
     @stack('scripts')
     @yield('dyn_js')
