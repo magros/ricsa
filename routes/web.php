@@ -38,12 +38,15 @@ Route::prefix('cotizacion')->group(function(){
         Route::get('propuestas', 'CotizacionCotroller@proyectos')->name('index');
         Route::get('propuesta', 'CotizacionCotroller@create')->name('create');
         Route::post('propuesta', 'CotizacionCotroller@store')->name('store');
+        Route::post('autorizar/{id}','CotizacionCotroller@autorizar')->name('autorizar');
         Route::get('cotizador/{id}','CotizacionCotroller@cotizador')->name('quoting');
+        Route::DELETE('propuesta/delet/{id}','CotizacionCotroller@destroy');
         Route::get('material/{id}','CotizacionCotroller@material');
 
         Route::get('material','MaterialController@index')->name('material');
         Route::get('create','MaterialController@create')->name('material.create');
         Route::post('save','MaterialController@store')->name('material.save');
+        Route::DELETE('delet/{id}','MaterialController@destroy');
         Route::post('list/material','MaterialController@list')->name('material.cotizador');
 
 

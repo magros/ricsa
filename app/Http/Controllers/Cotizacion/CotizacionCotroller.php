@@ -124,7 +124,11 @@ class CotizacionCotroller extends Controller
      */
     public function destroy($id)
     {
-        //
+        $ric = Ric::find($id);
+        if(!is_null($ric)){
+            return response()->json($ric->delete());
+        }
+        return abort(500);
     }
 
     public function proyectos(){
@@ -150,7 +154,7 @@ class CotizacionCotroller extends Controller
                 }
                 if($total>0 && $peso_neto>0){
                     $precio_kilo = $total/$peso_neto;
-                }                
+                }
         $data = [
             'cuerpo'=>MaterialQuotation::where('ric_id',$id)->where('name','cuerpo')->get(),
             'tapas'=>MaterialQuotation::where('ric_id',$id)->where('name','tapas')->get(),
@@ -213,5 +217,16 @@ class CotizacionCotroller extends Controller
         $queries = DB::getQueryLog();
         // dd($queries);
         return view('reportes.portafoliorics')->with($data);
+    }
+
+    public function autorizar($id){
+        $ric = Ric::find($id);
+        if(!is_null($ric)){
+            $ric->update([
+                'status'=>2
+            ]);
+            return response()->json($ric);
+        }
+        return abort(500);
     }
 }

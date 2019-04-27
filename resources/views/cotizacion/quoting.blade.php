@@ -159,7 +159,7 @@
 
 
                             <div>
-                                <button id="adicionar" class="btn btn-lg btn-primary pull-right m-t-n-xs" type="button"><strong>Guardar</strong></button>
+                                <button id="adicionar" class="btn btn-lg btn-primary pull-right m-t-n-xs" type="button"><strong>Agregar</strong></button>
 
                             </div>
                             {!! Form::close() !!}
@@ -184,7 +184,7 @@
                                     </thead>
                                     <tbody id="contenido">
                                         @foreach ($cuerpo as $c)
-                                            <tr class="gradeA" id="item-{{$c->id}}">
+                                            <tr class="gradeA" id="item-cuerpo-{{$c->id}}">
                                                 <td>{{$c->material->description}}</td>
                                                 <td>{{$c->material->specification}}</td>
                                                 <td>{{$c->quantity}}</td>
@@ -194,7 +194,11 @@
                                                 <td>{{$c->material->gross_weight}}</td>
                                                 <td>{{$c->material->price}}</td>
                                                 <td>{{$c->total}}</td>
-                                                <td>Eliminar</td>
+                                                <td>
+                                                    <a href="#" class="btn btn-dark deleteC" data-c="{{$c->id}}">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -203,6 +207,34 @@
                             </div>
                         </div>
 
+                    </div>
+                </div>
+                {{-- Modal para eliminar cuerpo--}}
+                <div class="modal inmodal fade" id="delete-modal-cuerpo" tabindex="-1" role="dialog"  aria-hidden="true">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">¡Atención!</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>
+                                    <strong>
+                                    ¿Estás seguro de borrar la propuesta?
+                                    </strong>
+                                    <br><br>
+                                    Se borrarán también cualquier información relacionada.
+                                    <br><br>
+                                    Esta acción es irreversible.
+                                    <br><br>
+                                    ¿Deseas continuar?
+                                    </strong>
+                                </p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-danger" id="delete-action-btn-cuerpo" data-tangoC="0">Borrar</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -339,7 +371,7 @@
 
 
                             <div>
-                                <button id="T_adicionar" class="btn btn-lg btn-primary pull-right m-t-n-xs" type="button"><strong>Guardar</strong></button>
+                                <button id="T_adicionar" class="btn btn-lg btn-primary pull-right m-t-n-xs" type="button"><strong>Agregar</strong></button>
 
                             </div>
                             {!! Form::close() !!}
@@ -364,7 +396,7 @@
                                     </thead>
                                     <tbody id="T_contenido">
                                         @foreach ($tapas as $t)
-                                            <tr class="gradeA" id="item-{{$t->id}}">
+                                            <tr class="gradeA" id="item-tapas-{{$c->id}}">
                                                 <td>{{$t->material->description}}</td>
                                                 <td>{{$t->material->specification}}</td>
                                                 <td>{{$t->quantity}}</td>
@@ -374,7 +406,10 @@
                                                 <td>{{$t->material->gross_weight}}</td>
                                                 <td>{{$t->material->price}}</td>
                                                 <td>{{$t->total}}</td>
-                                                <td>Eliminar</td>
+                                                <td>  <a href="#" class="btn btn-dark deleteT" data-t="{{$t->id}}">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -383,6 +418,34 @@
                             </div>
                         </div>
 
+                    </div>
+                </div>
+                {{-- Modal para eliminar cuerpo--}}
+                <div class="modal inmodal fade" id="delete-modal-tapas" tabindex="-1" role="dialog"  aria-hidden="true">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">¡Atención!</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>
+                                    <strong>
+                                    ¿Estás seguro de borrar la propuesta?
+                                    </strong>
+                                    <br><br>
+                                    Se borrarán también cualquier información relacionada.
+                                    <br><br>
+                                    Esta acción es irreversible.
+                                    <br><br>
+                                    ¿Deseas continuar?
+                                    </strong>
+                                </p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-danger" id="delete-action-btn-tapas" data-tangoT="0">Borrar</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -519,7 +582,7 @@
 
 
                             <div>
-                                <button id="S_adicionar" class="btn btn-lg btn-primary pull-right m-t-n-xs" type="button"><strong>Guardar</strong></button>
+                                <button id="S_adicionar" class="btn btn-lg btn-primary pull-right m-t-n-xs" type="button"><strong>Agregar</strong></button>
 
                             </div>
                             {!! Form::close() !!}
@@ -544,7 +607,7 @@
                                     </thead>
                                     <tbody id="S_contenido">
                                         @foreach ($soportes as $s)
-                                            <tr class="gradeA" id="item-{{$s->id}}">
+                                            <tr class="gradeA" id="item-soporte-{{$s->id}}">
                                                 <td>{{$s->material->description}}</td>
                                                 <td>{{$s->material->specification}}</td>
                                                 <td>{{$s->quantity}}</td>
@@ -554,12 +617,43 @@
                                                 <td>{{$s->material->gross_weight}}</td>
                                                 <td>{{$s->material->price}}</td>
                                                 <td>{{$s->total}}</td>
-                                                <td>Eliminar</td>
+                                                <td>  <a href="#" class="btn btn-dark deleteS" data-s="{{$s->id}}">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
 
+                            </div>
+                            {{-- Modal para eliminar soportes--}}
+                            <div class="modal inmodal fade" id="delete-modal-soporte" tabindex="-1" role="dialog"  aria-hidden="true">
+                                <div class="modal-dialog modal-sm">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">¡Atención!</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>
+                                                <strong>
+                                                ¿Estás seguro de borrar la propuesta?
+                                                </strong>
+                                                <br><br>
+                                                Se borrarán también cualquier información relacionada.
+                                                <br><br>
+                                                Esta acción es irreversible.
+                                                <br><br>
+                                                ¿Deseas continuar?
+                                                </strong>
+                                            </p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
+                                            <button type="button" class="btn btn-danger" id="delete-action-btn-soporte" data-tangoS="0">Borrar</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -699,7 +793,7 @@
 
 
                             <div>
-                                <button id="E_adicionar" class="btn btn-lg btn-primary pull-right m-t-n-xs" type="button"><strong>Guardar</strong></button>
+                                <button id="E_adicionar" class="btn btn-lg btn-primary pull-right m-t-n-xs" type="button"><strong>Agregar</strong></button>
 
                             </div>
                             {!! Form::close() !!}
@@ -724,7 +818,7 @@
                                     </thead>
                                     <tbody id="E_contenido">
                                         @foreach ($escalera as $e)
-                                            <tr class="gradeA" id="item-{{$e->id}}">
+                                            <tr class="gradeA" id="item-escalera-{{$e->id}}">
                                                 <td>{{$e->material->description}}</td>
                                                 <td>{{$e->material->specification}}</td>
                                                 <td>{{$e->quantity}}</td>
@@ -734,7 +828,10 @@
                                                 <td>{{$e->material->gross_weight}}</td>
                                                 <td>{{$e->material->price}}</td>
                                                 <td>{{$e->total}}</td>
-                                                <td>Eliminar</td>
+                                                <td>  <a href="#" class="btn btn-dark deleteE" data-e="{{$e->id}}">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -743,6 +840,34 @@
                             </div>
                         </div>
 
+                    </div>
+                </div>
+                {{-- Modal para eliminar escalera--}}
+                <div class="modal inmodal fade" id="delete-modal-escalera" tabindex="-1" role="dialog"  aria-hidden="true">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">¡Atención!</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>
+                                    <strong>
+                                    ¿Estás seguro de borrar la propuesta?
+                                    </strong>
+                                    <br><br>
+                                    Se borrarán también cualquier información relacionada.
+                                    <br><br>
+                                    Esta acción es irreversible.
+                                    <br><br>
+                                    ¿Deseas continuar?
+                                    </strong>
+                                </p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-danger" id="delete-action-btn-escalera" data-tangoS="0">Borrar</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -879,7 +1004,7 @@
 
 
                             <div>
-                                <button id="R_adicionar" class="btn btn-lg btn-primary pull-right m-t-n-xs" type="button"><strong>Guardar</strong></button>
+                                <button id="R_adicionar" class="btn btn-lg btn-primary pull-right m-t-n-xs" type="button"><strong>Agregar</strong></button>
 
                             </div>
                             {!! Form::close() !!}
@@ -904,7 +1029,7 @@
                                     </thead>
                                     <tbody id="R_contenido">
                                         @foreach ($registro as $r)
-                                            <tr class="gradeA" id="item-{{$r->id}}">
+                                            <tr class="gradeA" id="item-registro-{{$r->id}}">
                                                 <td>{{$r->material->description}}</td>
                                                 <td>{{$r->material->specification}}</td>
                                                 <td>{{$r->quantity}}</td>
@@ -914,7 +1039,10 @@
                                                 <td>{{$r->material->gross_weight}}</td>
                                                 <td>{{$r->material->price}}</td>
                                                 <td>{{$r->total}}</td>
-                                                <td>Eliminar</td>
+                                                <td>  <a href="#" class="btn btn-dark deleteR" data-r="{{$r->id}}">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -923,6 +1051,34 @@
                             </div>
                         </div>
 
+                    </div>
+                </div>
+                {{-- Modal para eliminar registro--}}
+                <div class="modal inmodal fade" id="delete-modal-registro" tabindex="-1" role="dialog"  aria-hidden="true">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">¡Atención!</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>
+                                    <strong>
+                                    ¿Estás seguro de borrar la propuesta?
+                                    </strong>
+                                    <br><br>
+                                    Se borrarán también cualquier información relacionada.
+                                    <br><br>
+                                    Esta acción es irreversible.
+                                    <br><br>
+                                    ¿Deseas continuar?
+                                    </strong>
+                                </p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-danger" id="delete-action-btn-registro" data-tangoR="0">Borrar</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1059,7 +1215,7 @@
 
 
                             <div>
-                                <button id="B_adicionar" class="btn btn-lg btn-primary pull-right m-t-n-xs" type="button"><strong>Guardar</strong></button>
+                                <button id="B_adicionar" class="btn btn-lg btn-primary pull-right m-t-n-xs" type="button"><strong>Agregar</strong></button>
 
                             </div>
                             {!! Form::close() !!}
@@ -1084,7 +1240,7 @@
                                     </thead>
                                     <tbody id="B_contenido">
                                         @foreach ($boquillas as $b)
-                                            <tr class="gradeA" id="item-{{$b->id}}">
+                                            <tr class="gradeA" id="item-boquilla-{{$b->id}}">
                                                 <td>{{$b->material->description}}</td>
                                                 <td>{{$b->material->specification}}</td>
                                                 <td>{{$b->quantity}}</td>
@@ -1094,12 +1250,44 @@
                                                 <td>{{$b->material->gross_weight}}</td>
                                                 <td>{{$b->material->price}}</td>
                                                 <td>{{$b->total}}</td>
-                                                <td>Eliminar</td>
+                                                <td>  <a href="#" class="btn btn-dark deleteB" data-b="{{$b->id}}">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
 
+                            </div>
+                        </div>
+
+                         {{-- Modal para eliminar registro--}}
+                        <div class="modal inmodal fade" id="delete-modal-boquilla" tabindex="-1" role="dialog"  aria-hidden="true">
+                            <div class="modal-dialog modal-sm">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">¡Atención!</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>
+                                            <strong>
+                                            ¿Estás seguro de borrar la propuesta?
+                                            </strong>
+                                            <br><br>
+                                            Se borrarán también cualquier información relacionada.
+                                            <br><br>
+                                            Esta acción es irreversible.
+                                            <br><br>
+                                            ¿Deseas continuar?
+                                            </strong>
+                                        </p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
+                                        <button type="button" class="btn btn-danger" id="delete-action-btn-boquilla" data-tangoB="0">Borrar</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -1148,7 +1336,7 @@
         <div class="panel-heading">
             Costo de mano de obra
         </div>
-        <div class="panel-body">
+        {{-- <div class="panel-body">
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
@@ -1258,7 +1446,7 @@
                             </div>
 
                             <div>
-                                <button id="B_adicionar" class="btn btn-lg btn-primary pull-right m-t-n-xs" type="button"><strong>Guardar</strong></button>
+                                <button id="B_adicionar" class="btn btn-lg btn-primary pull-right m-t-n-xs" type="button"><strong>Agregar</strong></button>
 
                             </div>
                             {!! Form::close() !!}
@@ -1293,7 +1481,11 @@
                                                 <td>{{$b->material->gross_weight}}</td>
                                                 <td>{{$b->material->price}}</td>
                                                 <td>{{$b->total}}</td>
-                                                <td>Eliminar</td>
+                                                <td>
+                                                    <a href="#" class="btn btn-dark delete">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -1305,7 +1497,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <div class="panel-footer">
 
         </div>
@@ -1372,15 +1564,15 @@
                     processData: false,  // tell jQuery not to process the data
                     contentType: false,  // tell jQuery not to set contentType
                 }).done(function(data){
-                    // location.reload();
-                    $.each(data.material, function(index, value){
-                        /* Vamos agregando a nuestra tabla las filas necesarias */
-                        $("#contenido").append("<tr><td>" + value.material.description + "</td><td>" + value.material.specification + "</td><td>" + value.quantity + "</td><td>" + value.material.dimension + "</td><td>"+value.material.length+"</td><td>"+value.material.net_weight+"</td><td>"+value.material.gross_weight+"</td><td>"+value.material.price+"</td><td>"+value.total+"</td></tr>");
-                    });
-                    $("#peso_neto").val(data.peso_neto);
-                    $("#peso_bruto").val(data.peso_burto);
-                    $("#precio_kilo").val(data.precio_kilo);
-                    $("#total_material").val(data.total);
+                     location.reload();
+                    // $.each(data.material, function(index, value){
+                    //     /* Vamos agregando a nuestra tabla las filas necesarias */
+                    //     $("#contenido").append("<tr class='gradeA' id='item-cuerpo-"+value.id+"'><td>" + value.material.description + "</td><td>" + value.material.specification + "</td><td>" + value.quantity + "</td><td>" + value.material.dimension + "</td><td>"+value.material.length+"</td><td>"+value.material.net_weight+"</td><td>"+value.material.gross_weight+"</td><td>"+value.material.price+"</td><td>"+value.total+"</td><td><a href='#' class='btn btn-dark deleteC' data-c="+value.id+"><i class='fa fa-trash'></i></a></td></tr>");
+                    // });
+                    // $("#peso_neto").val(data.peso_neto);
+                    // $("#peso_bruto").val(data.peso_burto);
+                    // $("#precio_kilo").val(data.precio_kilo);
+                    // $("#total_material").val(data.total);
                 }).fail(function(data){
                     var message = data.responseJSON.errors;
                     console.log(message);
@@ -1444,14 +1636,15 @@
                     processData: false,  // tell jQuery not to process the data
                     contentType: false,  // tell jQuery not to set contentType
                 }).done(function(data){
-                    $.each(data.material, function(index, value){
-                        /* Vamos agregando a nuestra tabla las filas necesarias */
-                        $("#T_contenido").append("<tr><td>" + value.material.description + "</td><td>" + value.material.specification + "</td><td>" + value.quantity + "</td><td>" + value.material.dimension + "</td><td>"+value.material.length+"</td><td>"+value.material.net_weight+"</td><td>"+value.material.gross_weight+"</td><td>"+value.material.price+"</td><td>"+value.total+"</td></tr>");
-                    });
-                    $("#peso_neto").val(data.peso_neto);
-                    $("#peso_bruto").val(data.peso_burto);
-                    $("#precio_kilo").val(data.precio_kilo);
-                    $("#total_material").val(data.total);
+                    location.reload();
+                    // $.each(data.material, function(index, value){
+                    //     /* Vamos agregando a nuestra tabla las filas necesarias */
+                    //     $("#T_contenido").append("<tr><td>" + value.material.description + "</td><td>" + value.material.specification + "</td><td>" + value.quantity + "</td><td>" + value.material.dimension + "</td><td>"+value.material.length+"</td><td>"+value.material.net_weight+"</td><td>"+value.material.gross_weight+"</td><td>"+value.material.price+"</td><td>"+value.total+"</td></tr>");
+                    // });
+                    // $("#peso_neto").val(data.peso_neto);
+                    // $("#peso_bruto").val(data.peso_burto);
+                    // $("#precio_kilo").val(data.precio_kilo);
+                    // $("#total_material").val(data.total);
                 }).fail(function(data){
                     var message = data.responseJSON.errors;
                     console.log(message);
@@ -1515,14 +1708,15 @@
                     processData: false,  // tell jQuery not to process the data
                     contentType: false,  // tell jQuery not to set contentType
                 }).done(function(data){
-                    $.each(data.material, function(index, value){
-                        /* Vamos agregando a nuestra tabla las filas necesarias */
-                        $("#S_contenido").append("<tr><td>" + value.material.description + "</td><td>" + value.material.specification + "</td><td>" + value.quantity + "</td><td>" + value.material.dimension + "</td><td>"+value.material.length+"</td><td>"+value.material.net_weight+"</td><td>"+value.material.gross_weight+"</td><td>"+value.material.price+"</td><td>"+value.total+"</td></tr>");
-                    });
-                    $("#peso_neto").val(data.peso_neto);
-                    $("#peso_bruto").val(data.peso_burto);
-                    $("#precio_kilo").val(data.precio_kilo);
-                    $("#total_material").val(data.total);
+                    location.reload();
+                    // $.each(data.material, function(index, value){
+                    //     /* Vamos agregando a nuestra tabla las filas necesarias */
+                    //     $("#S_contenido").append("<tr><td>" + value.material.description + "</td><td>" + value.material.specification + "</td><td>" + value.quantity + "</td><td>" + value.material.dimension + "</td><td>"+value.material.length+"</td><td>"+value.material.net_weight+"</td><td>"+value.material.gross_weight+"</td><td>"+value.material.price+"</td><td>"+value.total+"</td></tr>");
+                    // });
+                    // $("#peso_neto").val(data.peso_neto);
+                    // $("#peso_bruto").val(data.peso_burto);
+                    // $("#precio_kilo").val(data.precio_kilo);
+                    // $("#total_material").val(data.total);
                 }).fail(function(data){
                     var message = data.responseJSON.errors;
                     console.log(message);
@@ -1586,14 +1780,15 @@
                     processData: false,  // tell jQuery not to process the data
                     contentType: false,  // tell jQuery not to set contentType
                 }).done(function(data){
-                    $.each(data.material, function(index, value){
-                        /* Vamos agregando a nuestra tabla las filas necesarias */
-                        $("#E_contenido").append("<tr><td>" + value.material.description + "</td><td>" + value.material.specification + "</td><td>" + value.quantity + "</td><td>" + value.material.dimension + "</td><td>"+value.material.length+"</td><td>"+value.material.net_weight+"</td><td>"+value.material.gross_weight+"</td><td>"+value.material.price+"</td><td>"+value.total+"</td></tr>");
-                    });
-                    $("#peso_neto").val(data.peso_neto);
-                    $("#peso_bruto").val(data.peso_burto);
-                    $("#precio_kilo").val(data.precio_kilo);
-                    $("#total_material").val(data.total);
+                    location.reload();
+                    // $.each(data.material, function(index, value){
+                    //     /* Vamos agregando a nuestra tabla las filas necesarias */
+                    //     $("#E_contenido").append("<tr><td>" + value.material.description + "</td><td>" + value.material.specification + "</td><td>" + value.quantity + "</td><td>" + value.material.dimension + "</td><td>"+value.material.length+"</td><td>"+value.material.net_weight+"</td><td>"+value.material.gross_weight+"</td><td>"+value.material.price+"</td><td>"+value.total+"</td></tr>");
+                    // });
+                    // $("#peso_neto").val(data.peso_neto);
+                    // $("#peso_bruto").val(data.peso_burto);
+                    // $("#precio_kilo").val(data.precio_kilo);
+                    // $("#total_material").val(data.total);
                 }).fail(function(data){
                     var message = data.responseJSON.errors;
                     console.log(message);
@@ -1657,14 +1852,15 @@
                     processData: false,  // tell jQuery not to process the data
                     contentType: false,  // tell jQuery not to set contentType
                 }).done(function(data){
-                    $.each(data.material, function(index, value){
-                        /* Vamos agregando a nuestra tabla las filas necesarias */
-                        $("#R_contenido").append("<tr><td>" + value.material.description + "</td><td>" + value.material.specification + "</td><td>" + value.quantity + "</td><td>" + value.material.dimension + "</td><td>"+value.material.length+"</td><td>"+value.material.net_weight+"</td><td>"+value.material.gross_weight+"</td><td>"+value.material.price+"</td><td>"+value.total+"</td></tr>");
-                    });
-                    $("#peso_neto").val(data.peso_neto);
-                    $("#peso_bruto").val(data.peso_burto);
-                    $("#precio_kilo").val(data.precio_kilo);
-                    $("#total_material").val(data.total);
+                    location.reload();
+                    // $.each(data.material, function(index, value){
+                    //     /* Vamos agregando a nuestra tabla las filas necesarias */
+                    //     $("#R_contenido").append("<tr><td>" + value.material.description + "</td><td>" + value.material.specification + "</td><td>" + value.quantity + "</td><td>" + value.material.dimension + "</td><td>"+value.material.length+"</td><td>"+value.material.net_weight+"</td><td>"+value.material.gross_weight+"</td><td>"+value.material.price+"</td><td>"+value.total+"</td></tr>");
+                    // });
+                    // $("#peso_neto").val(data.peso_neto);
+                    // $("#peso_bruto").val(data.peso_burto);
+                    // $("#precio_kilo").val(data.precio_kilo);
+                    // $("#total_material").val(data.total);
                 }).fail(function(data){
                     var message = data.responseJSON.errors;
                     console.log(message);
@@ -1728,14 +1924,15 @@
                     processData: false,  // tell jQuery not to process the data
                     contentType: false,  // tell jQuery not to set contentType
                 }).done(function(data){
-                    $.each(data.material, function(index, value){
-                        /* Vamos agregando a nuestra tabla las filas necesarias */
-                        $("#B_contenido").append("<tr><td>" + value.material.description + "</td><td>" + value.material.specification + "</td><td>" + value.quantity + "</td><td>" + value.material.dimension + "</td><td>"+value.material.length+"</td><td>"+value.material.net_weight+"</td><td>"+value.material.gross_weight+"</td><td>"+value.material.price+"</td><td>"+value.total+"</td></tr>");
-                    });
-                    $("#peso_neto").val(data.peso_neto);
-                    $("#peso_bruto").val(data.peso_burto);
-                    $("#precio_kilo").val(data.precio_kilo);
-                    $("#total_material").val(data.total);
+                    location.reload();
+                    // $.each(data.material, function(index, value){
+                    //     /* Vamos agregando a nuestra tabla las filas necesarias */
+                    //     $("#B_contenido").append("<tr><td>" + value.material.description + "</td><td>" + value.material.specification + "</td><td>" + value.quantity + "</td><td>" + value.material.dimension + "</td><td>"+value.material.length+"</td><td>"+value.material.net_weight+"</td><td>"+value.material.gross_weight+"</td><td>"+value.material.price+"</td><td>"+value.total+"</td></tr>");
+                    // });
+                    // $("#peso_neto").val(data.peso_neto);
+                    // $("#peso_bruto").val(data.peso_burto);
+                    // $("#precio_kilo").val(data.precio_kilo);
+                    // $("#total_material").val(data.total);
                 }).fail(function(data){
                     var message = data.responseJSON.errors;
                     console.log(message);
@@ -1744,6 +1941,186 @@
                 $(".alert").removeClass("in").show();
                 $(".alert").delay(200).addClass("in").fadeOut(3000);
             }
+
+        });
+
+        /*
+        Modal de eliminar material de cuerpo
+        */
+        $(".deleteC").click(function(event) {
+            event.preventDefault();
+            var id = $(this).data('c');
+            $("#delete-action-btn-cuerpo").attr('data-tangoC',id);
+            $("#delete-modal-cuerpo").modal();
+        });
+
+        $("#delete-action-btn-cuerpo").click(function(event) {
+            event.preventDefault();
+            var id = $(this).attr('data-tangoC');
+            alert(id);
+            $.ajax({
+                url: '{{url('cotizacion/delet')}}/'+id,
+                type: 'DELETE',
+                dataType: 'json',
+            })
+            .done(function(data) {
+                $("#item-cuerpo-"+id).remove();
+                $("#delete-modal-cuerpo").modal('hide');
+                toastr.success('Se ha eliminado la información correctamente');
+            })
+            .fail(function() {
+                console.log(data);
+            });
+
+        });
+
+         /*
+        Modal de eliminar material de tapas
+        */
+        $(".deleteT").click(function(event) {
+            event.preventDefault();
+            var id = $(this).data('t');
+            $("#delete-action-btn-tapas").attr('data-tangoT',id);
+            $("#delete-modal-tapas").modal();
+        });
+
+        $("#delete-action-btn-tapas").click(function(event) {
+            event.preventDefault();
+            var id = $(this).attr('data-tangoT');
+            alert(id);
+            $.ajax({
+                url: '{{url('cotizacion/delet')}}/'+id,
+                type: 'DELETE',
+                dataType: 'json',
+            })
+            .done(function(data) {
+                $("#item-cuerpo-"+id).remove();
+                $("#delete-modal-tapas").modal('hide');
+                toastr.success('Se ha eliminado la información correctamente');
+            })
+            .fail(function() {
+                console.log(data);
+            });
+
+        });
+
+         /*
+        Modal de eliminar material de soporte
+        */
+        $(".deleteS").click(function(event) {
+            event.preventDefault();
+            var id = $(this).data('s');
+            $("#delete-action-btn-soporte").attr('data-tangoS',id);
+            $("#delete-modal-soporte").modal();
+        });
+
+        $("#delete-action-btn-soporte").click(function(event) {
+            event.preventDefault();
+            var id = $(this).attr('data-tangoS');
+            alert(id);
+            $.ajax({
+                url: '{{url('cotizacion/delet')}}/'+id,
+                type: 'DELETE',
+                dataType: 'json',
+            })
+            .done(function(data) {
+                $("#item-soporte-"+id).remove();
+                $("#delete-modal-soporte").modal('hide');
+                toastr.success('Se ha eliminado la información correctamente');
+            })
+            .fail(function() {
+                console.log(data);
+            });
+
+        });
+
+        /*
+        Modal de eliminar material de escalera
+        */
+        $(".deleteE").click(function(event) {
+            event.preventDefault();
+            var id = $(this).data('e');
+            $("#delete-action-btn-escalera").attr('data-tangoE',id);
+            $("#delete-modal-escalera").modal();
+        });
+
+        $("#delete-action-btn-escalera").click(function(event) {
+            event.preventDefault();
+            var id = $(this).attr('data-tangoE');
+            alert(id);
+            $.ajax({
+                url: '{{url('cotizacion/delet')}}/'+id,
+                type: 'DELETE',
+                dataType: 'json',
+            })
+            .done(function(data) {
+                $("#item-escalera-"+id).remove();
+                $("#delete-modal-escalera").modal('hide');
+                toastr.success('Se ha eliminado la información correctamente');
+            })
+            .fail(function() {
+                console.log(data);
+            });
+
+        });
+
+        /*
+        Modal de eliminar material de registro
+        */
+        $(".deleteR").click(function(event) {
+            event.preventDefault();
+            var id = $(this).data('r');
+            $("#delete-action-btn-registro").attr('data-tangoR',id);
+            $("#delete-modal-registro").modal();
+        });
+
+        $("#delete-action-btn-registro").click(function(event) {
+            event.preventDefault();
+            var id = $(this).attr('data-tangoR');
+            alert(id);
+            $.ajax({
+                url: '{{url('cotizacion/delet')}}/'+id,
+                type: 'DELETE',
+                dataType: 'json',
+            })
+            .done(function(data) {
+                $("#item-registro-"+id).remove();
+                $("#delete-modal-registro").modal('hide');
+                toastr.success('Se ha eliminado la información correctamente');
+            })
+            .fail(function() {
+                console.log(data);
+            });
+
+        });
+
+        /*
+        Modal de eliminar material de boquilla
+        */
+        $(".deleteB").click(function(event) {
+            event.preventDefault();
+            var id = $(this).data('b');
+            $("#delete-action-btn-boquilla").attr('data-tangoB',id);
+            $("#delete-modal-boquilla").modal();
+        });
+
+        $("#delete-action-btn-boquilla").click(function(event) {
+            event.preventDefault();
+            var id = $(this).attr('data-tangoB');
+            alert(id);
+            $.ajax({
+                url: '{{url('cotizacion/delet')}}/'+id,
+                type: 'DELETE',
+                dataType: 'json',
+            })
+            .done(function(data) {
+                $("#item-boquilla-"+id).remove();
+                $("#delete-modal-boquilla").modal('hide');
+                toastr.success('Se ha eliminado la información correctamente');
+            })
+            .fail(function() {
+                console.log(data);
+            });
 
         });
 
