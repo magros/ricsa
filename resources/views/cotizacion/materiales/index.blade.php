@@ -56,10 +56,10 @@
                                     {{$material->r_rc}}
                                 </td>
                                 <td>
-                                    {{-- <a href="{{route('cotizacion.client.edit',[$client->id])}}" class="btn btn-black">
+                                    {{-- <a href="{{route('cotizacion.client.edit',[$client->id])}}" class="btn btn-outline-light">
                                         <i class="fa fa-pencil-square-o"></i>
                                     </a>
-                                    <a href="#" class="btn btn-black delete" data-id="{{$client->id}}">
+                                    <a href="#" class="btn btn-outline-light delete" data-id="{{$client->id}}">
                                         <i class="fa fa-trash"></i>
                                     </a> --}}
 

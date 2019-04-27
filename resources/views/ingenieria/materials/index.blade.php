@@ -56,10 +56,10 @@
                                     {{$material->r_rc}}
                                 </td>
                                 <td>
-                                    <a href="{{route('ingenieria.material.edit',[$material->id])}}" class="btn btn-dark">
+                                    <a href="{{route('ingenieria.material.edit',[$material->id])}}" class="btn btn-outline-light">
                                         <i class="fa fa-pencil-square-o"></i>
                                     </a>
-                                    <a href="#" class="btn btn-dark delete" data-id="{{$material->id}}">
+                                    <a href="#" class="btn btn-outline-light delete" data-id="{{$material->id}}">
                                         <i class="fa fa-trash"></i>
                                     </a>
 

@@ -167,8 +167,8 @@
 
                         <div class="row">
                             <div class="col-sm-12">
-                                <table  id="tabla_cuerpo" class="table table-bordered table-hover ">
-                                    <thead>
+                                <table  id="tabla_cuerpo" class="table table-stripped table-dark table-hover ">
+                                    <thead class="thead-dark">
                                         <tr>
                                             <th>Descripcion</th>
                                             <th>Especificacion Material</th>
@@ -347,8 +347,8 @@
 
                         <div class="row">
                             <div class="col-sm-12">
-                                <table  id="tabla_cuerpo" class="table table-bordered table-hover ">
-                                    <thead>
+                                <table  id="tabla_cuerpo" class="table table-striped table-dark table-hover ">
+                                    <thead class="thead-dark">
                                         <tr>
                                             <th>Descripcion</th>
                                             <th>Especificacion Material</th>
@@ -527,8 +527,8 @@
 
                         <div class="row">
                             <div class="col-sm-12">
-                                <table  id="tabla_cuerpo" class="table table-bordered table-hover ">
-                                    <thead>
+                                <table  id="tabla_cuerpo" class="table table-striped table-dark table-hover ">
+                                    <thead class="thead-dark">
                                         <tr>
                                             <th>Descripcion</th>
                                             <th>Especificacion Material</th>
@@ -707,8 +707,8 @@
 
                         <div class="row">
                             <div class="col-sm-12">
-                                <table  id="tabla_cuerpo" class="table table-bordered table-hover ">
-                                    <thead>
+                                <table  id="tabla_cuerpo" class="table table-striped table-dark table-hover ">
+                                    <thead class="thead-dark">
                                         <tr>
                                             <th>Descripcion</th>
                                             <th>Especificacion Material</th>
@@ -749,7 +749,7 @@
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>registro de inspección</h5>
+                        <h5>Registro de inspección</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -887,8 +887,8 @@
 
                         <div class="row">
                             <div class="col-sm-12">
-                                <table  id="tabla_cuerpo" class="table table-bordered table-hover ">
-                                    <thead>
+                                <table  id="tabla_cuerpo" class="table table-striped table-dark table-hover ">
+                                    <thead class="thead-dark">
                                         <tr>
                                             <th>Descripcion</th>
                                             <th>Especificacion Material</th>
@@ -929,7 +929,7 @@
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>boquillas</h5>
+                        <h5>Boquillas</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -1067,8 +1067,8 @@
 
                         <div class="row">
                             <div class="col-sm-12">
-                                <table  id="tabla_cuerpo" class="table table-bordered table-hover ">
-                                    <thead>
+                                <table  id="tabla_cuerpo" class="table table-striped table-dark table-hover ">
+                                    <thead class="thead-dark">
                                         <tr>
                                             <th>Descripcion</th>
                                             <th>Especificacion Material</th>
@@ -1266,8 +1266,8 @@
 
                         <div class="row">
                             <div class="col-sm-12">
-                                <table  id="tabla_cuerpo" class="table table-bordered table-hover ">
-                                    <thead>
+                                <table  id="tabla_cuerpo" class="table table-striped table-dark table-hover ">
+                                    <thead class="thead-dark">
                                         <tr>
                                             <th>Descripcion</th>
                                             <th>Especificacion Material</th>

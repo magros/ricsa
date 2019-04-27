@@ -59,13 +59,13 @@
                                     {{$proyect->status}}
                                 </td>
                                 <td>
-                                    <a href="#" class="btn btn-white">
+                                    <a href="#" class="btn btn-outline-light">
                                         <i class="fa fa-eye"></i>
                                     </a>
-                                    <a href="#" class="btn btn-white">
+                                    <a href="#" class="btn btn-outline-light">
                                         <i class="fa fa-pencil-square-o"></i>
                                     </a>
-                                    <a href="{{route('ingenieria.proyect.create')}}" class="btn btn-white">
+                                    <a href="{{route('ingenieria.proyect.create')}}" class="btn btn-outline-light">
                                         <i class="fa fa-plus"></i>
                                     </a>
                                 </td>

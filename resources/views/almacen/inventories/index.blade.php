@@ -56,7 +56,7 @@
                                     {{$inventory->ric->name_proyect}}
                                 </td>
                                 <td>
-                                    <a href="{{route('almacen.inventory.edit',[$inventory->id])}}" class="btn btn-white">
+                                    <a href="{{route('almacen.inventory.edit',[$inventory->id])}}" class="btn btn-outline-light">
                                         <i class="fa fa-eye"></i>
                                     </a>
                                 </td>

@@ -48,7 +48,7 @@
                                     {{$dollar->price}}
                                 </td>
                                 <td>
-                                    <a href="{{route('precio.dollar.edit',[$dollar->id])}}" class="btn btn-white">
+                                    <a href="{{route('precio.dollar.edit',[$dollar->id])}}" class="btn btn-outline-light">
                                         <i class="fa fa-pencil-square-o"></i>
                                     </a>
 

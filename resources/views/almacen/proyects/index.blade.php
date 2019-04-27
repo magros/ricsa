@@ -59,7 +59,7 @@
                                     {{$proyect->status}}
                                 </td>
                                 <td>
-                                    <a href="#" class="btn btn-white">
+                                    <a href="#" class="btn btn-outline-light">
                                         <i class="fa fa-eye"></i>
                                     </a>
                                 </td>

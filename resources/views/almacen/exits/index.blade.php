@@ -55,7 +55,7 @@
                                     {{$material->estimated_time}}
                                 </td>
                                 <td>
-                                    <a href="#" class="btn btn-dark">
+                                    <a href="#" class="btn btn-outline-light">
                                         <i class="fa fa-eye"></i>
                                     </a>
                                 </td>

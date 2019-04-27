@@ -52,7 +52,7 @@
                                     {{$metal->price}}
                                 </td>
                                 <td>
-                                    <a href="{{route('precio.metal.edit',[$metal->id])}}" class="btn btn-dark">
+                                    <a href="{{route('precio.metal.edit',[$metal->id])}}" class="btn btn-outline-light">
                                         <i class="fa fa-pencil-square-o"></i>
                                     </a>
 
