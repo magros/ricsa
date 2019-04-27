@@ -30,8 +30,8 @@
                 </div>
                 <div class="ibox-content">
 
-                    <table class="table table-striped table-bordered table-hover dataTables-users" >
-                        <thead>
+                    <table class="table table-striped table-dark table-hover dataTables-users" >
+                        <thead class="thead-dark">
                         <tr>
                             <th>Descipcion</th>
                             <th>Especificación</th>
@@ -56,7 +56,7 @@
                                     {{$inventory->ric->name_proyect}}
                                 </td>
                                 <td>
-                                    <a href="{{route('almacen.inventory.edit',[$inventory->id])}}" class="btn btn-white">
+                                    <a href="{{route('almacen.inventory.edit',[$inventory->id])}}" class="btn btn-outline-light">
                                         <i class="fa fa-eye"></i>
                                     </a>
                                 </td>

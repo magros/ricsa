@@ -30,7 +30,7 @@
                 </div>
                 <div class="ibox-content">
 
-                    <table class="table table-striped table-bordered table-hover dataTables-users" >
+                    <table class="table table-striped table-hover table-dark dataTables-users" >
                         <thead class="thead-dark">
                         <tr>
                             <th>Nombre</th>
@@ -69,19 +69,19 @@
                                     @endif
                                 </td>
                                 <td>
-                                    {{-- <a href="{{route('cotizacion.client.edit',[$ric->id])}}" class="btn btn-dark">
+                                    {{-- <a href="{{route('cotizacion.client.edit',[$ric->id])}}" class="btn btn-outline-light">
                                         <i class="fa fa-pencil-square-o"></i>
                                     </a> --}}
-                                    <a href="#" class="btn btn-dark delete" data-id="{{$ric->id}}">
+                                    <a href="#" class="btn btn-outline-light delete" data-id="{{$ric->id}}">
                                         <i class="fa fa-trash"></i>
                                     </a>
                                     @if($ric->complexity > 1 && $ric->status ==1)
-                                        <a href="#" class="btn btn-white update" data-id="{{$ric->id}}">
+                                        <a href="#" class="btn btn-outline-light delete" data-id="{{$ric->id}}">
                                             PMO
                                         </a>
                                     @endif
                                     @if ($ric->complexity == 1 || $ric->status == 2)
-                                        <a href="{{route('cotizacion.quoting',[$ric->id])}}" class="btn btn-white" data-id="{{$ric->id}}">
+                                        <a href="{{route('cotizacion.quoting',[$ric->id])}}" class="btn btn-outline-light" data-id="{{$ric->id}}">
                                             <i class="glyphicon glyphicon-plus"></i>
                                         </a>
                                     @endif
