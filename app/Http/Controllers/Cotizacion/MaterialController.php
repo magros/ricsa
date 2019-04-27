@@ -123,7 +123,11 @@ class MaterialController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $material = MaterialQuotation::find($id);
+        if(!is_null($material)){
+            return response()->json($material->delete());
+        }
+        return abort(500);
     }
     public function list(Request $request)
     {

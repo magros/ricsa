@@ -30,7 +30,7 @@
                 </div>
                 <div class="ibox-content">
 
-                    <table class="table table-striped table-bordered table-hover dataTables-users" >
+                    <table class="table table-striped table-hover table-dark dataTables-users" >
                         <thead class="thead-dark">
                         <tr>
                             <th>Nombre</th>
@@ -61,30 +61,27 @@
                                     @endif
                                 </td>
                                 <td>
-                                    @if($ric->status == 1)
+                                    @if($ric->status == 1 || $ric->status == 2 )
                                         Propuesta
-                                    @endif
-                                    @if($ric->status == 2)
-                                        Aprubado
                                     @endif
                                     @if($ric->status == 3)
                                         Ric
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{route('cotizacion.client.edit',[$ric->id])}}" class="btn btn-dark">
+                                    {{-- <a href="{{route('cotizacion.client.edit',[$ric->id])}}" class="btn btn-outline-light">
                                         <i class="fa fa-pencil-square-o"></i>
-                                    </a>
-                                    <a href="#" class="btn btn-dark delete" data-id="{{$ric->id}}">
+                                    </a> --}}
+                                    <a href="#" class="btn btn-outline-light delete" data-id="{{$ric->id}}">
                                         <i class="fa fa-trash"></i>
                                     </a>
-                                    @if($ric->complexity > 1)
-                                        <a href="#" class="btn btn-white delete" data-id="{{$ric->id}}">
-                                            <i class="fa fa-check"></i>
+                                    @if($ric->complexity > 1 && $ric->status ==1)
+                                        <a href="#" class="btn btn-outline-light delete" data-id="{{$ric->id}}">
+                                            PMO
                                         </a>
                                     @endif
                                     @if ($ric->complexity == 1 || $ric->status == 2)
-                                        <a href="{{route('cotizacion.quoting',[$ric->id])}}" class="btn btn-white" data-id="{{$ric->id}}">
+                                        <a href="{{route('cotizacion.quoting',[$ric->id])}}" class="btn btn-outline-light" data-id="{{$ric->id}}">
                                             <i class="glyphicon glyphicon-plus"></i>
                                         </a>
                                     @endif
@@ -98,21 +95,48 @@
             </div>
         </div>
     </div>
-
-    <div class="modal inmodal fade" id="delete-modal" tabindex="-1" role="dialog"  aria-hidden="true">
+    {{-- Modal para autorizar --}}
+    <div class="modal inmodal fade" id="update-modal" tabindex="-1" role="dialog"  aria-hidden="true">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                     <h4 class="modal-title">¡Atención!</h4>
                 </div>
                 <div class="modal-body">
                     <p>
                         <strong>
-                            ¿Estás seguro de borrar el cliente?
+                        ¿Estás seguro de aprobar la propuesta?
                         </strong>
                         <br><br>
-                        Se borrarán también cualquier información y registros de esta cuenta.
+                        La propuesta es de complejidad elevada
+                        <br><br>
+                        Esta acción es irreversible.
+                        <br><br>
+                        ¿Deseas continuar?
+                        </strong>
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-warning" id="update-action-btn" data-tango="0">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- Modal para eliminar --}}
+    <div class="modal inmodal fade" id="delete-modal" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">¡Atención!</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        <strong>
+                        ¿Estás seguro de borrar la propuesta?
+                        </strong>
+                        <br><br>
+                        Se borrarán también cualquier información relacionada.
                         <br><br>
                         Esta acción es irreversible.
                         <br><br>
@@ -139,7 +163,39 @@
         $('.dataTables-users').dataTable({
             responsive: true,
         });
+        /*
+        Modal de autorizar proyecto PMO
+        */
+        $(".update").click(function(event) {
+            event.preventDefault();
+            var id = $(this).data('id');
+            $("#update-action-btn").attr('data-tango',id);
+            $("#update-modal").modal();
+        });
 
+        $("#update-action-btn").click(function(event) {
+            event.preventDefault();
+            var id = $(this).attr('data-tango');
+            $.ajax({
+                url: '{{url('cotizacion/autorizar')}}/'+id,
+                type: 'POST',
+                dataType: 'json',
+            })
+                .done(function(data) {
+                    $("#update-modal").modal('hide');
+                    toastr.success('Se ha autorizado la propuesta correctamente');
+                    location.reload();
+                })
+                .fail(function() {
+                    console.log(data);
+                });
+
+
+        });
+
+        /*
+        Modal de eliminar proyecto
+        */
         $(".delete").click(function(event) {
             event.preventDefault();
             var id = $(this).data('id');
@@ -151,19 +207,19 @@
             event.preventDefault();
             var id = $(this).attr('data-tango');
             $.ajax({
-                url: '{{url('cotizacion/cliente/delet')}}/'+id,
+                url: '{{url('cotizacion/propuesta/delet')}}/'+id,
                 type: 'DELETE',
                 dataType: 'json',
             })
-                .done(function(data) {
-                    $("#item-"+id).remove();
-                    $("#delete-modal").modal('hide');
-                    toastr.success('Se ha eliminado la información correctamente');
-                })
-                .fail(function() {
-                    console.log(data);
-                });
-
+            .done(function(data) {
+                $("#item-"+id).remove();
+                $("#delete-modal").modal('hide');
+                toastr.success('Se ha eliminado la información correctamente');
+                location.reload();
+            })
+            .fail(function() {
+                console.log(data);
+            });
 
         });
 
