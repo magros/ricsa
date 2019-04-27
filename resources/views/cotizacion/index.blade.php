@@ -30,7 +30,7 @@
                 </div>
                 <div class="ibox-content">
 
-                    <table class="table table-striped table-bordered table-hover dataTables-users" >
+                    <table class="table table-striped table-hover table-dark dataTables-users" >
                         <thead class="thead-dark">
                         <tr>
                             <th>Nombre</th>
@@ -79,12 +79,12 @@
                                         <i class="fa fa-trash"></i>
                                     </a>
                                     @if($ric->complexity > 1)
-                                        <a href="#" class="btn btn-white delete" data-id="{{$ric->id}}">
+                                        <a href="#" class="btn btn-dark delete" data-id="{{$ric->id}}">
                                             <i class="fa fa-check"></i>
                                         </a>
                                     @endif
                                     @if ($ric->complexity == 1 || $ric->status == 2)
-                                        <a href="{{route('cotizacion.quoting',[$ric->id])}}" class="btn btn-white" data-id="{{$ric->id}}">
+                                        <a href="{{route('cotizacion.quoting',[$ric->id])}}" class="btn btn-dark" data-id="{{$ric->id}}">
                                             <i class="glyphicon glyphicon-plus"></i>
                                         </a>
                                     @endif

@@ -29,8 +29,8 @@
                 </div>
                 <div class="ibox-content">
 
-                    <table class="table table-striped table-bordered table-hover dataTables-users" >
-                        <thead>
+                    <table class="table table-striped table-hover table-dark dataTables-users" >
+                        <thead class="thead-dark">
                         <tr>
                             <th>RIC</th>
                             <th>Proyecto</th>

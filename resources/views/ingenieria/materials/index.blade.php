@@ -30,8 +30,8 @@
                 </div>
                 <div class="ibox-content">
 
-                    <table class="table table-striped table-bordered table-hover dataTables-users" >
-                        <thead>
+                    <table class="table table-striped table-hover table-dark dataTables-users" >
+                        <thead class="thead-dark">
                         <tr>
                             <th>Descipcion</th>
                             <th>Especificación</th>
@@ -56,10 +56,10 @@
                                     {{$material->r_rc}}
                                 </td>
                                 <td>
-                                    <a href="{{route('ingenieria.material.edit',[$material->id])}}" class="btn btn-white">
+                                    <a href="{{route('ingenieria.material.edit',[$material->id])}}" class="btn btn-dark">
                                         <i class="fa fa-pencil-square-o"></i>
                                     </a>
-                                    <a href="#" class="btn btn-white delete" data-id="{{$material->id}}">
+                                    <a href="#" class="btn btn-dark delete" data-id="{{$material->id}}">
                                         <i class="fa fa-trash"></i>
                                     </a>
 

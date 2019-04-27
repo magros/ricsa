@@ -62,7 +62,6 @@
                                     <a href="#" class="btn btn-dark delete" data-id="{{$client->id}}">
                                         <i class="fa fa-trash"></i>
                                     </a>
-
                                 </td>
                             </tr>
                         @endforeach

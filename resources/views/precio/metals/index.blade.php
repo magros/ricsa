@@ -30,8 +30,8 @@
                 </div>
                 <div class="ibox-content">
 
-                    <table class="table table-striped table-bordered table-hover dataTables-users" >
-                        <thead>
+                    <table class="table table-striped table-dark table-hover dataTables-users" >
+                        <thead class="thead-dark">
                         <tr>
                             <th>Nombre</th>
                             <th>Descripción</th>
@@ -52,7 +52,7 @@
                                     {{$metal->price}}
                                 </td>
                                 <td>
-                                    <a href="{{route('precio.metal.edit',[$metal->id])}}" class="btn btn-white">
+                                    <a href="{{route('precio.metal.edit',[$metal->id])}}" class="btn btn-dark">
                                         <i class="fa fa-pencil-square-o"></i>
                                     </a>
 

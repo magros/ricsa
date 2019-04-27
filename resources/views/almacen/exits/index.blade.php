@@ -29,8 +29,8 @@
                 </div>
                 <div class="ibox-content">
 
-                    <table class="table table-striped table-bordered table-hover dataTables-users" >
-                        <thead>
+                    <table class="table table-striped table-dark table-hover dataTables-users" >
+                        <thead class="thead-dark">
                         <tr>
                             <th>Descipción</th>
                             <th>Unidad</th>
@@ -55,7 +55,7 @@
                                     {{$material->estimated_time}}
                                 </td>
                                 <td>
-                                    <a href="#" class="btn btn-white">
+                                    <a href="#" class="btn btn-dark">
                                         <i class="fa fa-eye"></i>
                                     </a>
                                 </td>
