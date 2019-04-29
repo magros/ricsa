@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Cotizacion;
 
 use App\Ric;
 use App\Customer;
+use App\Manpower;
 use App\Material;
 use Carbon\Traits\Date;
 use App\Libraries\Helpers;
@@ -162,6 +163,7 @@ class CotizacionCotroller extends Controller
             'escalera'=>MaterialQuotation::where('ric_id',$id)->where('name','escalera')->get(),
             'registro'=>MaterialQuotation::where('ric_id',$id)->where('name','registro')->get(),
             'boquillas'=>MaterialQuotation::where('ric_id',$id)->where('name','boquillas')->get(),
+            'mano_obra'=>Manpower::where('ric_id',$id)->get(),
             'peso_neto'=>$peso_neto,
             'peso_burto'=>$peso_bruto,
             'precio_kilo'=>$precio_kilo,
