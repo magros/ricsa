@@ -14,7 +14,12 @@ class ProvedoresController extends Controller
      */
     public function index()
     {
-        //
+        $data = [
+            // 'prices' => Ric::all(),
+            'tab' => 'contabilidad',
+            'subtab' => 'provider',
+        ];
+        return view('contabilidad.provedores.index')->with($data);
     }
 
     /**

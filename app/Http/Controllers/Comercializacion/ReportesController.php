@@ -14,7 +14,11 @@ class ReportesController extends Controller
      */
     public function index()
     {
-        //
+        $data = [
+            'tab' => 'warehouse',
+            'subtab' => 'materials',
+        ];
+        return view('comercializacion.reportes.index')->with($data);
     }
 
     /**

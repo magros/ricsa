@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Comercializacion;
 
+use App\Ric;
+use App\Libraries\Helpers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -14,7 +16,12 @@ class PreciosController extends Controller
      */
     public function index()
     {
-        //
+        $data = [
+            'prices' => Ric::all(),
+            'tab' => 'warehouse',
+            'subtab' => 'materials',
+        ];
+        return view('comercializacion.precios.index')->with($data);
     }
 
     /**

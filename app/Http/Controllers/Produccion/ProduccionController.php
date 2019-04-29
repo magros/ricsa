@@ -14,7 +14,12 @@ class ProduccionController extends Controller
      */
     public function index()
     {
-        //
+        $data = [
+            // 'prices' => Ric::all(),
+            'tab' => 'warehouse',
+            'subtab' => 'materials',
+        ];
+        return view('produccion.produccion.index')->with($data);
     }
 
     /**

@@ -181,7 +181,7 @@ Route::prefix('compras')->group(function(){
         Route::DELETE('listamateriales/delet/{id}','ListaMaterialesController@destroy');
 
         Route::get('/', 'ListaConsumiblesController@index');
-        Route::get('listaconsumibles','ListaConsumiblesController@index')->name('listconsumables');
+        Route::get('listaconsumibles','ListaConsumiblesController@index')->name('listconsumable');
         Route::get('listaconsumibles/create','ListaConsumiblesController@create')->name('listconsumables.create');
         Route::post('listaconsumibles/save','ListaConsumiblesController@store')->name('listconsumables.save');
         Route::get('listaconsumibles/{id}','ListaConsumiblesController@edit')->name('listconsumables.edit');
@@ -213,7 +213,7 @@ Route::prefix('contabilidad')->group(function(){
         Route::DELETE('material/delet/{id}','MaterialController@destroy');
 
         Route::get('/', 'ProvedoresController@index');
-        Route::get('provedores','ProvedoresController@index')->name('providers');
+        Route::get('provedores','ProvedoresController@index')->name('provider');
         Route::get('provedores/create','ProvedoresController@create')->name('providers.create');
         Route::post('provedores/save','ProvedoresController@store')->name('providers.save');
         Route::get('provedores/{id}','ProvedoresController@edit')->name('providers.edit');
@@ -229,7 +229,7 @@ Route::prefix('contabilidad')->group(function(){
         Route::DELETE('proyectos/delet/{id}','ProyectosController@destroy');
 
         Route::get('/', 'ReportesController@index');
-        Route::get('reportes','ReportesController@index')->name('reports');
+        Route::get('reportes','ReportesController@index')->name('report');
         Route::get('reportes/create','ReportesController@create')->name('reports.create');
         Route::post('reportes/save','ReportesController@store')->name('reports.save');
         Route::get('reportes/{id}','ReportesController@edit')->name('reports.edit');
@@ -277,7 +277,7 @@ Route::prefix('comercializacion')->group(function(){
 
         // Route::resource('proyects','ProyectoController');
         Route::get('/', 'PreciosController@index');
-        Route::get('precios','PreciosController@index')->name('prices');
+        Route::get('precios','PreciosController@index')->name('price');
         Route::get('precios/create','PreciosController@create')->name('prices.create');
         Route::post('precios/save','PreciosController@store')->name('prices.save');
         Route::get('precios/{id}','PreciosController@edit')->name('prices.edit');
@@ -285,7 +285,7 @@ Route::prefix('comercializacion')->group(function(){
         Route::DELETE('precios/delet/{id}','PreciosController@destroy');
 
         Route::get('/', 'ReportesController@index');
-        Route::get('reportes','ReportesController@index')->name('reports');
+        Route::get('reportes','ReportesController@index')->name('report');
         Route::get('reportes/create','ReportesController@create')->name('reports.create');
         Route::post('reportes/save','ReportesController@store')->name('reports.save');
         Route::get('reportes/{id}','ReportesController@edit')->name('reports.edit');

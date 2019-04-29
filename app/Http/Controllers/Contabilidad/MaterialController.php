@@ -14,7 +14,12 @@ class MaterialController extends Controller
      */
     public function index()
     {
-        //
+        $data = [
+            // 'prices' => Ric::all(),
+            'tab' => 'contabilidad',
+            'subtab' => 'material',
+        ];
+        return view('contabilidad.materiales.index')->with($data);
     }
 
     /**

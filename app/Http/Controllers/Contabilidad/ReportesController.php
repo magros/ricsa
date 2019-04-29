@@ -14,7 +14,12 @@ class ReportesController extends Controller
      */
     public function index()
     {
-        //
+        $data = [
+            // 'prices' => Ric::all(),
+            'tab' => 'contabilidad',
+            'subtab' => 'con_report',
+        ];
+        return view('contabilidad.reportes.index')->with($data);
     }
 
     /**

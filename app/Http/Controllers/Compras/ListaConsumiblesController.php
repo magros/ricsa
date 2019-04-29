@@ -14,7 +14,12 @@ class ListaConsumiblesController extends Controller
      */
     public function index()
     {
-        //
+        $data = [
+            // 'prices' => Ric::all(),
+            'tab' => 'compras',
+            'subtab' => 'listcon',
+        ];
+        return view('compras.listaConsumibles.index')->with($data);
     }
 
     /**

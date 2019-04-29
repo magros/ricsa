@@ -14,7 +14,12 @@ class ProyectosController extends Controller
      */
     public function index()
     {
-        //
+        $data = [
+            // 'prices' => Ric::all(),
+            'tab' => 'contabilidad',
+            'subtab' => 'proyect',
+        ];
+        return view('contabilidad.proyectos.index')->with($data);
     }
 
     /**

@@ -14,7 +14,12 @@ class ListaMaterialesController extends Controller
      */
     public function index()
     {
-        //
+        $data = [
+            // 'prices' => Ric::all(),
+            'tab' => 'compras',
+            'subtab' => 'listmat',
+        ];
+        return view('compras.listaMateriales.index')->with($data);
     }
 
     /**

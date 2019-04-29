@@ -152,38 +152,38 @@
                         </ul>
                     </li>
                     {{-- Compras --}}
-                    <li class="{{isset($tab)&&$tab=='price'?'active':''}} w-100">
+                    <li class="{{isset($tab)&&$tab=='compras'?'active':''}} w-100">
                         <a href="#"><i class="fa fa-cogs "></i> <span class="nav-label">Compras</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li class="{{isset($subtab)&&$subtab=='dollars'?'active':''}}">
-                                <a href="#">Compras</a>
+                            <li class="{{isset($subtab)&&$subtab=='compra'?'active':''}}">
+                                <a href="{{route('compras.shopping')}}">Compras</a>
                             </li>
-                            <li class="{{isset($subtab)&&$subtab=='metals'?'active':''}}">
-                                <a href="#">Lista de materiales</a>
+                            <li class="{{isset($subtab)&&$subtab=='listmat'?'active':''}}">
+                                <a href="{{route('compras.listmaterial')}}">Lista de materiales</a>
                             </li>
-                            <li class="{{isset($subtab)&&$subtab=='reports'?'active':''}}">
-                                <a href="#">Lista de consumibles</a>
+                            <li class="{{isset($subtab)&&$subtab=='listcon'?'active':''}}">
+                                <a href="{{route('compras.listconsumable')}}">Lista de consumibles</a>
                             </li>
-                            <li class="{{isset($subtab)&&$subtab=='reports'?'active':''}}">
-                                <a href="#">Ordenes de compra</a>
+                            <li class="{{isset($subtab)&&$subtab=='ordcom'?'active':''}}">
+                                <a href="{{route('compras.ordershopp')}}">Ordenes de compra</a>
                             </li>
                         </ul>
                     </li>
                     {{-- Contabilidad --}}
-                    <li class="{{isset($tab)&&$tab=='price'?'active':''}} w-100">
+                    <li class="{{isset($tab)&&$tab=='contabilidad'?'active':''}} w-100">
                         <a href="#"><i class="fa fa-cogs "></i> <span class="nav-label">Contabilidad</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li class="{{isset($subtab)&&$subtab=='dollars'?'active':''}}">
-                                <a href="#">Materiales</a>
+                            <li class="{{isset($subtab)&&$subtab=='material'?'active':''}}">
+                                <a href="{{route('contabilidad.material')}}">Materiales</a>
                             </li>
-                            <li class="{{isset($subtab)&&$subtab=='reports'?'active':''}}">
-                                <a href="#">Provedores</a>
+                            <li class="{{isset($subtab)&&$subtab=='provider'?'active':''}}">
+                                <a href="{{route('contabilidad.provider')}}">Provedores</a>
                             </li>
-                            <li class="{{isset($subtab)&&$subtab=='reports'?'active':''}}">
-                                <a href="#">Proyectos</a>
+                            <li class="{{isset($subtab)&&$subtab=='proyect'?'active':''}}">
+                                <a href="{{route('contabilidad.proyect')}}">Proyectos</a>
                             </li>
-                            <li class="{{isset($subtab)&&$subtab=='reports'?'active':''}}">
-                                <a href="#">Reportes</a>
+                            <li class="{{isset($subtab)&&$subtab=='con_report'?'active':''}}">
+                                <a href="{{route('contabilidad.report')}}">Reportes</a>
                             </li>
                         </ul>
                     </li>
@@ -192,13 +192,13 @@
                         <a href="#"><i class="fa fa-cogs "></i> <span class="nav-label">Produccion</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li class="{{isset($subtab)&&$subtab=='dollars'?'active':''}}">
-                                <a href="#">Produccion</a>
+                                <a href="{{route('produccion.production')}}">Produccion</a>
                             </li>
                             <li class="{{isset($subtab)&&$subtab=='reports'?'active':''}}">
-                                <a href="#">Proyectos</a>
+                                <a href="{{route('produccion.proyect')}}">Proyectos</a>
                             </li>
                             <li class="{{isset($subtab)&&$subtab=='reports'?'active':''}}">
-                                <a href="#">Personal</a>
+                                <a href="{{route('produccion.personal')}}">Personal</a>
                             </li>
                         </ul>
                     </li>
@@ -207,10 +207,10 @@
                         <a href="#"><i class="fa fa-cogs "></i> <span class="nav-label">Comercializacion</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li class="{{isset($subtab)&&$subtab=='dollars'?'active':''}}">
-                                <a href="#">Precios</a>
+                                <a href="{{route('comercializacion.price')}}">Precios</a>
                             </li>
                             <li class="{{isset($subtab)&&$subtab=='reports'?'active':''}}">
-                                <a href="#">Reportes</a>
+                                <a href="{{route('comercializacion.report')}}">Reportes</a>
                             </li>
                         </ul>
                     </li>

@@ -14,7 +14,12 @@ class OrdenCompraController extends Controller
      */
     public function index()
     {
-        //
+        $data = [
+            // 'prices' => Ric::all(),
+            'tab' => 'compras',
+            'subtab' => 'ordcom',
+        ];
+        return view('compras.ordenCompra.index')->with($data);
     }
 
     /**

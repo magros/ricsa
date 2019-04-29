@@ -14,7 +14,12 @@ class ComprasController extends Controller
      */
     public function index()
     {
-        //
+        $data = [
+            // 'prices' => Ric::all(),
+            'tab' => 'compras',
+            'subtab' => 'compra',
+        ];
+        return view('compras.compras.index')->with($data);
     }
 
     /**

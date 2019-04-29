@@ -14,7 +14,12 @@ class PersonalController extends Controller
      */
     public function index()
     {
-        //
+        $data = [
+            // 'prices' => Ric::all(),
+            'tab' => 'warehouse',
+            'subtab' => 'materials',
+        ];
+        return view('produccion.personal.index')->with($data);
     }
 
     /**
