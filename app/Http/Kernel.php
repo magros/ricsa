@@ -65,6 +65,11 @@ class Kernel extends HttpKernel
         'ingenieria' => \App\Http\Middleware\Proyecto::class,
         'precio' => \App\Http\Middleware\Precio::class,
         'alamcen'=> \App\Http\Middleware\Almacen::class,
+        'calidad'=> \App\Http\Middleware\Calidad::class,
+        'compras'=> \App\Http\Middleware\Compras::class,
+        'contabilidad'=> \App\Http\Middleware\Contabilidad::class,
+        'produccion'=> \App\Http\Middleware\Produccion::class,
+        'comercializacion'=> \App\Http\Middleware\Comercializacion::class,
     ];
 
     /**
