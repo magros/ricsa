@@ -48,6 +48,8 @@ Route::prefix('cotizacion')->group(function(){
         Route::post('save','MaterialController@store')->name('material.save');
         Route::DELETE('delet/{id}','MaterialController@destroy');
         Route::post('list/material','MaterialController@list')->name('material.cotizador');
+        Route::post('mano','MaterialController@ManoObra')->name('mano.obra');
+        Route::DELETE('delet/mano/{id}','MaterialController@deleteManoObra');
 
 
         Route::get('rics', ['as'=>'rics', 'uses'=>'CotizacionCotroller@rics']);
@@ -120,6 +122,7 @@ Route::prefix('almacen')->group(function(){
         Route::DELETE('proyecto/delet/{id}','ProyectoController@destroy');
 
         Route::get('inventory','InventoryController@index')->name('inventory');
+        Route::get('inventario/{id}','InventoryController@getMaterial');
         Route::get('inventory/create','InventoryController@create')->name('inventory.create');
         Route::post('inventory/store','InventoryController@store')->name('inventory.store');
         Route::get('inventory/{id}','InventoryController@edit')->name('inventory.edit');

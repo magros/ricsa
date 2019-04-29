@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Almacen;
 use App\Material;
 use App\Inventory;
 use App\MaterialType;
+use App\Ric;
 use App\Libraries\Helpers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -20,7 +21,6 @@ class InventoryController extends Controller
     public function index()
     {
         $data = [
-            'materials' => Material::all(),
             'inventories' => Inventory::all(),
             'tab' => 'warehouse',
             'subtab' => 'materials',
@@ -36,7 +36,9 @@ class InventoryController extends Controller
     public function create()
     {
         $data = [
+            'materials' => Material::pluck('description','id'),
             'material_types' => MaterialType::pluck('name','id'),
+            'rics' => Ric::pluck('Nric','id'),
             'tab' => 'warehouse',
             'subtab' => 'materials'
         ];
@@ -53,32 +55,18 @@ class InventoryController extends Controller
     {
         $request -> validate([
             'description' => 'required',
-            'specification'=> 'required',
-            'thickness' => 'required',
-            'dimension' => 'required',
-            'length' => 'required',
-            'net_weight' => 'required',
-            'gross_weight' => 'required',
-            'trademark' => 'required',
-            'price' => 'required',
-            'material_type_id'=>'required'
+            'ric_id' => 'required',
+            'quantity' => 'required',
+
         ]);
 
-        $material = Material::create([
-            'description' => $request->description,
-            'specification'=> $request->specification,
-            'thickness' => $request->thickness,
-            'dimension' => $request->dimension,
-            'thickness' => $request->thickness,
-            'length' => $request->length,
-            'net_weight' => $request->net_weight,
-            'gross_weight' => $request->gross_weight,
-            'trademark' => $request->trademark,
-            'price' => $request->price,
-            'r_rc' => 'R',
-            'material_type_id'=>$request->material_type_id
+        $inventory = Inventory::create([
+            'material_id' =>$request->description,
+            'quantity' =>$request->quantity,
+            'ric_id' => $request->ric_id,
         ]);
-        $material->save();
+        dd($inventory);
+        $inventory->save();
         return redirect()->route('almacen.inventory.create')->with('alert', Helpers::alertData('success','','saveSuccess'));
     }
 
@@ -101,12 +89,9 @@ class InventoryController extends Controller
      */
     public function edit($id)
     {
-        $materials = DB::table('materials')
-        ->select('description','specification','thickness','dimension','length','net_weight','gross_weight','trademark','price')
-        ->where('id', '=', $id )
-        ->get();
         $data = [
-            'materials' => $materials,
+            'rics' => Ric::pluck('Nric','id'),
+            'materials' => Material::pluck('description','id'),
             'material_types' => MaterialType::pluck('name','id'),
             'inventories' => Inventory::find($id),
             'tab' => 'engineering',
@@ -136,5 +121,13 @@ class InventoryController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getMaterial($id){
+        $material = Material::find($id);
+        if(!is_null($material)){
+            return response()->json($material);
+        }
+        return abort(500);
     }
 }

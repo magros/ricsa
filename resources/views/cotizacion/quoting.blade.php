@@ -1336,7 +1336,7 @@
         <div class="panel-heading">
             Costo de mano de obra
         </div>
-        {{-- <div class="panel-body">
+        <div class="panel-body">
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
@@ -1354,13 +1354,13 @@
                                 <div class="form-group">
                                     <label for="descripcion">Descripcion:</label>
                                     <div class="clearfix"></div>
-                                    <select name="" id="" class="form-control">
+                                    <select name="description" id="description" class="form-control">
                                         <option value="">---Selecionar---</option>
                                         <option value="1">cuerpo y tapas</option>
                                         <option value="2">soportes</option>
                                         <option value="3">escaleras y barandales</option>
                                         <option value="4">boquillas</option>
-                                        <option value="5">ingeniería</option>
+                                        {{-- <option value="5">ingeniería</option> --}}
                                     </select>
                                 </div>
                             </div>
@@ -1379,14 +1379,14 @@
 
                             <div class="col-sm-3">
                                 <div class="form-group">
-                                    <label for="peso_neto">Peso neto:</label>
+                                    <label for="peso">Peso neto:</label>
                                     <div class="clearfix"></div>
-                                    {!! Form::text('peso_neto',old('peso_neto'),[
+                                    {!! Form::text('peso',old('peso'),[
                                         'class'=>'form-control','placeholder'=>'Peso',
-                                        'autocomplete'=>'off', 'id' => 'peso_neto',
+                                        'autocomplete'=>'off', 'id' => 'peso',
                                         'data-required-error' => 'Este campo es obligatorio',
                                         'data-error' => 'Introduce una cantidad',
-                                        'maxlength' => '100',
+                                        'maxlength' => '100','disabled'
                                     ]) !!}
                                     <div class="help-block with-errors"></div>
                                 </div>
@@ -1406,47 +1406,8 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label for="contract_id">Di mm:</label>
-                                    <div class="clearfix"></div>
-                                    {!! Form::text('B_dimension',old('B_dimension'),[
-                                        'class'=>'form-control','placeholder'=>'B_dimension',
-                                        'required'=>'', 'autocomplete'=>'off', 'id' => 'B_dimension',
-                                        'data-required-error' => 'Este campo es obligatorio', 'maxlength' => '15','disabled'
-                                    ]) !!}
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label for="cadencia">Long mm:</label>
-                                    <div class="clearfix"></div>
-                                    {!! Form::text('cadencia',old('cadencia'),[
-                                        'class'=>'form-control','placeholder'=>'cadencia',
-                                        'required'=>'', 'autocomplete'=>'off', 'id' => 'cadencia',
-                                        'data-required-error' => 'Este campo es obligatorio', 'maxlength' => '15','disabled'
-                                    ]) !!}
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label for="contract_id">Peso neto:</label>
-                                    <div class="clearfix"></div>
-                                    {!! Form::text('B_net_weight',old('B_net_weight'),[
-                                        'class'=>'form-control','placeholder'=>'B_net_weight',
-                                        'required'=>'', 'autocomplete'=>'off', 'id' => 'B_net_weight',
-                                        'data-required-error' => 'Este campo es obligatorio', 'maxlength' => '15','disabled'
-                                    ]) !!}
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                            </div>
-
                             <div>
-                                <button id="B_adicionar" class="btn btn-lg btn-primary pull-right m-t-n-xs" type="button"><strong>Agregar</strong></button>
+                                <button id="M_adicionar" class="btn btn-lg btn-primary pull-right m-t-n-xs" type="button"><strong>Agregar</strong></button>
 
                             </div>
                             {!! Form::close() !!}
@@ -1458,31 +1419,27 @@
                                     <thead class="thead-dark">
                                         <tr>
                                             <th>Descripcion</th>
-                                            <th>Especificacion Material</th>
-                                            <th>cantidad</th>
-                                            <th>Di mm</th>
-                                            <th>Long mm:</th>
+                                            <th>$/H</th>
                                             <th>Peso neto</th>
-                                            <th>Peso bruto</th>
-                                            <th>Precio unitario</th>
+                                            <th>Cadencia</th>
+                                            <th>Horas</th>
+                                            <th>Porcentaje</th>
                                             <th>Total</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="B_contenido">
-                                        @foreach ($boquillas as $b)
-                                            <tr class="gradeA" id="item-{{$b->id}}">
-                                                <td>{{$b->material->description}}</td>
-                                                <td>{{$b->material->specification}}</td>
-                                                <td>{{$b->quantity}}</td>
-                                                <td>{{$b->material->dimension}}</td>
-                                                <td>{{$b->material->length}}</td>
-                                                <td>{{$b->material->net_weight}}</td>
-                                                <td>{{$b->material->gross_weight}}</td>
-                                                <td>{{$b->material->price}}</td>
-                                                <td>{{$b->total}}</td>
+                                    <tbody id="mano_obra">
+                                        @foreach ($mano_obra as $m)
+                                            <tr class="gradeA" id="item-obra-{{$m->id}}">
+                                                <td>{{$m->description}}</td>
+                                                <td>{{$m->price_hour}}</td>
+                                                <td>{{$m->net_weight}}</td>
+                                                <td>{{$m->cadence}}</td>
+                                                <td>{{$m->hours}}</td>
+                                                <td>{{$m->costo}}</td>
+                                                <td>{{$m->total}}</td>
                                                 <td>
-                                                    <a href="#" class="btn btn-dark delete">
+                                                    <a href="#" class="btn btn-dark deleteM" data-m="{{$m->id}}">
                                                         <i class="fa fa-trash"></i>
                                                     </a>
                                                 </td>
@@ -1492,12 +1449,42 @@
                                 </table>
 
                             </div>
+
+                            {{-- Modal para eliminar mano de obra--}}
+                            <div class="modal inmodal fade" id="delete-modal-mano" tabindex="-1" role="dialog"  aria-hidden="true">
+                                <div class="modal-dialog modal-sm">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">¡Atención!</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>
+                                                <strong>
+                                                ¿Estás seguro de borrar la propuesta?
+                                                </strong>
+                                                <br><br>
+                                                Se borrarán también cualquier información relacionada.
+                                                <br><br>
+                                                Esta acción es irreversible.
+                                                <br><br>
+                                                ¿Deseas continuar?
+                                                </strong>
+                                            </p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
+                                            <button type="button" class="btn btn-danger" id="delete-action-btn-obra" data-tangoM="0">Borrar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
 
                     </div>
                 </div>
             </div>
-        </div> --}}
+        </div>
         <div class="panel-footer">
 
         </div>
@@ -1943,6 +1930,64 @@
             }
 
         });
+        /*
+        Mano de Obra
+        */
+        $("#description").change(function(){
+            var formData = new FormData();
+            formData.append('type', $("#description").val());
+            if($("#description").val()){
+                $.ajax({
+                    url : '{{route('cotizacion.mano.obra')}}',
+                    type : 'POST',
+                    data : formData,
+                    datatype:'json',
+                    processData: false,  // tell jQuery not to process the data
+                    contentType: false,  // tell jQuery not to set contentType
+            })
+                .done(function(data) {
+                    $('#peso').val(data.peso_neto);
+                })
+                .fail(function() {
+                    console.log(data);
+                });
+            }else{
+                $("#B_specification").val("")
+                $("#B_thickness").val("")
+                $("#B_dimension").val("")
+                $("#B_length").val("")
+                $("#B_net_weight").val("")
+                $("#B_gross_weight").val("")
+                $("#B_price").val("")
+            }
+        });
+        $('#M_adicionar').click(function() {
+            if($("#cadencia").val() && $("#precio_hora").val()){
+                var formData = new FormData();
+                formData.append('description', $("#description").val());
+                formData.append('precio_hora', $("#precio_hora").val());
+                formData.append('id_ric','{{$ric}}');
+                formData.append('peso',$('#peso').val());
+                formData.append('cadencia',$('#cadencia').val());
+                $.ajax({
+                    url : '{{route('cotizacion.mano.obra')}}',
+                    type : 'POST',
+                    data : formData,
+                    datatype:'json',
+                    processData: false,  // tell jQuery not to process the data
+                    contentType: false,  // tell jQuery not to set contentType
+                }).done(function(data){
+                    location.reload();
+                }).fail(function(data){
+                    var message = data.responseJSON.errors;
+                    console.log(message);
+                });
+            }else{
+                $(".alert").removeClass("in").show();
+                $(".alert").delay(200).addClass("in").fadeOut(3000);
+            }
+
+        });
 
         /*
         Modal de eliminar material de cuerpo
@@ -1957,7 +2002,7 @@
         $("#delete-action-btn-cuerpo").click(function(event) {
             event.preventDefault();
             var id = $(this).attr('data-tangoC');
-            alert(id);
+
             $.ajax({
                 url: '{{url('cotizacion/delet')}}/'+id,
                 type: 'DELETE',
@@ -1987,7 +2032,7 @@
         $("#delete-action-btn-tapas").click(function(event) {
             event.preventDefault();
             var id = $(this).attr('data-tangoT');
-            alert(id);
+
             $.ajax({
                 url: '{{url('cotizacion/delet')}}/'+id,
                 type: 'DELETE',
@@ -2017,7 +2062,7 @@
         $("#delete-action-btn-soporte").click(function(event) {
             event.preventDefault();
             var id = $(this).attr('data-tangoS');
-            alert(id);
+
             $.ajax({
                 url: '{{url('cotizacion/delet')}}/'+id,
                 type: 'DELETE',
@@ -2047,7 +2092,7 @@
         $("#delete-action-btn-escalera").click(function(event) {
             event.preventDefault();
             var id = $(this).attr('data-tangoE');
-            alert(id);
+
             $.ajax({
                 url: '{{url('cotizacion/delet')}}/'+id,
                 type: 'DELETE',
@@ -2077,7 +2122,7 @@
         $("#delete-action-btn-registro").click(function(event) {
             event.preventDefault();
             var id = $(this).attr('data-tangoR');
-            alert(id);
+
             $.ajax({
                 url: '{{url('cotizacion/delet')}}/'+id,
                 type: 'DELETE',
@@ -2107,7 +2152,7 @@
         $("#delete-action-btn-boquilla").click(function(event) {
             event.preventDefault();
             var id = $(this).attr('data-tangoB');
-            alert(id);
+
             $.ajax({
                 url: '{{url('cotizacion/delet')}}/'+id,
                 type: 'DELETE',
@@ -2116,6 +2161,37 @@
             .done(function(data) {
                 $("#item-boquilla-"+id).remove();
                 $("#delete-modal-boquilla").modal('hide');
+                toastr.success('Se ha eliminado la información correctamente');
+            })
+            .fail(function() {
+                console.log(data);
+            });
+
+        });
+
+        /*
+        Modal de eliminar mano de obra
+        */
+        $(".deleteM").click(function(event) {
+            event.preventDefault();
+            var id = $(this).data('m');
+            $("#delete-action-btn-obra").attr('data-tangoM',id);
+            $("#delete-modal-mano").modal();
+        });
+
+        $("#delete-action-btn-obra").click(function(event) {
+            event.preventDefault();
+            var id = $(this).attr('data-tangoM');
+
+            $.ajax({
+                url: '{{url('cotizacion/delet/mano')}}/'+id,
+                type: 'DELETE',
+                dataType: 'json',
+            })
+            .done(function(data) {
+                console.log(data)
+                $("#item-obra-"+id).remove();
+                $("#delete-modal-mano").modal('hide');
                 toastr.success('Se ha eliminado la información correctamente');
             })
             .fail(function() {
