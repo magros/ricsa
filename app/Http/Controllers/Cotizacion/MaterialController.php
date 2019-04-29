@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Cotizacion;
 
+use App\Manpower;
 use App\Material;
 use App\MaterialType;
 use App\Libraries\Helpers;
@@ -131,7 +132,6 @@ class MaterialController extends Controller
     }
     public function list(Request $request)
     {
-        // $client = Customer::find($id);
         if(!is_null($request)){
             $total = $request->peso * $request->price;
             $material_cuatation = MaterialQuotation::create([
@@ -185,4 +185,69 @@ class MaterialController extends Controller
         return abort(500);
     }
 
+    public function ManoObra(Request $request){
+        if(!is_null($request->type)){
+            $peso_neto = 0;
+            if($request->type==1){
+                $material = MaterialQuotation::where('name','cuerpo')
+                ->orWhere('name', 'tapas')
+                ->get();
+                foreach ($material as $m) {
+                    $peso_neto = $peso_neto + $m->material->net_weight;
+                }
+            }
+            if($request->type==2){
+                $material = MaterialQuotation::where('name','soporte')
+                ->get();
+                foreach ($material as $m) {
+                    $peso_neto = $peso_neto + $m->material->net_weight;
+                }
+            }
+            if($request->type==3){
+                $material = MaterialQuotation::where('name','escalera')
+                ->get();
+                foreach ($material as $m) {
+                    $peso_neto = $peso_neto + $m->material->net_weight;
+                }
+            }
+            if($request->type==4){
+                $material = MaterialQuotation::where('name','boquillas')
+                ->get();
+                foreach ($material as $m) {
+                    $peso_neto = $peso_neto + $m->material->net_weight;
+                }
+            }
+            if($request->type==5){
+               $peso_neto = 0.05;
+            }
+            return response()->json([
+                'peso_neto'=>$peso_neto,
+                ]);
+        }
+
+        $hours = $request->peso/$request->cadencia;
+        $total =$hours * $request->precio_hora;
+        $p = $total / $request->peso;
+
+        $mano_obra = Manpower::create([
+            'ric_id'=>$request->id_ric,
+            'description'=>$request->description,
+            'price_hour'=>$request->precio_hora,
+            'net_weight'=>$request->peso,
+            'cadence'=>$request->cadencia,
+            'hours'=>$hours,
+            'costo'=>$p,
+            'total'=>$total
+        ]);
+        return response()->json($mano_obra);
+    }
+
+    public function deleteManoObra($id)
+    {
+        $material = Manpower::find($id);
+        if(!is_null($material)){
+            return response()->json($material->delete());
+        }
+        return abort(500);
+    }
 }

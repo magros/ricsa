@@ -48,6 +48,8 @@ Route::prefix('cotizacion')->group(function(){
         Route::post('save','MaterialController@store')->name('material.save');
         Route::DELETE('delet/{id}','MaterialController@destroy');
         Route::post('list/material','MaterialController@list')->name('material.cotizador');
+        Route::post('mano','MaterialController@ManoObra')->name('mano.obra');
+        Route::DELETE('delet/mano/{id}','MaterialController@deleteManoObra');
 
 
         Route::get('rics', ['as'=>'rics', 'uses'=>'CotizacionCotroller@rics']);
@@ -133,5 +135,165 @@ Route::prefix('almacen')->group(function(){
         Route::get('salida/{id}','SalidaController@edit')->name('exit.edit');
         Route::patch('salida/update/{id}','SalidaController@update')->name('exit.update');
         Route::DELETE('salida/delet/{id}','SalidaController@destroy');
+    });
+});
+
+Route::prefix('calidad')->group(function(){
+    Route::middleware(['calidad'])->name('calidad.')->namespace('Calidad')->group(function()
+    {
+
+        // Route::resource('proyects','ProyectoController');
+        Route::get('/', 'ValidacionController@index');
+        Route::get('validacion','ValidacionController@index')->name('validation');
+        Route::get('validacion/create','ValidacionController@create')->name('validation.create');
+        Route::post('validacion/save','ValidacionController@store')->name('validation.save');
+        Route::get('validacion/{id}','ValidacionController@edit')->name('validation.edit');
+        Route::patch('validacion/update/{id}','ValidacionController@update')->name('validation.update');
+        Route::DELETE('validacion/delet/{id}','ValidacionController@destroy');
+
+        Route::get('/', 'PersonalController@index');
+        Route::get('personal','PersonalController@index')->name('personal');
+        Route::get('personal/create','PersonalController@create')->name('personal.create');
+        Route::post('personal/save','PersonalController@store')->name('personal.save');
+        Route::get('personal/{id}','PersonalController@edit')->name('personal.edit');
+        Route::patch('personal/update/{id}','PersonalController@update')->name('personal.update');
+        Route::DELETE('personal/delet/{id}','PersonalController@destroy');
+
+    });
+});
+
+Route::prefix('compras')->group(function(){
+    Route::middleware(['compras'])->name('compras.')->namespace('Compras')->group(function()
+    {
+
+        // Route::resource('proyects','ProyectoController');
+        Route::get('/', 'ComprasController@index');
+        Route::get('compras','ComprasController@index')->name('shopping');
+        Route::get('compras/create','ComprasController@create')->name('shopping.create');
+        Route::post('compras/save','ComprasController@store')->name('shopping.save');
+        Route::get('compras/{id}','ComprasController@edit')->name('shopping.edit');
+        Route::patch('compras/update/{id}','ComprasController@update')->name('shopping.update');
+        Route::DELETE('compras/delet/{id}','ComprasController@destroy');
+
+        Route::get('/', 'ListaMaterialesController@index');
+        Route::get('listamateriales','ListaMaterialesController@index')->name('listmaterial');
+        Route::get('listamateriales/create','ListaMaterialesController@create')->name('listmaterial.create');
+        Route::post('listamateriales/save','ListaMaterialesController@store')->name('listmaterial.save');
+        Route::get('listamateriales/{id}','ListaMaterialesController@edit')->name('listmaterial.edit');
+        Route::patch('listamateriales/update/{id}','ListaMaterialesController@update')->name('listmaterial.update');
+        Route::DELETE('listamateriales/delet/{id}','ListaMaterialesController@destroy');
+
+        Route::get('/', 'ListaConsumiblesController@index');
+        Route::get('listaconsumibles','ListaConsumiblesController@index')->name('listconsumables');
+        Route::get('listaconsumibles/create','ListaConsumiblesController@create')->name('listconsumables.create');
+        Route::post('listaconsumibles/save','ListaConsumiblesController@store')->name('listconsumables.save');
+        Route::get('listaconsumibles/{id}','ListaConsumiblesController@edit')->name('listconsumables.edit');
+        Route::patch('listaconsumibles/update/{id}','ListaConsumiblesController@update')->name('listconsumables.update');
+        Route::DELETE('listaconsumibles/delet/{id}','ListaConsumiblesController@destroy');
+
+        Route::get('/', 'OrdenCompraController@index');
+        Route::get('ordencompra','OrdenCompraController@index')->name('ordershopp');
+        Route::get('ordencompra/create','OrdenCompraController@create')->name('ordershopp.create');
+        Route::post('ordencompra/save','OrdenCompraController@store')->name('ordershopp.save');
+        Route::get('ordencompra/{id}','OrdenCompraController@edit')->name('ordershopp.edit');
+        Route::patch('ordencompra/update/{id}','OrdenCompraController@update')->name('ordershopp.update');
+        Route::DELETE('ordencompra/delet/{id}','OrdenCompraController@destroy');
+
+    });
+});
+
+Route::prefix('contabilidad')->group(function(){
+    Route::middleware(['contabilidad'])->name('contabilidad.')->namespace('Contabilidad')->group(function()
+    {
+
+        // Route::resource('proyects','ProyectoController');
+        Route::get('/', 'MaterialController@index');
+        Route::get('material','MaterialController@index')->name('material');
+        Route::get('material/create','MaterialController@create')->name('material.create');
+        Route::post('material/save','MaterialController@store')->name('material.save');
+        Route::get('material/{id}','MaterialController@edit')->name('material.edit');
+        Route::patch('material/update/{id}','MaterialController@update')->name('material.update');
+        Route::DELETE('material/delet/{id}','MaterialController@destroy');
+
+        Route::get('/', 'ProvedoresController@index');
+        Route::get('provedores','ProvedoresController@index')->name('providers');
+        Route::get('provedores/create','ProvedoresController@create')->name('providers.create');
+        Route::post('provedores/save','ProvedoresController@store')->name('providers.save');
+        Route::get('provedores/{id}','ProvedoresController@edit')->name('providers.edit');
+        Route::patch('provedores/update/{id}','ProvedoresController@update')->name('providers.update');
+        Route::DELETE('provedores/delet/{id}','ProvedoresController@destroy');
+
+        Route::get('/', 'ProyectosController@index');
+        Route::get('proyectos','ProyectosController@index')->name('proyect');
+        Route::get('proyectos/create','ProyectosController@create')->name('proyect.create');
+        Route::post('proyectos/save','ProyectosController@store')->name('proyect.save');
+        Route::get('proyectos/{id}','ProyectosController@edit')->name('proyect.edit');
+        Route::patch('proyectos/update/{id}','ProyectosController@update')->name('proyect.update');
+        Route::DELETE('proyectos/delet/{id}','ProyectosController@destroy');
+
+        Route::get('/', 'ReportesController@index');
+        Route::get('reportes','ReportesController@index')->name('reports');
+        Route::get('reportes/create','ReportesController@create')->name('reports.create');
+        Route::post('reportes/save','ReportesController@store')->name('reports.save');
+        Route::get('reportes/{id}','ReportesController@edit')->name('reports.edit');
+        Route::patch('reportes/update/{id}','ReportesController@update')->name('reports.update');
+        Route::DELETE('reportes/delet/{id}','ReportesController@destroy');
+
+    });
+});
+
+Route::prefix('produccion')->group(function(){
+    Route::middleware(['produccion'])->name('produccion.')->namespace('Produccion')->group(function()
+    {
+
+        // Route::resource('proyects','ProyectoController');
+        Route::get('/', 'ProduccionController@index');
+        Route::get('produccion','ProduccionController@index')->name('production');
+        Route::get('produccion/create','ProduccionController@create')->name('production.create');
+        Route::post('produccion/save','ProduccionController@store')->name('production.save');
+        Route::get('produccion/{id}','ProduccionController@edit')->name('production.edit');
+        Route::patch('produccion/update/{id}','ProduccionController@update')->name('production.update');
+        Route::DELETE('produccion/delet/{id}','ProduccionController@destroy');
+
+        Route::get('/', 'ProyectosController@index');
+        Route::get('proyectos','ProyectosController@index')->name('proyect');
+        Route::get('proyectos/create','ProyectosController@create')->name('proyect.create');
+        Route::post('proyectos/save','ProyectosController@store')->name('proyect.save');
+        Route::get('proyectos/{id}','ProyectosController@edit')->name('proyect.edit');
+        Route::patch('proyectos/update/{id}','ProyectosController@update')->name('proyect.update');
+        Route::DELETE('proyectos/delet/{id}','ProyectosController@destroy');
+
+        Route::get('/', 'PersonalController@index');
+        Route::get('personal','PersonalController@index')->name('personal');
+        Route::get('personal/create','PersonalController@create')->name('personal.create');
+        Route::post('personal/save','PersonalController@store')->name('personal.save');
+        Route::get('personal/{id}','PersonalController@edit')->name('personal.edit');
+        Route::patch('personal/update/{id}','PersonalController@update')->name('personal.update');
+        Route::DELETE('personal/delet/{id}','PersonalController@destroy');
+
+    });
+});
+
+Route::prefix('comercializacion')->group(function(){
+    Route::middleware(['comercializacion'])->name('comercializacion.')->namespace('Comercializacion')->group(function()
+    {
+
+        // Route::resource('proyects','ProyectoController');
+        Route::get('/', 'PreciosController@index');
+        Route::get('precios','PreciosController@index')->name('prices');
+        Route::get('precios/create','PreciosController@create')->name('prices.create');
+        Route::post('precios/save','PreciosController@store')->name('prices.save');
+        Route::get('precios/{id}','PreciosController@edit')->name('prices.edit');
+        Route::patch('precios/update/{id}','PreciosController@update')->name('prices.update');
+        Route::DELETE('precios/delet/{id}','PreciosController@destroy');
+
+        Route::get('/', 'ReportesController@index');
+        Route::get('reportes','ReportesController@index')->name('reports');
+        Route::get('reportes/create','ReportesController@create')->name('reports.create');
+        Route::post('reportes/save','ReportesController@store')->name('reports.save');
+        Route::get('reportes/{id}','ReportesController@edit')->name('reports.edit');
+        Route::patch('reportes/update/{id}','ReportesController@update')->name('reports.update');
+        Route::DELETE('reportes/delet/{id}','ReportesController@destroy');
+
     });
 });
