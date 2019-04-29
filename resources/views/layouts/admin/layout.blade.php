@@ -98,6 +98,9 @@
                             <li class="{{isset($subtab)&&$subtab=='materials'?'active':''}}">
                                 <a href="{{route('ingenieria.material')}}">Materiales</a>
                             </li>
+                            <li class="{{isset($subtab)&&$subtab=='hours'?'active':''}}">
+                                <a href="{{route('ingenieria.material')}}">Asignación de horas</a>
+                            </li>
                             <li class="{{isset($subtab)&&$subtab=='reports'?'active':''}}">
                                 <a href="#">Reportes</a>
                             </li>
@@ -240,7 +243,7 @@
 
         });
     </script>
-    <script type="text/javascript">
+    {{-- <script type="text/javascript">
         $(document).ready(function() {
             $('#data-spanish').DataTable( {
                 "language": {
@@ -248,7 +251,7 @@
                 }
             } );
          } );
-    </script>
+    </script> --}}
     @stack('scripts')
     @yield('dyn_js')
 

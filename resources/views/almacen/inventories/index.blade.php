@@ -33,8 +33,9 @@
                     <table class="table table-striped table-dark table-hover dataTables-users" >
                         <thead class="thead-dark">
                         <tr>
-                            <th>Descipcion</th>
-                            <th>Especificación</th>
+                            <th>Material</th>
+                            <th>Especificacion</th>
+                            <th>Cantidad</th>
                             <th>RIC</th>
                             <th>Proyecto</th>
                             <th>Acciones</th>
@@ -48,6 +49,9 @@
                                 </td>
                                 <td>
                                     {{$inventory->material->specification}}
+                                </td>
+                                <td>
+                                    {{$inventory->quantity}}
                                 </td>
                                 <td>
                                     {{$inventory->ric->Nric}}
