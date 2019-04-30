@@ -18,8 +18,8 @@ class PreciosController extends Controller
     {
         $data = [
             'prices' => Ric::all(),
-            'tab' => 'warehouse',
-            'subtab' => 'materials',
+            'tab' => 'comercializacion',
+            'subtab' => 'comerprecio',
         ];
         return view('comercializacion.precios.index')->with($data);
     }

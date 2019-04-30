@@ -14,7 +14,12 @@ class ValidacionController extends Controller
      */
     public function index()
     {
-        //
+        $data = [
+            // 'prices' => Ric::all(),
+            'tab' => 'calidad',
+            'subtab' => 'calivalidacion',
+        ];
+        return view('calidad.validacion.index')->with($data);
     }
 
     /**
@@ -24,7 +29,7 @@ class ValidacionController extends Controller
      */
     public function create()
     {
-        //
+        return view('calidad.validacion.createoredit');
     }
 
     /**

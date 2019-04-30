@@ -14,7 +14,12 @@ class PersonalController extends Controller
      */
     public function index()
     {
-        //
+        $data = [
+            // 'prices' => Ric::all(),
+            'tab' => 'calidad',
+            'subtab' => 'calipersonal',
+        ];
+        return view('calidad.personal.index')->with($data);
     }
 
     /**
@@ -24,7 +29,7 @@ class PersonalController extends Controller
      */
     public function create()
     {
-        //
+        return view('calidad.personal.createoredit');
     }
 
     /**

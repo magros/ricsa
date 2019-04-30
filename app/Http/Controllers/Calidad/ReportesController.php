@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Comercializacion;
+namespace App\Http\Controllers\Calidad;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -15,10 +15,11 @@ class ReportesController extends Controller
     public function index()
     {
         $data = [
-            'tab' => 'comercializacion',
-            'subtab' => 'comerreporte',
+            // 'prices' => Ric::all(),
+            'tab' => 'calidad',
+            'subtab' => 'calireporte',
         ];
-        return view('comercializacion.reportes.index')->with($data);
+        return view('calidad.reportes.index')->with($data);
     }
 
     /**

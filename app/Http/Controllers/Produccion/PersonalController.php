@@ -16,8 +16,8 @@ class PersonalController extends Controller
     {
         $data = [
             // 'prices' => Ric::all(),
-            'tab' => 'warehouse',
-            'subtab' => 'materials',
+            'tab' => 'produccion',
+            'subtab' => 'prodpersonal',
         ];
         return view('produccion.personal.index')->with($data);
     }
