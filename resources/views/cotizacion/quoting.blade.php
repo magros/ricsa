@@ -22,7 +22,8 @@
     Llena todos los campos.
 </div>
 <div class="row">
-    <div class="panel panel-default">
+    {{-- Materiales --}}
+    <div class="panel panel-default col-md-12">
         <div class="panel-heading">Material</div>
         <div class="panel-body">
 
@@ -160,7 +161,6 @@
 
                             <div>
                                 <button id="adicionar" class="btn btn-lg btn-primary pull-right m-t-n-xs" type="button"><strong>Agregar</strong></button>
-
                             </div>
                             {!! Form::close() !!}
                         </div>
@@ -1332,7 +1332,8 @@
             </div>
         </div>
     </div>
-    <div class="panel panel-default">
+    {{-- Mano de obra --}}
+    <div class="panel panel-default col-md-12">
         <div class="panel-heading">
             Costo de mano de obra
         </div>
@@ -1360,7 +1361,7 @@
                                         <option value="2">soportes</option>
                                         <option value="3">escaleras y barandales</option>
                                         <option value="4">boquillas</option>
-                                        {{-- <option value="5">ingeniería</option> --}}
+                                        <option value="5">ingeniería</option>
                                     </select>
                                 </div>
                             </div>
@@ -1431,7 +1432,23 @@
                                     <tbody id="mano_obra">
                                         @foreach ($mano_obra as $m)
                                             <tr class="gradeA" id="item-obra-{{$m->id}}">
-                                                <td>{{$m->description}}</td>
+                                                <td>
+                                                    @if ($m->description==1)
+                                                        cuerpo y tapas
+                                                    @endif
+                                                    @if ($m->description==2)
+                                                        csoportes
+                                                    @endif
+                                                    @if ($m->description==3)
+                                                        escaleras y barandales
+                                                    @endif
+                                                    @if ($m->description==4)
+                                                        boquillas
+                                                    @endif
+                                                    @if ($m->description==5)
+                                                        ingeniería
+                                                    @endif
+                                                </td>
                                                 <td>{{$m->price_hour}}</td>
                                                 <td>{{$m->net_weight}}</td>
                                                 <td>{{$m->cadence}}</td>
@@ -1486,8 +1503,256 @@
             </div>
         </div>
         <div class="panel-footer">
+            <div class="row">
+                <div class="col-sm-2">
+                    <h4>Costo mano de obra</h4>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="peso_neto_m">Total peso neto</label>
+                        <input type="text" class="form-control" name="peso_neto_m" id="peso_neto_m" placeholder="Total peso neto" value="{{($total_peso_neto_mo) ? $total_peso_neto_mo : 0}}" disabled>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="total_candecia">Total cadencia</label>
+                        <input type="text" class="form-control" name="total_candecia" id="total_candecia" placeholder="Total peso bruto" value="{{($cadencia) ? $cadencia : 0}}" disabled>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="total_horas">Total horas</label>
+                        <input type="text" class="form-control" name="total_horas" id="total_horas" placeholder="Precio por kilo" value="{{($total_horas) ? $total_horas : 0}}" disabled>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="precio">Total precio</label>
+                        <input type="text" class="form-control" name="precio" id="precio" placeholder="Precio por kilo" value="{{($total_precio_mo) ? $total_precio_mo : 0}}" disabled>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="total_mano_obra">Total</label>
+                        <input type="text" class="form-control" name="total_mano_obra" id="total_mano_obra" placeholder="Total" value="{{($total_mo) ? $total_mo : 0}}" disabled>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
 
+            </div>
         </div>
+    </div>
+    {{-- consumibles --}}
+    <div class="panel panel-default col-md-12">
+        <div class="panel-heading">
+            Costo de consumibles y pruebas
+        </div>
+        <div class="panel-body">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Consumibles y pruebas</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            {!! Form::open(['id'=>'user-form', 'files'=>true,'data-toggle' => 'validator',])!!}
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <div class="clearfix"></div>
+                                    <label for="descripcion">Descripcion</label>
+                                    {!! Form::text('descripcion',old('descripcion'),[
+                                        'class'=>'form-control','placeholder'=>'Precio por hora',
+                                        'required'=>'', 'autocomplete'=>'off', 'id' => 'descripcion',
+                                        'data-required-error' => 'Este campo es obligatorio','maxlength' => '100',
+                                    ]) !!}
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="cantidad">Cantidad</label>
+                                    {!! Form::text('cantidad',old('cantidad'),[
+                                        'class'=>'form-control','placeholder'=>'Cantidad',
+                                        'required'=>'', 'autocomplete'=>'off', 'id' => 'cantidad',
+                                        'data-required-error' => 'Este campo es obligatorio','maxlength' => '100',
+                                    ]) !!}
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="unit_price">Precio unitario</label>
+                                    <div class="clearfix"></div>
+                                    {!! Form::text('unit_price',old('unit_price'),[
+                                        'class'=>'form-control','placeholder'=>'Precio unitario',
+                                        'autocomplete'=>'off', 'id' => 'unit_price',
+                                        'data-required-error' => 'Este campo es obligatorio',
+                                        'data-error' => 'Introduce una cantidad',
+                                        'maxlength' => '100',
+                                    ]) !!}
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+
+                            <div>
+
+                                <button id="Con_adicionar" class="btn btn-lg btn-primary pull-right m-t-n-xs" type="button"><strong>Agregar</strong></button>
+                            </div>
+                            {!! Form::close() !!}
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table class="table table-striped table-dark table-hover ">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>Descripcion</th>
+                                            <th>Cantidad</th>
+                                            <th>Precio unitario</th>
+                                            <th>Total</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="consumibles">
+                                        @foreach ($consumibles as $c)
+                                            <tr class="gradeA" id="item-consumible-{{$c->id}}">
+                                                <td>{{$c->description}}</td>
+                                                <td>{{$c->quantity}}</td>
+                                                <td>{{$c->unit_price}}</td>
+                                                <td>{{$c->total}}</td>
+                                                <td>
+                                                    <a href="#" class="btn btn-dark deleteCo" data-co="{{$c->id}}">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+                            {{-- Modal para eliminar consumibles--}}
+                            <div class="modal inmodal fade" id="delete-modal-consumible" tabindex="-1" role="dialog"  aria-hidden="true">
+                                <div class="modal-dialog modal-sm">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">¡Atención!</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>
+                                                <strong>
+                                                ¿Estás seguro de borrar la propuesta?
+                                                </strong>
+                                                <br><br>
+                                                Se borrarán también cualquier información relacionada.
+                                                <br><br>
+                                                Esta acción es irreversible.
+                                                <br><br>
+                                                ¿Deseas continuar?
+                                                </strong>
+                                            </p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
+                                            <button type="button" class="btn btn-danger" id="delete-action-btn-consumible" data-tangoCo="0">Borrar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="row">
+                <div class="col-sm-4">
+                    <h4>costo de consumibles y pruebas</h4>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="peso_neto_m">Precio unitario</label>
+                        <input type="text" class="form-control" name="peso_neto_m" id="peso_neto_m" placeholder="Total peso neto" value="{{($precio_consumible) ? $precio_consumible : 0}}" disabled>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="total_candecia">Total</label>
+                        <input type="text" class="form-control" name="total_candecia" id="total_candecia" placeholder="Total peso bruto" value="{{($total_consumible) ? $total_consumible : 0}}" disabled>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default col-md-12">
+        <div class="panel-footer">
+            <div class="row">
+                <div class="col-sm-4">
+                    <h4>Costo de fabricacion</h4>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="peso_neto_m">Precio unitario</label>
+                        <input type="text" class="form-control" name="peso_neto_m" id="peso_neto_m" placeholder="Total peso neto" value="{{($precio_unitario_ric) ? $precio_unitario_ric : 0}}" disabled>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="total_candecia">Total</label>
+                        <input type="text" class="form-control" name="total_candecia" id="total_candecia" placeholder="Total peso bruto" value="{{($total_fabricacion) ? $total_fabricacion : 0}}" disabled>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default col-md-12">
+        <div class="panel-footer">
+            <div class="row">
+                <div class="col-sm-4">
+                    <h4>Precio de venta</h4>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="peso_neto_m">Precio unitario</label>
+                        <input type="text" class="form-control" name="peso_neto_m" id="peso_neto_m" placeholder="Total peso neto" value="{{($precio_venta) ? $precio_venta : 0}}" disabled>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="total_candecia">Total</label>
+                        <input type="text" class="form-control" name="total_candecia" id="total_candecia" placeholder="Total peso bruto" value="{{($total_venta) ? $total_venta : 0}}" disabled>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div>
+        <button id="adicionar" class="btn btn-lg btn-primary pull-right m-t-n-xs" type="button"><strong>Terminar</strong></button>
     </div>
 </div>
 @endsection
@@ -1554,7 +1819,7 @@
                      location.reload();
                     // $.each(data.material, function(index, value){
                     //     /* Vamos agregando a nuestra tabla las filas necesarias */
-                    //     $("#contenido").append("<tr class='gradeA' id='item-cuerpo-"+value.id+"'><td>" + value.material.description + "</td><td>" + value.material.specification + "</td><td>" + value.quantity + "</td><td>" + value.material.dimension + "</td><td>"+value.material.length+"</td><td>"+value.material.net_weight+"</td><td>"+value.material.gross_weight+"</td><td>"+value.material.price+"</td><td>"+value.total+"</td><td><a href='#' class='btn btn-dark deleteC' data-c="+value.id+"><i class='fa fa-trash'></i></a></td></tr>");
+                    //     $("#contenido").append("<tr class='gradeA' id='item-cuerpo-"+value.id+"'><td>" + value.material.description + "</td><td>" + value.material.specification + "</td><td>" + value.quantity + "</td><td>" + value.material.dimension + "</td><td>"+value.material.length+"</td><td>"+value.material.net_weight+"</td><td>"+value.material.gross_weight+"</td><td>"+value.material.price+"</td><td>"+value.total+"</td><td><a href='#' class='btn btn-dark delete' data-c="+value.id+"><i class='fa fa-trash'></i></a></td></tr>");
                     // });
                     // $("#peso_neto").val(data.peso_neto);
                     // $("#peso_bruto").val(data.peso_burto);
@@ -1962,21 +2227,77 @@
             }
         });
         $('#M_adicionar').click(function() {
-            if($("#cadencia").val() && $("#precio_hora").val()){
+            if($("#description").val()!=5){
+                if($("#cadencia").val() && $("#precio_hora").val()){
+                    var formData = new FormData();
+                    formData.append('description', $("#description").val());
+                    formData.append('precio_hora', $("#precio_hora").val());
+                    formData.append('id_ric','{{$ric}}');
+                    formData.append('peso',$('#peso').val());
+                    formData.append('cadencia',$('#cadencia').val());
+                    $.ajax({
+                        url : '{{route('cotizacion.mano.obra')}}',
+                        type : 'POST',
+                        data : formData,
+                        datatype:'json',
+                        processData: false,  // tell jQuery not to process the data
+                        contentType: false,  // tell jQuery not to set contentType
+                    }).done(function(data){
+                        location.reload();
+                    }).fail(function(data){
+                        var message = data.responseJSON.errors;
+                        console.log(message);
+                    });
+                }else{
+                    $(".alert").removeClass("in").show();
+                    $(".alert").delay(200).addClass("in").fadeOut(3000);
+                }
+            }else{
+                if($("#precio_hora").val()){
+                    var formData = new FormData();
+                    formData.append('description', $("#description").val());
+                    formData.append('precio_hora', $("#precio_hora").val());
+                    formData.append('id_ric','{{$ric}}');
+                    formData.append('peso',$('#peso').val());
+                    $.ajax({
+                        url : '{{route('cotizacion.mano.obra')}}',
+                        type : 'POST',
+                        data : formData,
+                        datatype:'json',
+                        processData: false,  // tell jQuery not to process the data
+                        contentType: false,  // tell jQuery not to set contentType
+                    }).done(function(data){
+                        location.reload();
+                    }).fail(function(data){
+                        var message = data.responseJSON.errors;
+                        console.log(message);
+                    });
+                }else{
+                    $(".alert").removeClass("in").show();
+                    $(".alert").delay(200).addClass("in").fadeOut(3000);
+                }
+            }
+        });
+
+         /*
+        Consumibles
+        */
+        $('#Con_adicionar').click(function() {
+            if($('#descripcion').val() && $('#cantidad').val() &&$('#unit_price').val()){
                 var formData = new FormData();
-                formData.append('description', $("#description").val());
-                formData.append('precio_hora', $("#precio_hora").val());
+                formData.append('descripcion', $("#descripcion").val());
+                formData.append('cantidad', $("#cantidad").val());
                 formData.append('id_ric','{{$ric}}');
-                formData.append('peso',$('#peso').val());
-                formData.append('cadencia',$('#cadencia').val());
+                formData.append('unit_price',$('#unit_price').val());
                 $.ajax({
-                    url : '{{route('cotizacion.mano.obra')}}',
+                    url : '{{route('cotizacion.consumibles')}}',
                     type : 'POST',
                     data : formData,
                     datatype:'json',
                     processData: false,  // tell jQuery not to process the data
                     contentType: false,  // tell jQuery not to set contentType
                 }).done(function(data){
+                    console.log(data)
                     location.reload();
                 }).fail(function(data){
                     var message = data.responseJSON.errors;
@@ -1984,15 +2305,14 @@
                 });
             }else{
                 $(".alert").removeClass("in").show();
-                $(".alert").delay(200).addClass("in").fadeOut(3000);
+	            $(".alert").delay(200).addClass("in").fadeOut(3000);
             }
-
         });
 
         /*
         Modal de eliminar material de cuerpo
         */
-        $(".deleteC").click(function(event) {
+        $(".delete").click(function(event) {
             event.preventDefault();
             var id = $(this).data('c');
             $("#delete-action-btn-cuerpo").attr('data-tangoC',id);
@@ -2192,6 +2512,37 @@
                 console.log(data)
                 $("#item-obra-"+id).remove();
                 $("#delete-modal-mano").modal('hide');
+                toastr.success('Se ha eliminado la información correctamente');
+            })
+            .fail(function() {
+                console.log(data);
+            });
+
+        });
+
+         /*
+        Modal de eliminar consumible
+        */
+        $(".deleteCo").click(function(event) {
+            event.preventDefault();
+            var id = $(this).data('co');
+            $("#delete-action-btn-consumible").attr('data-tangoCo',id);
+            $("#delete-modal-consumible").modal();
+        });
+
+        $("#delete-action-btn-consumible").click(function(event) {
+            event.preventDefault();
+            var id = $(this).attr('data-tangoCo');
+
+            $.ajax({
+                url: '{{url('cotizacion/delet/consumible')}}/'+id,
+                type: 'DELETE',
+                dataType: 'json',
+            })
+            .done(function(data) {
+                console.log(data)
+                $("#item-consumible-"+id).remove();
+                $("#delete-modal-consumible").modal('hide');
                 toastr.success('Se ha eliminado la información correctamente');
             })
             .fail(function() {
