@@ -1,17 +1,17 @@
 @extends('layouts.admin.layout')
 @section('meta_title')
-    @if(!isset($material))
+    @if(!isset($materials))
         Agregar material
     @else
-        Editando {{$material->description}}
+        Editando
     @endif
 @endsection
 
 @section('page_title')
-    @if(!isset($material))
+    @if(!isset($materials))
         Agregar material
     @else
-        Editando {{$material->description}}
+        Editando
     @endif
 @endsection
 @section('page_action')
@@ -32,17 +32,18 @@
                 <div class="ibox-content">
                     <div class="row">
                         <div class="col-sm-12">
-                            @if(!isset($material))
+                            @if(!isset($materials))
                                 {!! Form::open(['route'=>'ingenieria.material.store','id'=>'material-form', 'files'=>true,'data-toggle' => 'validator',]) !!}
                             @else
-                                {!! Form::model($material, [
+                                {!! Form::model($materials, [
                                     'method' => 'patch',
-                                    'route' => ['ingenieria.material.update', $material->id],
+                                    'route' => ['ingenieria.material.update', $materials->id],
                                     'id'=>'material-form',
                                     'files' => true,
                                     'data-toggle' => 'validator',
                                 ]) !!}
                             @endif
+                            <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="description">Descripcion</label>
                                     {!! Form::text('description',old('description'),[
@@ -86,7 +87,6 @@
                             		]) !!}
                                     <div class="help-block with-errors"></div>
                                 </div>
-
                                 <div class="form-group">
                                     <label for="dimension">Dimensión</label>
                                     {!! Form::text('dimension',old('dimension'),[
@@ -96,7 +96,8 @@
                             		]) !!}
                                     <div class="help-block with-errors"></div>
                                 </div>
-
+                            </div>
+                            <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="length">Longitud</label>
                                     {!! Form::text('length',old('length'),[
@@ -106,7 +107,6 @@
                             		]) !!}
                                     <div class="help-block with-errors"></div>
                                 </div>
-
                                 <div class="form-group">
                                     <label for="net_weight">Peso neto</label>
                                     {!! Form::text('net_weight',old('net_weight'),[
@@ -150,6 +150,7 @@
                                 <div>
                                     <button class="btn btn-lg btn-primary pull-right m-t-n-xs" type="submit"><strong>Guardar</strong></button>
                                 </div>
+                            </div>
                             {!! Form::close() !!}
                         </div>
                     </div>

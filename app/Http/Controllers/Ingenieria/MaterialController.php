@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Ingenieria;
 
 use App\Material;
+use App\Inventory;
 use App\MaterialType;
 use App\Libraries\Helpers;
 use Illuminate\Http\Request;

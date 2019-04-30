@@ -66,7 +66,15 @@ class ProyectoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = [
+            'proyects' => Ric::find($id),
+            'quotations' => MaterialQuotation::pluck('quantity','id'),
+            'materials' => Material::pluck('description','dimension','id'),
+            'inventories' => Inventory::pluck('quantity','id'),
+            'tab' => 'warehouse',
+            'subtab' => 'proyects',
+        ];
+        return view('almacen.proyects.view')->with($data);
     }
 
     /**

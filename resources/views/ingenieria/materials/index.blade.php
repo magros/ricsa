@@ -56,13 +56,9 @@
                                     {{$material->r_rc}}
                                 </td>
                                 <td>
-                                    <a href="{{route('ingenieria.material.edit',[$material->id])}}" class="btn btn-outline-light">
+                                    {{-- <a href="{{route('ingenieria.material.edit',[$material->id])}}" class="btn btn-outline-light">
                                         <i class="fa fa-pencil-square-o"></i>
-                                    </a>
-                                    <a href="#" class="btn btn-outline-light delete" data-id="{{$material->id}}">
-                                        <i class="fa fa-trash"></i>
-                                    </a>
-
+                                    </a> --}}
                                 </td>
                             </tr>
                         @endforeach

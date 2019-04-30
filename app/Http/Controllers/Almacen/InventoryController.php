@@ -65,7 +65,6 @@ class InventoryController extends Controller
             'quantity' =>$request->quantity,
             'ric_id' => $request->ric_id,
         ]);
-        dd($inventory);
         $inventory->save();
         return redirect()->route('almacen.inventory.create')->with('alert', Helpers::alertData('success','','saveSuccess'));
     }
@@ -97,7 +96,7 @@ class InventoryController extends Controller
             'tab' => 'engineering',
             'subtab' => 'materials',
         ];
-        return view('almacen.inventories.createoredit')->with($data);
+        return view('almacen.inventories.view')->with($data);
     }
 
     /**
