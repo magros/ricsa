@@ -1,11 +1,11 @@
 @extends('layouts.admin.layout')
 
 @section('meta_title')
-    Personal
+    Produccion Personal
 @endsection
 
 @section('page_title')
-    Personal
+    Produccion Personal
 @endsection
 
 @section('meta_extra')
@@ -21,7 +21,7 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Personal en sistema</h5>
+                    <h5>Produccion Personal en sistema</h5>
                     <div class="ibox-tools">
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>

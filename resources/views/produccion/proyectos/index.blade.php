@@ -1,11 +1,11 @@
 @extends('layouts.admin.layout')
 
 @section('meta_title')
-    Proyectos
+    Proyectos produccion
 @endsection
 
 @section('page_title')
-    Proyectos
+    Proyectos produccion
 @endsection
 
 @section('meta_extra')
@@ -21,7 +21,7 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Proyectos en sistema</h5>
+                    <h5>Proyectos produccion en sistema</h5>
                     <div class="ibox-tools">
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>

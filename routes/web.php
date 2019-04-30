@@ -50,6 +50,8 @@ Route::prefix('cotizacion')->group(function(){
         Route::post('list/material','MaterialController@list')->name('material.cotizador');
         Route::post('mano','MaterialController@ManoObra')->name('mano.obra');
         Route::DELETE('delet/mano/{id}','MaterialController@deleteManoObra');
+        Route::post('consumibles','MaterialController@consumibles')->name('consumibles');
+        Route::DELETE('delet/consumible/{id}','MaterialController@deleteConsumible');
 
 
         Route::get('rics', ['as'=>'rics', 'uses'=>'CotizacionCotroller@rics']);
@@ -158,6 +160,14 @@ Route::prefix('calidad')->group(function(){
         Route::get('personal/{id}','PersonalController@edit')->name('personal.edit');
         Route::patch('personal/update/{id}','PersonalController@update')->name('personal.update');
         Route::DELETE('personal/delet/{id}','PersonalController@destroy');
+
+        Route::get('/', 'ReportesController@index');
+        Route::get('reportes','ReportesController@index')->name('report');
+        Route::get('reportes/create','ReportesController@create')->name('reports.create');
+        Route::post('reportes/save','ReportesController@store')->name('reports.save');
+        Route::get('reportes/{id}','ReportesController@edit')->name('reports.edit');
+        Route::patch('reportes/update/{id}','ReportesController@update')->name('reports.update');
+        Route::DELETE('reportes/delet/{id}','ReportesController@destroy');
 
     });
 });

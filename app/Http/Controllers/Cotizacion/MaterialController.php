@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Cotizacion;
 
 use App\Manpower;
 use App\Material;
+use App\Consumable;
 use App\MaterialType;
 use App\Libraries\Helpers;
 use App\MaterialQuotation;
@@ -224,27 +225,63 @@ class MaterialController extends Controller
                 'peso_neto'=>$peso_neto,
                 ]);
         }
-
-        $hours = $request->peso/$request->cadencia;
-        $total =$hours * $request->precio_hora;
-        $p = $total / $request->peso;
-
-        $mano_obra = Manpower::create([
-            'ric_id'=>$request->id_ric,
-            'description'=>$request->description,
-            'price_hour'=>$request->precio_hora,
-            'net_weight'=>$request->peso,
-            'cadence'=>$request->cadencia,
-            'hours'=>$hours,
-            'costo'=>$p,
-            'total'=>$total
-        ]);
+        if($request->description!=5){
+            $hours = $request->peso/$request->cadencia;
+            $total =$hours * $request->precio_hora;
+            $p = $total / $request->peso;
+            $mano_obra = Manpower::create([
+                'ric_id'=>$request->id_ric,
+                'description'=>$request->description,
+                'price_hour'=>$request->precio_hora,
+                'net_weight'=>$request->peso,
+                'cadence'=>$request->cadencia,
+                'hours'=>$hours,
+                'costo'=>$p,
+                'total'=>$total
+            ]);
+        }else{
+            $hours = 0;
+            $a = Manpower::where('ric_id',$request->id_ric)->where('description','<>',5)->get();
+            foreach ($a as $b) {
+                $hours = $hours + $b->hours;
+            }
+            $hours = $request->peso * $hours;
+            $total = $hours * $request->precio_hora;
+            $mano_obra = Manpower::create([
+                'ric_id'=>$request->id_ric,
+                'description'=>$request->description,
+                'price_hour'=>$request->precio_hora,
+                'net_weight'=>$request->peso,
+                'hours'=>$hours,
+                'total'=>$total
+            ]);
+        }
         return response()->json($mano_obra);
     }
 
     public function deleteManoObra($id)
     {
         $material = Manpower::find($id);
+        if(!is_null($material)){
+            return response()->json($material->delete());
+        }
+        return abort(500);
+    }
+
+    public function consumibles(Request $request){
+        $consumible = Consumable::create([
+            'ric_id' => $request->id_ric,
+            'description' => $request->descripcion,
+            'quantity' => $request->cantidad,
+            'unit_price' => $request->unit_price,
+            'total' => $request->cantidad * $request->unit_price,
+        ]);
+        return response()->json($consumible);
+    }
+
+    public function deleteConsumible($id)
+    {
+        $material = Consumable::find($id);
         if(!is_null($material)){
             return response()->json($material->delete());
         }

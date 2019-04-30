@@ -1,11 +1,11 @@
 @extends('layouts.admin.layout')
 
 @section('meta_title')
-    Reportes
+    Reportes Comercializacion
 @endsection
 
 @section('page_title')
-    Reportes
+    Reportes Comercializacion
 @endsection
 
 @section('meta_extra')
@@ -21,7 +21,7 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Reportes en sistema</h5>
+                    <h5>Reportes Comercializacion en sistema</h5>
                     <div class="ibox-tools">
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
