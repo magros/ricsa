@@ -6,6 +6,7 @@ use App\Ric;
 use App\Customer;
 use App\Manpower;
 use App\Material;
+use App\Consumable;
 use Carbon\Traits\Date;
 use App\Libraries\Helpers;
 use App\MaterialQuotation;
@@ -142,7 +143,7 @@ class CotizacionCotroller extends Controller
     }
 
     public function cotizador($id){
-        $peso_neto = 0;
+                $peso_neto = 0;
                 $peso_bruto = 0;
                 $total = 0;
                 $precio_kilo = 0;
@@ -156,6 +157,35 @@ class CotizacionCotroller extends Controller
                 if($total>0 && $peso_neto>0){
                     $precio_kilo = $total/$peso_neto;
                 }
+                $peso_neto_mo = 0;
+                $cadencia = 0;
+                $horas = 0;
+                $total_mo = 0;
+                $total_precio = 0;
+                $MO = Manpower::where('ric_id',$id)->get();
+                foreach ($MO as $m) {
+                    if($m->description!=5){
+                        $peso_neto_mo = $peso_neto_mo + $m->net_weight;
+                    }
+                    $horas = $horas + $m->hours;
+                    $total_mo = $total_mo + $m->total;
+                }
+                $cadencia = $peso_neto_mo / $horas;
+                $total_precio = $total_mo/$peso_neto;
+
+                $total_consumible = 0;
+                $precio_consumible = 0;
+                $consumibles = Consumable::where('ric_id',$id)->get();
+                foreach ($consumibles as $con) {
+                    $total_consumible = $total_consumible + $con->total;
+                }
+                $precio_consumible = $total_consumible/$peso_neto;
+                $total_fabricacion = $total + $total_mo + $total_consumible;
+                $precio_unitario_ric = $total_fabricacion/$peso_neto;
+
+                $total_venta = $total_fabricacion/(1-0.25);
+                $precio_venta = $total_venta/$peso_neto;
+
         $data = [
             'cuerpo'=>MaterialQuotation::where('ric_id',$id)->where('name','cuerpo')->get(),
             'tapas'=>MaterialQuotation::where('ric_id',$id)->where('name','tapas')->get(),
@@ -163,12 +193,24 @@ class CotizacionCotroller extends Controller
             'escalera'=>MaterialQuotation::where('ric_id',$id)->where('name','escalera')->get(),
             'registro'=>MaterialQuotation::where('ric_id',$id)->where('name','registro')->get(),
             'boquillas'=>MaterialQuotation::where('ric_id',$id)->where('name','boquillas')->get(),
-            'mano_obra'=>Manpower::where('ric_id',$id)->get(),
+            'mano_obra'=>$MO,
             'peso_neto'=>$peso_neto,
             'peso_burto'=>$peso_bruto,
             'precio_kilo'=>$precio_kilo,
             'total' => $total,
+            'total_peso_neto_mo' =>$peso_neto_mo,
+            'cadencia'=> $cadencia,
+            'total_horas'=>$horas,
+            'total_precio_mo'=>$total_precio,
+            'total_mo'=>$total_mo,
+            'total_consumible' => $total_consumible,
+            'precio_consumible'=> $precio_consumible,
+            'total_fabricacion'=> $total_fabricacion,
+            'precio_unitario_ric' => $precio_unitario_ric,
+            'total_venta'=>$total_venta,
+            'precio_venta'=> $precio_venta,
             'materials' => Material::pluck('description','id'),
+            'consumibles'=> $consumibles,
             'ric'=>$id,
             'tab' => 'quotation',
             'subtab' => 'quotations'

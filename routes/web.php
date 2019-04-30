@@ -50,6 +50,8 @@ Route::prefix('cotizacion')->group(function(){
         Route::post('list/material','MaterialController@list')->name('material.cotizador');
         Route::post('mano','MaterialController@ManoObra')->name('mano.obra');
         Route::DELETE('delet/mano/{id}','MaterialController@deleteManoObra');
+        Route::post('consumibles','MaterialController@consumibles')->name('consumibles');
+        Route::DELETE('delet/consumible/{id}','MaterialController@deleteConsumible');
 
 
         Route::get('rics', ['as'=>'rics', 'uses'=>'CotizacionCotroller@rics']);
