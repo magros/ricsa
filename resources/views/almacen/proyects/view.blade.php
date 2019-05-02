@@ -13,6 +13,7 @@
 @stop
 
 @section('page_action')
+<a href="{{route('almacen.proyect')}}" class="btn btn-white">&lt; Regresar</a>
 @endsection
 
 @section('content')
@@ -39,30 +40,25 @@
                             <th>Usar</th>
                         </tr>
                         </thead>
-                        @foreach($proyects as $proyect)
-                        <tr class="gradeA">
+                        @foreach($engineerings as $engineering)
+                            <tr class="gradeA">
                             <td>
-                                {{$proyect->inventory->material->description}}
+                                {{$engineering->material->description}}
                             </td>
                             <td>
-                                {{$proyect->name_proyect}}
+                                {{$engineering->quantity}}
                             </td>
                             <td>
-                                {{$proyect->complexity}}
+                                {{$engineering->material->dimension}}
                             </td>
                             <td>
-                                {{$proyect->estimated_time}}
+                                {{$engineering->material->dimension}}
                             </td>
                             <td>
-                                {{$proyect->status}}
-                            </td>
-                            <td>
-                                <a href="#" class="btn btn-outline-light">
-                                    <i class="fa fa-eye"></i>
-                                </a>
+                                <input type="checkbox" name="" value="">
                             </td>
                         </tr>
-                    @endforeach
+                        @endforeach
                         <tbody>
 
                         </tbody>

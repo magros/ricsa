@@ -1,10 +1,10 @@
-<?php
+s<?php
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMaterialEngineeringTable extends Migration
+class CreateMaterialEngineeringsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateMaterialEngineeringTable extends Migration
      */
     public function up()
     {
-        Schema::create('material_engineering', function (Blueprint $table) {
+        Schema::create('material_engineerings', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
             $table->double('quantity')->nullable();
@@ -23,6 +23,7 @@ class CreateMaterialEngineeringTable extends Migration
             $table->integer('material_id')->nullable();
             $table->integer('engineering_id')->nullable();
             $table->integer('inventory_id')->nullable();
+            $table->integer('ric_id')->nullable();
         });
     }
 
@@ -33,6 +34,6 @@ class CreateMaterialEngineeringTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('material_engineering');
+        Schema::dropIfExists('material_engineerings');
     }
 }

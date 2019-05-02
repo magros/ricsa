@@ -20,7 +20,7 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Materiales en sistema</h5>
+                    <h5>Materiales en salida</h5>
                     <div class="ibox-tools">
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 <div class="ibox-content">
-
+                    <label>Fecha: 02-05-2019</label>
                     <table class="table table-striped table-dark table-hover dataTables-users" >
                         <thead class="thead-dark">
                         <tr>
@@ -36,28 +36,22 @@
                             <th>Unidad</th>
                             <th>Cantidad</th>
                             <th>Reporte</th>
-                            <th>Acciones</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($materials as $material)
-                            <tr class="gradeA" id="item-{{$material->id}}">
+                        @foreach($inventories as $inventory)
+                            <tr class="gradeA" id="item-{{$inventory->id}}">
                                 <td>
-                                    {{$material->id}}
+                                    {{$inventory->material->description}}
                                 </td>
                                 <td>
-                                    {{$material->name_material}}
+                                    {{$inventory->material->specification}}
                                 </td>
                                 <td>
-                                    {{$material->complexity}}
+                                    {{$inventory->quantity}}
                                 </td>
                                 <td>
-                                    {{$material->estimated_time}}
-                                </td>
-                                <td>
-                                    <a href="#" class="btn btn-outline-light">
-                                        <i class="fa fa-eye"></i>
-                                    </a>
+
                                 </td>
                             </tr>
                         @endforeach
