@@ -29,7 +29,7 @@ class ProvedoresController extends Controller
      */
     public function create()
     {
-        //
+        return view('contabilidad.provedores.createoredit');
     }
 
     /**

@@ -29,7 +29,7 @@ class ProyectosController extends Controller
      */
     public function create()
     {
-        //
+        return view('contabilidad.proyectos.vercontabilidad');
     }
 
     /**

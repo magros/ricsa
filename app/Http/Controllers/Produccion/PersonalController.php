@@ -29,7 +29,7 @@ class PersonalController extends Controller
      */
     public function create()
     {
-        //
+        return view('produccion.personal.createoredit');
     }
 
     /**

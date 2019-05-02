@@ -31,7 +31,7 @@ class PreciosController extends Controller
      */
     public function create()
     {
-        //
+        return view('comercializacion.precios.createoredit');
     }
 
     /**
