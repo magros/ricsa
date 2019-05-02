@@ -28,7 +28,7 @@ class ReportesController extends Controller
      */
     public function create()
     {
-        //
+        return view('comercializacion.reportes.reporteric');
     }
 
     /**

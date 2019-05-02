@@ -33,10 +33,8 @@
                     <table class="table table-striped table-dark table-hover dataTables-users" >
                         <thead class="thead-dark">
                         <tr>
-                            <th>Descipcion</th>
-                            <th>Especificación</th>
-                            <th>RIC</th>
-                            <th>Proyecto</th>
+                            <th>Material</th>
+                            <th>Precio</th>
                             <th>Acciones</th>
                         </tr>
                         </thead>
@@ -44,19 +42,13 @@
                         
                             <tr class="gradeA" >
                                 <td>
-                                pelon
+                                Acero inoxidable
                                 </td>
                                 <td>
-                                pelon
+                                $14.00
                                 </td>
                                 <td>
-                                pelon
-                                </td>
-                                <td>
-                                    pelon
-                                </td>
-                                <td>
-                                    <a href="#" class="btn btn-outline-light">
+                                    <a href="{{route('comercializacion.prices.create')}}" class="btn btn-outline-light">
                                         <i class="fa fa-eye"></i>
                                     </a>
                                 </td>

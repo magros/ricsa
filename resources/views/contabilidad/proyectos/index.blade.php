@@ -33,10 +33,10 @@
                     <table class="table table-striped table-dark table-hover dataTables-users" >
                         <thead class="thead-dark">
                         <tr>
-                            <th>Descipcion</th>
-                            <th>Especificación</th>
                             <th>RIC</th>
                             <th>Proyecto</th>
+                            <th>Estatus</th>
+                            <th>Estatus</th>
                             <th>Acciones</th>
                         </tr>
                         </thead>
@@ -44,20 +44,23 @@
                         
                             <tr class="gradeA" >
                                 <td>
-                                pelon
+                                RIC_N19_005
                                 </td>
                                 <td>
-                                pelon
+                                Equipo vertical
                                 </td>
                                 <td>
-                                pelon
+                                Nuevo
                                 </td>
                                 <td>
-                                    pelon
+                                En proceso
                                 </td>
                                 <td>
-                                    <a href="#" class="btn btn-outline-light">
+                                    <a href="{{route('contabilidad.proyect.create')}}" class="btn btn-outline-light">
                                         <i class="fa fa-eye"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-outline-light">
+                                        <i class="fa fa-user"></i>
                                     </a>
                                 </td>
                             </tr>

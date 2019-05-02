@@ -33,10 +33,11 @@
                     <table class="table table-striped table-dark table-hover dataTables-users" >
                         <thead class="thead-dark">
                         <tr>
-                            <th>Descipcion</th>
-                            <th>Especificación</th>
-                            <th>RIC</th>
-                            <th>Proyecto</th>
+                            <th>Nombre</th>
+                            <th>Empresa</th>
+                            <th>Calificacion</th>
+                            <th>Material</th>
+                            <th>Costo</th>
                             <th>Acciones</th>
                         </tr>
                         </thead>
@@ -44,20 +45,23 @@
                         
                             <tr class="gradeA" >
                                 <td>
-                                pelon
+                                Enrique Peña
                                 </td>
                                 <td>
-                                pelon
+                                Glencore
                                 </td>
                                 <td>
-                                pelon
+                                9.0
                                 </td>
                                 <td>
-                                    pelon
+                                Acero
                                 </td>
                                 <td>
-                                    <a href="#" class="btn btn-outline-light">
-                                        <i class="fa fa-eye"></i>
+                                $2.5
+                                </td>
+                                <td>
+                                    <a href="{{route('contabilidad.providers.create')}}" class="btn btn-outline-light">
+                                        <i class="fa fa-pencil"></i>
                                     </a>
                                 </td>
                             </tr>
