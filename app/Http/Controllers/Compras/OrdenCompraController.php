@@ -29,7 +29,7 @@ class OrdenCompraController extends Controller
      */
     public function create()
     {
-        //
+        return view('compras.ordenCompra.createoredit');
     }
 
     /**

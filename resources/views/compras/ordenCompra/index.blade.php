@@ -33,10 +33,9 @@
                     <table class="table table-striped table-dark table-hover dataTables-users" >
                         <thead class="thead-dark">
                         <tr>
-                            <th>Descipcion</th>
-                            <th>Especificación</th>
-                            <th>RIC</th>
-                            <th>Proyecto</th>
+                            <th>Proveedor</th>
+                            <th>Estatus</th>
+                            <th>Fecha</th>
                             <th>Acciones</th>
                         </tr>
                         </thead>
@@ -44,19 +43,16 @@
                         
                             <tr class="gradeA" >
                                 <td>
-                                pelon
+                                Juan
                                 </td>
                                 <td>
-                                pelon
+                                Pendiente
                                 </td>
                                 <td>
-                                pelon
+                                31-03-2019
                                 </td>
                                 <td>
-                                    pelon
-                                </td>
-                                <td>
-                                    <a href="#" class="btn btn-outline-light">
+                                    <a href="{{route('compras.ordershopp.create')}}" class="btn btn-outline-light">
                                         <i class="fa fa-eye"></i>
                                     </a>
                                 </td>

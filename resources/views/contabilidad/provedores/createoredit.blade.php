@@ -7,7 +7,7 @@ Editar Proveedor
 Editar Proveedor
 @endsection
 @section('page_action')
-<a href="{{route('calidad.personal')}}" class="btn btn-white">&lt; Regresar a materiales</a>
+<a href="{{route('contabilidad.provider')}}" class="btn btn-outline-light">&lt; Regresar a Proveedor</a>
 @endsection
 @section('content')
 <div class="row justify-content-center">

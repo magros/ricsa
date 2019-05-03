@@ -1,11 +1,11 @@
 @extends('layouts.admin.layout')
 
 @section('meta_title')
-    Lista Consumibles
+    Pedidos Consumibles
 @endsection
 
 @section('page_title')
-    Lista Consumibles
+    Pedidos Consumibles
 @endsection
 
 @section('meta_extra')
@@ -21,7 +21,7 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Lista Consumibles en sistema</h5>
+                    <h5>Pedidos Consumibles en sistema</h5>
                     <div class="ibox-tools">
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
@@ -33,10 +33,9 @@
                     <table class="table table-striped table-dark table-hover dataTables-users" >
                         <thead class="thead-dark">
                         <tr>
-                            <th>Descipcion</th>
-                            <th>Especificación</th>
-                            <th>RIC</th>
-                            <th>Proyecto</th>
+                            <th>No. Consumible</th>
+                            <th>Estatus</th>
+                            <th>Fecha</th>
                             <th>Acciones</th>
                         </tr>
                         </thead>
@@ -44,20 +43,17 @@
                         
                             <tr class="gradeA" >
                                 <td>
-                                pelon
+                                001
                                 </td>
                                 <td>
-                                pelon
+                                Pendiente
                                 </td>
                                 <td>
-                                pelon
+                                31-03-2019
                                 </td>
                                 <td>
-                                    pelon
-                                </td>
-                                <td>
-                                    <a href="#" class="btn btn-outline-light">
-                                        <i class="fa fa-eye"></i>
+                                    <a href="{{route('compras.listconsumables.create')}}" class="btn btn-outline-light">
+                                        <i class="fa fa-dollar"></i>
                                     </a>
                                 </td>
                             </tr>
