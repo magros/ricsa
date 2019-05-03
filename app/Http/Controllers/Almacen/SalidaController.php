@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Almacen;
 
+use App\Ric;
 use App\Material;
 use App\Inventory;
 use App\MaterialType;
@@ -21,6 +22,7 @@ class SalidaController extends Controller
         $data = [
             'materials' => Material::all(),
             'inventories' => Inventory::all(),
+            'rics' => Ric::pluck('Nric','id'),
             'tab' => 'warehouse',
             'subtab' => 'exitmaterials',
         ];
@@ -91,5 +93,19 @@ class SalidaController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function list(Request $request)
+    {
+        if(!is_null($request)){
+            $material_cuatation = MaterialQuotation::create([
+                'quantity'=>$request->cantidad,
+                'name'=>$request->name,
+                'total'=>$total,
+                'ric_id'=>$request->id_ric,
+                'material_id'=>$request->material_id
+            ]);
+            }
+        return abort(500);
     }
 }

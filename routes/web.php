@@ -135,6 +135,7 @@ Route::prefix('almacen')->group(function(){
         Route::get('salida/create','SalidaController@create')->name('exit.create');
         Route::post('salida/store','SalidaController@store')->name('exit.store');
         Route::get('salida/{id}','SalidaController@edit')->name('exit.edit');
+        Route::post('list/salida','SalidaController@list')->name('salida.almacen');
         Route::patch('salida/update/{id}','SalidaController@update')->name('exit.update');
         Route::DELETE('salida/delet/{id}','SalidaController@destroy');
     });

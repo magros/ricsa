@@ -2177,14 +2177,6 @@
                     contentType: false,  // tell jQuery not to set contentType
                 }).done(function(data){
                     location.reload();
-                    // $.each(data.material, function(index, value){
-                    //     /* Vamos agregando a nuestra tabla las filas necesarias */
-                    //     $("#B_contenido").append("<tr><td>" + value.material.description + "</td><td>" + value.material.specification + "</td><td>" + value.quantity + "</td><td>" + value.material.dimension + "</td><td>"+value.material.length+"</td><td>"+value.material.net_weight+"</td><td>"+value.material.gross_weight+"</td><td>"+value.material.price+"</td><td>"+value.total+"</td></tr>");
-                    // });
-                    // $("#peso_neto").val(data.peso_neto);
-                    // $("#peso_bruto").val(data.peso_burto);
-                    // $("#precio_kilo").val(data.precio_kilo);
-                    // $("#total_material").val(data.total);
                 }).fail(function(data){
                     var message = data.responseJSON.errors;
                     console.log(message);
