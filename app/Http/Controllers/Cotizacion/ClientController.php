@@ -52,6 +52,14 @@ class ClientController extends Controller
             'name'=> 'required',
             'company' => 'required',
             'phone' => 'required',
+            'rfc' => 'required',
+            'delivery_conditions' => 'required',
+            'payment_conditions' => 'required',
+            'country' => 'required',
+            'state' => 'required',
+            'city' => 'required',
+            'business_name' => 'required'
+
          ]);
 
         $client = Customer::create([
@@ -59,6 +67,13 @@ class ClientController extends Controller
             'company' => $request->company,
             'email' => $request->email,
             'phone' => $request->phone,
+            'rfc' => $request->phone,
+            'delivery_conditions' => $request->delivery_conditions,
+            'payment_conditions' => $request->payment_conditions,
+            'country' => $request->country,
+            'state' => $request->state,
+            'city' => $request->city,
+            'business_name' => $request->business_name
          ]);
 
          return redirect()->route('cotizacion.client.alta')->with('alert',Helpers::alertData('success','','saveSuccess'));
@@ -102,17 +117,31 @@ class ClientController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'email' => 'required',
+            'email' => 'required|unique:users,email',
             'name'=> 'required',
             'company' => 'required',
             'phone' => 'required',
+            'rfc' => 'required',
+            'delivery_conditions' => 'required',
+            'payment_conditions' => 'required',
+            'country' => 'required',
+            'state' => 'required',
+            'city' => 'required',
+            'business_name' => 'required'
          ]);
          $user = Customer::find($id);
          $user->update([
              'name' => $request->get('name'),
              'company' => $request->get('company'),
              'email' => $request->get('email'),
-             'phone' => $request->get('phone')
+             'phone' => $request->get('phone'),
+             'rfc' => $request->get('rfc'),
+             'delivery_conditions' => $request->get('delivery_conditions'),
+             'payment_conditions' => $request->get('payment_conditions'),
+             'country' => $request->get('country'),
+             'state' => $request->get('state'),
+             'city' => $request->get('city'),
+             'business_name' => $request->get('business_name')
          ]);
         return redirect()->back()->with('alert',Helpers::alertData('success','','saveSuccess'));
     }
