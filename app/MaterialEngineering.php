@@ -2,14 +2,20 @@
 
 namespace App;
 
+use App\Ric;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class MaterialEngineering extends Model
 {
-    use SoftDeletes;
-    protected $dates = ['deleted_at'];
+
     protected $fillable = [
-        'quantity','price', 'total', 'missing'
+        'quantity','price', 'total', 'missing', 'ric_id','material_id'
     ];
+
+    public function ric(){
+        return $this->belongsTo(Ric::class);
+    }
+    public function material(){
+        return $this->belongsTo(Material::class);
+    }
 }

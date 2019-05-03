@@ -163,6 +163,14 @@ Route::prefix('calidad')->group(function(){
         Route::patch('personal/update/{id}','PersonalController@update')->name('personal.update');
         Route::DELETE('personal/delet/{id}','PersonalController@destroy');
 
+        Route::get('/', 'ReportesController@index');
+        Route::get('reportes','ReportesController@index')->name('report');
+        Route::get('reportes/create','ReportesController@create')->name('reports.create');
+        Route::post('reportes/save','ReportesController@store')->name('reports.save');
+        Route::get('reportes/{id}','ReportesController@edit')->name('reports.edit');
+        Route::patch('reportes/update/{id}','ReportesController@update')->name('reports.update');
+        Route::DELETE('reportes/delet/{id}','ReportesController@destroy');
+
     });
 });
 

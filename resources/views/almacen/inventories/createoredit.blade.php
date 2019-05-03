@@ -76,9 +76,9 @@
 
                                 <div class="form-group">
                                     <label for="specification">Especificación</label>
-                                    {!! Form::text('material[specification]',old('material[specification]'),[
-                            			'class'=>'form-control','placeholder'=>'specification',
-                            			'required'=>'', 'autocomplete'=>'off', 'id' => 'material[specification]',
+                                    {!! Form::text('specification',old('specification'),[
+                            			'class'=>'form-control','placeholder'=>'Especificación',
+                            			'required'=>'', 'autocomplete'=>'off', 'id' => 'specification', 'disabled',
                             			'data-required-error' => 'Este campo es obligatorio','maxlength' => '100'
                             		]) !!}
                                     <div class="help-block with-errors"></div>
@@ -86,10 +86,10 @@
 
                                 <div class="form-group">
                                     <label for="thickness">Espesor</label>
-                                    {!! Form::text('material[thickness]',old('material[thickness]'),[
-                            			'class'=>'form-control','placeholder'=>'thickness',
-                            			'required'=>'', 'autocomplete'=>'off', 'id' => 'material[thickness]',
-                            			'data-required-error' => 'Este campo es obligatorio',
+                                    {!! Form::text('thickness',old('thickness'),[
+                            			'class'=>'form-control','placeholder'=>'Espesor',
+                            			'required'=>'', 'autocomplete'=>'off', 'id' => 'thickness',
+                            			'data-required-error' => 'Este campo es obligatorio', 'disabled',
                             			'data-error' => 'Introduce una dirección de correo válida',
                                         'maxlength' => '100'
                             		]) !!}
@@ -98,9 +98,9 @@
 
                                 <div class="form-group">
                                     <label for="dimension">Dimensión</label>
-                                    {!! Form::text('material[dimension]',old('material[dimension]'),[
-                            			'class'=>'form-control','placeholder'=>'dimension',
-                            			'required'=>'', 'autocomplete'=>'off', 'id' => 'material[dimension]',
+                                    {!! Form::text('dimension',old('dimension'),[
+                            			'class'=>'form-control','placeholder'=>'Dimensión',
+                            			'required'=>'', 'autocomplete'=>'off', 'id' => 'dimension','disabled',
                             			'data-required-error' => 'Este campo es obligatorio', 'maxlength' => '15'
                             		]) !!}
                                     <div class="help-block with-errors"></div>
@@ -109,9 +109,9 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="length">Longitud</label>
-                                    {!! Form::text('material[length]',old('material[length]'),[
-                                        'class'=>'form-control','placeholder'=>'length',
-                                        'required'=>'', 'autocomplete'=>'off', 'id' => 'material[length]',
+                                    {!! Form::text('length',old('length'),[
+                                        'class'=>'form-control','placeholder'=>'Longitud',
+                                        'required'=>'', 'autocomplete'=>'off', 'id' => 'length', 'disabled',
                                         'data-required-error' => 'Este campo es obligatorio', 'maxlength' => '15'
                                     ]) !!}
                                     <div class="help-block with-errors"></div>
@@ -119,9 +119,9 @@
 
                                 <div class="form-group">
                                     <label for="net_weight">Peso neto</label>
-                                    {!! Form::text('material[net_weight]',old('material[net_weight]'),[
-                                        'class'=>'form-control','placeholder'=>'net_weight',
-                                        'required'=>'', 'autocomplete'=>'off', 'id' => 'material[net_weight]',
+                                    {!! Form::text('net_weight',old('net_weight'),[
+                                        'class'=>'form-control','placeholder'=>'Peso neto',
+                                        'required'=>'', 'autocomplete'=>'off', 'id' => 'net_weight', 'disabled',
                                         'data-required-error' => 'Este campo es obligatorio', 'maxlength' => '15'
                                     ]) !!}
                                     <div class="help-block with-errors"></div>
@@ -129,9 +129,9 @@
 
                                 <div class="form-group">
                                     <label for="gross_weight">Peso bruto</label>
-                                    {!! Form::text('material[gross_weight]',old('material[gross_weight]'),[
-                            			'class'=>'form-control','placeholder'=>'gross_weight',
-                            			'required'=>'', 'autocomplete'=>'off', 'id' => 'material[gross_weight]',
+                                    {!! Form::text('gross_weight',old('gross_weight'),[
+                            			'class'=>'form-control','placeholder'=>'Peso bruto',
+                            			'required'=>'', 'autocomplete'=>'off', 'id' => 'gross_weight', 'disabled',
                             			'data-required-error' => 'Este campo es obligatorio', 'maxlength' => '15'
                             		]) !!}
                                     <div class="help-block with-errors"></div>
@@ -139,9 +139,9 @@
 
                                 <div class="form-group">
                                     <label for="trademark">Marca</label>
-                                    {!! Form::text('material[trademark]',old('material[trademark]'),[
-                            			'class'=>'form-control','placeholder'=>'trademark',
-                            			'required'=>'', 'autocomplete'=>'off', 'id' => 'material[trademark]',
+                                    {!! Form::text('trademark',old('trademark'),[
+                            			'class'=>'form-control','placeholder'=>'Marca',
+                            			'required'=>'', 'autocomplete'=>'off', 'id' => 'trademark', 'disabled',
                             			'data-required-error' => 'Este campo es obligatorio', 'maxlength' => '15'
                             		]) !!}
                                     <div class="help-block with-errors"></div>
@@ -149,9 +149,9 @@
 
                                 <div class="form-group">
                                     <label for="price">Precio unitario</label>
-                                    {!! Form::text('material[price]',old('material[price]'),[
-                            			'class'=>'form-control','placeholder'=>'price',
-                            			'required'=>'', 'autocomplete'=>'off', 'id' => 'material[price]',
+                                    {!! Form::text('price',old('price'),[
+                            			'class'=>'form-control','placeholder'=>'Precio',
+                            			'required'=>'', 'autocomplete'=>'off', 'id' => 'price', 'disabled',
                             			'data-required-error' => 'Este campo es obligatorio', 'maxlength' => '15'
                             		]) !!}
                                     <div class="help-block with-errors"></div>
@@ -160,9 +160,9 @@
                                 <div class="form-group">
                                     <label for="material_type_id">Tipo de material:</label>
                                     <div class="clearfix"></div>
-                                    {!! Form::select('material[material_type_id]',[null=>'---Selecionar---']+$material_types->toArray(),old('material[material_type_id]'),[
-                                        'class'=>'form-control','id'=>'material[material_type_id]',
-                                        'data-required-error' => 'Este campo es obligatorio',
+                                    {!! Form::select('material_type_id',[null=>'Tipo de material']+$material_types->toArray(),old('material_type_id'),[
+                                        'class'=>'form-control','id'=>'material_type_id',
+                                        'data-required-error' => 'Este campo es obligatorio', 'disabled'
                                     ]) !!}
                                     <div class="help-block with-errors"></div>
                                 </div>

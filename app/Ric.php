@@ -28,6 +28,9 @@ class Ric extends Model
     public function materialQuotation(){
         return $this->hasOne(MaterialQuotation::class);
     }
+    public function materialEngineering(){
+        return $this->hasOne(materialEngineering::class);
+    }
     public function inventory(){
         return $this->hasMany(Inventory::class);
     }

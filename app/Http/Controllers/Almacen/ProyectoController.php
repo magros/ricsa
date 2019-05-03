@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Almacen;
 
+use DB;
 use App\Ric;
-use App\MaterialQuotation;
 use App\Material;
 use App\Inventory;
+use App\MaterialEngineering;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -66,7 +67,15 @@ class ProyectoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = [
+            'proyects' => Ric::find($id),
+            'engineerings' => MaterialEngineering::where('ric_id', $id)->get(),
+            'materials' => Material::all(),
+            'inventories' => Inventory::all(),
+            'tab' => 'warehouse',
+            'subtab' => 'proyects',
+        ];
+        return view('almacen.proyects.view')->with($data);
     }
 
     /**

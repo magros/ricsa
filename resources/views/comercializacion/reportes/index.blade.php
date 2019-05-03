@@ -1,11 +1,11 @@
 @extends('layouts.admin.layout')
 
 @section('meta_title')
-    Reportes
+    Reportes Comercializacion
 @endsection
 
 @section('page_title')
-    Reportes
+    Reportes Comercializacion
 @endsection
 
 @section('meta_extra')
@@ -21,7 +21,7 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Reportes en sistema</h5>
+                    <h5>Reportes Comercializacion en sistema</h5>
                     <div class="ibox-tools">
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
@@ -33,10 +33,10 @@
                     <table class="table table-striped table-dark table-hover dataTables-users" >
                         <thead class="thead-dark">
                         <tr>
-                            <th>Descipcion</th>
-                            <th>Especificación</th>
                             <th>RIC</th>
-                            <th>Proyecto</th>
+                            <th>Equipo</th>
+                            <th>Estatus</th>
+                            <th>Estatus</th>
                             <th>Acciones</th>
                         </tr>
                         </thead>
@@ -44,20 +44,20 @@
                         
                             <tr class="gradeA" >
                                 <td>
-                                pelon
+                                RIC_N19_005
                                 </td>
                                 <td>
-                                pelon
+                                Equipo vertical
                                 </td>
                                 <td>
-                                pelon
+                                Nuevo
                                 </td>
                                 <td>
-                                    pelon
+                                LM
                                 </td>
                                 <td>
-                                    <a href="#" class="btn btn-outline-light">
-                                        <i class="fa fa-eye"></i>
+                                    <a href="{{route('comercializacion.reports.create')}}" class="btn btn-outline-light">
+                                        <i class="fa fa-plus"></i>
                                     </a>
                                 </td>
                             </tr>

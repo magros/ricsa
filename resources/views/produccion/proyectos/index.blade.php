@@ -1,11 +1,11 @@
 @extends('layouts.admin.layout')
 
 @section('meta_title')
-    Proyectos
+    Proyectos produccion
 @endsection
 
 @section('page_title')
-    Proyectos
+    Proyectos produccion
 @endsection
 
 @section('meta_extra')
@@ -21,7 +21,7 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Proyectos en sistema</h5>
+                    <h5>Proyectos produccion en sistema</h5>
                     <div class="ibox-tools">
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
@@ -33,10 +33,9 @@
                     <table class="table table-striped table-dark table-hover dataTables-users" >
                         <thead class="thead-dark">
                         <tr>
-                            <th>Descipcion</th>
-                            <th>Especificación</th>
                             <th>RIC</th>
-                            <th>Proyecto</th>
+                            <th>Equipo</th>
+                            <th>Estatus</th>
                             <th>Acciones</th>
                         </tr>
                         </thead>
@@ -44,19 +43,16 @@
                         
                             <tr class="gradeA" >
                                 <td>
-                                pelon
+                                RIC_N19_005
                                 </td>
                                 <td>
-                                pelon
+                                Equipo Vertical
                                 </td>
                                 <td>
-                                pelon
+                                Nuevo
                                 </td>
                                 <td>
-                                    pelon
-                                </td>
-                                <td>
-                                    <a href="#" class="btn btn-outline-light">
+                                    <a href="{{route('produccion.proyect.create')}}" class="btn btn-outline-light">
                                         <i class="fa fa-eye"></i>
                                     </a>
                                 </td>

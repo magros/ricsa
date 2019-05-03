@@ -59,7 +59,7 @@
                                     {{$proyect->status}}
                                 </td>
                                 <td>
-                                    <a href="#" class="btn btn-outline-light">
+                                    <a href="{{route('almacen.proyect.edit',[$proyect->id])}}" class="btn btn-outline-light">
                                         <i class="fa fa-eye"></i>
                                     </a>
                                 </td>

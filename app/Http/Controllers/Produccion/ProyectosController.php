@@ -16,8 +16,8 @@ class ProyectosController extends Controller
     {
         $data = [
             // 'prices' => Ric::all(),
-            'tab' => 'warehouse',
-            'subtab' => 'materials',
+            'tab' => 'produccion',
+            'subtab' => 'prodproyectos',
         ];
         return view('produccion.proyectos.index')->with($data);
     }
@@ -29,7 +29,7 @@ class ProyectosController extends Controller
      */
     public function create()
     {
-        //
+        return view('produccion.proyectos.createoredit');
     }
 
     /**

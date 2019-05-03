@@ -15,8 +15,8 @@ class ReportesController extends Controller
     public function index()
     {
         $data = [
-            'tab' => 'warehouse',
-            'subtab' => 'materials',
+            'tab' => 'comercializacion',
+            'subtab' => 'comerreporte',
         ];
         return view('comercializacion.reportes.index')->with($data);
     }
@@ -28,7 +28,7 @@ class ReportesController extends Controller
      */
     public function create()
     {
-        //
+        return view('comercializacion.reportes.reporteric');
     }
 
     /**

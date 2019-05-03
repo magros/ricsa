@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Almacen;
 
 use App\Material;
+use App\Inventory;
 use App\MaterialType;
 use App\Libraries\Helpers;
 use Illuminate\Http\Request;
@@ -19,6 +20,7 @@ class SalidaController extends Controller
     {
         $data = [
             'materials' => Material::all(),
+            'inventories' => Inventory::all(),
             'tab' => 'warehouse',
             'subtab' => 'exitmaterials',
         ];

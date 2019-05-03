@@ -33,10 +33,10 @@
                     <table class="table table-striped table-dark table-hover dataTables-users" >
                         <thead class="thead-dark">
                         <tr>
-                            <th>Descipcion</th>
-                            <th>Especificación</th>
                             <th>RIC</th>
-                            <th>Proyecto</th>
+                            <th>Equipo</th>
+                            <th>Cantidad</th>
+                            <th>Estatus</th>
                             <th>Acciones</th>
                         </tr>
                         </thead>
@@ -44,16 +44,16 @@
                         
                             <tr class="gradeA" >
                                 <td>
-                                pelon
+                                RIC_N19_003
                                 </td>
                                 <td>
-                                pelon
+                                Equipo horizontal
                                 </td>
                                 <td>
-                                pelon
+                                9
                                 </td>
                                 <td>
-                                    pelon
+                                    Cuarentena
                                 </td>
                                 <td>
                                     <a href="#" class="btn btn-outline-light">

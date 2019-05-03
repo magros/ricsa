@@ -140,17 +140,17 @@
                         </ul>
                     </li>
                     {{-- Calidad --}}
-                    <li class="{{isset($tab)&&$tab=='price'?'active':''}} w-100">
+                    <li class="{{isset($tab)&&$tab=='calidad'?'active':''}} w-100">
                         <a href="#"><i class="fa fa-cogs "></i> <span class="nav-label">Calidad</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li class="{{isset($subtab)&&$subtab=='dollars'?'active':''}}">
-                                <a href="#">Validacion</a>
+                            <li class="{{isset($subtab)&&$subtab=='calivalidacion'?'active':''}}">
+                                <a href="{{route('calidad.validation')}}">Validacion</a>
                             </li>
-                            <li class="{{isset($subtab)&&$subtab=='metals'?'active':''}}">
-                                <a href="#">Personal</a>
+                            <li class="{{isset($subtab)&&$subtab=='calipersonal'?'active':''}}">
+                                <a href="{{route('calidad.personal')}}">Personal</a>
                             </li>
-                            <li class="{{isset($subtab)&&$subtab=='reports'?'active':''}}">
-                                <a href="#">Reportes</a>
+                            <li class="{{isset($subtab)&&$subtab=='calireporte'?'active':''}}">
+                                <a href="{{route('calidad.report')}}">Reportes</a>
                             </li>
                         </ul>
                     </li>
@@ -191,28 +191,28 @@
                         </ul>
                     </li>
                     {{-- Produccion --}}
-                    <li class="{{isset($tab)&&$tab=='price'?'active':''}} w-100">
+                    <li class="{{isset($tab)&&$tab=='produccion'?'active':''}} w-100">
                         <a href="#"><i class="fa fa-cogs "></i> <span class="nav-label">Produccion</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li class="{{isset($subtab)&&$subtab=='dollars'?'active':''}}">
+                            <li class="{{isset($subtab)&&$subtab=='produccionsub'?'active':''}}">
                                 <a href="{{route('produccion.production')}}">Produccion</a>
                             </li>
-                            <li class="{{isset($subtab)&&$subtab=='reports'?'active':''}}">
+                            <li class="{{isset($subtab)&&$subtab=='prodproyectos'?'active':''}}">
                                 <a href="{{route('produccion.proyect')}}">Proyectos</a>
                             </li>
-                            <li class="{{isset($subtab)&&$subtab=='reports'?'active':''}}">
+                            <li class="{{isset($subtab)&&$subtab=='prodpersonal'?'active':''}}">
                                 <a href="{{route('produccion.personal')}}">Personal</a>
                             </li>
                         </ul>
                     </li>
                     {{-- Comercializacion --}}
-                    <li class="{{isset($tab)&&$tab=='price'?'active':''}} w-100">
+                    <li class="{{isset($tab)&&$tab=='comercializacion'?'active':''}} w-100">
                         <a href="#"><i class="fa fa-cogs "></i> <span class="nav-label">Comercializacion</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li class="{{isset($subtab)&&$subtab=='dollars'?'active':''}}">
+                            <li class="{{isset($subtab)&&$subtab=='comerprecio'?'active':''}}">
                                 <a href="{{route('comercializacion.price')}}">Precios</a>
                             </li>
-                            <li class="{{isset($subtab)&&$subtab=='reports'?'active':''}}">
+                            <li class="{{isset($subtab)&&$subtab=='comerreporte'?'active':''}}">
                                 <a href="{{route('comercializacion.report')}}">Reportes</a>
                             </li>
                         </ul>

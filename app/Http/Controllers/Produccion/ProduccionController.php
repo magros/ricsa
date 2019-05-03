@@ -16,8 +16,8 @@ class ProduccionController extends Controller
     {
         $data = [
             // 'prices' => Ric::all(),
-            'tab' => 'warehouse',
-            'subtab' => 'materials',
+            'tab' => 'produccion',
+            'subtab' => 'produccionsub',
         ];
         return view('produccion.produccion.index')->with($data);
     }
