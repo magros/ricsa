@@ -19,6 +19,13 @@ class CreateCustomersTable extends Migration
             $table->string('company');
             $table->string('email');
             $table->string('phone');
+            $table->string('business_name');
+            $table->string('rfc');
+            $table->string('delivery_conditions');
+            $table->string('payment_conditions');
+            $table->string('country');
+            $table->string('state');
+            $table->string('city');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -158,9 +158,6 @@
                     <li class="{{isset($tab)&&$tab=='compras'?'active':''}} w-100">
                         <a href="#"><i class="fa fa-cogs "></i> <span class="nav-label">Compras</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li class="{{isset($subtab)&&$subtab=='compra'?'active':''}}">
-                                <a href="{{route('compras.shopping')}}">Compras</a>
-                            </li>
                             <li class="{{isset($subtab)&&$subtab=='listmat'?'active':''}}">
                                 <a href="{{route('compras.listmaterial')}}">Lista de materiales</a>
                             </li>
@@ -194,9 +191,6 @@
                     <li class="{{isset($tab)&&$tab=='produccion'?'active':''}} w-100">
                         <a href="#"><i class="fa fa-cogs "></i> <span class="nav-label">Produccion</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li class="{{isset($subtab)&&$subtab=='produccionsub'?'active':''}}">
-                                <a href="{{route('produccion.production')}}">Produccion</a>
-                            </li>
                             <li class="{{isset($subtab)&&$subtab=='prodproyectos'?'active':''}}">
                                 <a href="{{route('produccion.proyect')}}">Proyectos</a>
                             </li>

@@ -11,7 +11,7 @@ class Customer extends Model
     use SoftDeletes;
     protected $dates = ['deleted_at'];
     protected $fillable = [
-        'name', 'company', 'email','phone'
+        'name', 'company', 'email','phone','business_name','rfc','delivery_conditions','payment_conditions','country','state','city'
     ];
 
     public function rics()

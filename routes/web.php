@@ -53,6 +53,8 @@ Route::prefix('cotizacion')->group(function(){
         Route::post('consumibles','MaterialController@consumibles')->name('consumibles');
         Route::DELETE('delet/consumible/{id}','MaterialController@deleteConsumible');
 
+        Route::get('notificaciones','MaterialController@notificaciones')->name('notificaciones');
+
 
         Route::get('rics', ['as'=>'rics', 'uses'=>'CotizacionCotroller@rics']);
 
@@ -177,15 +179,6 @@ Route::prefix('compras')->group(function(){
     Route::middleware(['compras'])->name('compras.')->namespace('Compras')->group(function()
     {
 
-        // Route::resource('proyects','ProyectoController');
-        Route::get('/', 'ComprasController@index');
-        Route::get('compras','ComprasController@index')->name('shopping');
-        Route::get('compras/create','ComprasController@create')->name('shopping.create');
-        Route::post('compras/save','ComprasController@store')->name('shopping.save');
-        Route::get('compras/{id}','ComprasController@edit')->name('shopping.edit');
-        Route::patch('compras/update/{id}','ComprasController@update')->name('shopping.update');
-        Route::DELETE('compras/delet/{id}','ComprasController@destroy');
-
         Route::get('/', 'ListaMaterialesController@index');
         Route::get('listamateriales','ListaMaterialesController@index')->name('listmaterial');
         Route::get('listamateriales/create','ListaMaterialesController@create')->name('listmaterial.create');
@@ -258,14 +251,6 @@ Route::prefix('produccion')->group(function(){
     {
 
         // Route::resource('proyects','ProyectoController');
-        Route::get('/', 'ProduccionController@index');
-        Route::get('produccion','ProduccionController@index')->name('production');
-        Route::get('produccion/create','ProduccionController@create')->name('production.create');
-        Route::post('produccion/save','ProduccionController@store')->name('production.save');
-        Route::get('produccion/{id}','ProduccionController@edit')->name('production.edit');
-        Route::patch('produccion/update/{id}','ProduccionController@update')->name('production.update');
-        Route::DELETE('produccion/delet/{id}','ProduccionController@destroy');
-
         Route::get('/', 'ProyectosController@index');
         Route::get('proyectos','ProyectosController@index')->name('proyect');
         Route::get('proyectos/create','ProyectosController@create')->name('proyect.create');

@@ -29,7 +29,7 @@ class ListaConsumiblesController extends Controller
      */
     public function create()
     {
-        //
+        return view('compras.listaConsumibles.createoredit');
     }
 
     /**

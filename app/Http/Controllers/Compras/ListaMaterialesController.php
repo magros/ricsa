@@ -29,7 +29,7 @@ class ListaMaterialesController extends Controller
      */
     public function create()
     {
-        //
+        return view('compras.listaMateriales.createoredit');
     }
 
     /**

@@ -2,14 +2,20 @@
 
 namespace App\Http\Controllers\Cotizacion;
 
+use App\User;
 use App\Manpower;
 use App\Material;
 use App\Consumable;
 use App\MaterialType;
 use App\Libraries\Helpers;
 use App\MaterialQuotation;
+use App\Mail\Notifications;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Redirect;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class MaterialController extends Controller
 {
@@ -286,5 +292,29 @@ class MaterialController extends Controller
             return response()->json($material->delete());
         }
         return abort(500);
+    }
+
+    public function notificaciones(){
+        // return $pdf = PDF::loadView('pdfs.propuesta')->save(public_path().'/path/my_stored_file.pdf');
+        // dd(public_path());
+        // $pdf->save('pdfs/my_stored_file.pdf');
+        // return $pdf->stream();
+        try{
+            User::chunk(2,function($users){
+                foreach($users as $a){
+                    Mail::send('emails.notifications', ['user'=> $a], function ($message) use ($a){
+                        $message->from('notificaciones@ricsa.com','Notificaciones');
+                        $message->to($a->email, $a->name)->subject('Se a terminado de cotizar una propuesta');
+                    });
+                }
+            });
+            return redirect()->route('cotizacion.index')->with('alert',Helpers::alertData('success','','saveSuccess'));
+
+        } catch(\Exception $e){
+            Log::error('Ocurrió un error al agregar comentario en ItemQuestionsController',[
+                'message' => $e->getMessage()
+            ]);
+            return redirect()->back()->with('alert',Helpers::alertData('warning','','saveError'));
+        }
     }
 }
