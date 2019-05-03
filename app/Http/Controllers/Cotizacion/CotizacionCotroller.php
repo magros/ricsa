@@ -147,7 +147,10 @@ class CotizacionCotroller extends Controller
                 $peso_bruto = 0;
                 $total = 0;
                 $precio_kilo = 0;
-
+                $total_fabricacion = 0;
+                $precio_unitario_ric = 0;
+                $total_venta= 0;
+                $precio_venta = 0;
                 $pe = MaterialQuotation::where('ric_id',$id)->get();
                 foreach ($pe as $p ) {
                     $peso_neto = $peso_neto + $p->material->net_weight;
@@ -170,8 +173,10 @@ class CotizacionCotroller extends Controller
                     $horas = $horas + $m->hours;
                     $total_mo = $total_mo + $m->total;
                 }
-                $cadencia = $peso_neto_mo / $horas;
-                $total_precio = $total_mo/$peso_neto;
+                if($peso_neto_mo>0 && $horas && $total_mo>0 && $peso_neto > 0){
+                    $cadencia = $peso_neto_mo / $horas;
+                    $total_precio = $total_mo/$peso_neto;
+                }
 
                 $total_consumible = 0;
                 $precio_consumible = 0;
@@ -179,13 +184,17 @@ class CotizacionCotroller extends Controller
                 foreach ($consumibles as $con) {
                     $total_consumible = $total_consumible + $con->total;
                 }
+                if($total_consumible> 0 && $peso_neto>0 && $total_fabricacion>0){
                 $precio_consumible = $total_consumible/$peso_neto;
                 $total_fabricacion = $total + $total_mo + $total_consumible;
                 $precio_unitario_ric = $total_fabricacion/$peso_neto;
 
-                $total_venta = $total_fabricacion/(1-0.25);
-                $precio_venta = $total_venta/$peso_neto;
+                }
 
+                if($total_fabricacion > 0 && $total_venta>0 && $peso_neto>0){
+                    $total_venta = $total_fabricacion/(1-0.25);
+                    $precio_venta = $total_venta/$peso_neto;
+                }
         $data = [
             'cuerpo'=>MaterialQuotation::where('ric_id',$id)->where('name','cuerpo')->get(),
             'tapas'=>MaterialQuotation::where('ric_id',$id)->where('name','tapas')->get(),

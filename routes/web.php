@@ -53,6 +53,8 @@ Route::prefix('cotizacion')->group(function(){
         Route::post('consumibles','MaterialController@consumibles')->name('consumibles');
         Route::DELETE('delet/consumible/{id}','MaterialController@deleteConsumible');
 
+        Route::get('notificaciones','MaterialController@notificaciones')->name('notificaciones');
+
 
         Route::get('rics', ['as'=>'rics', 'uses'=>'CotizacionCotroller@rics']);
 

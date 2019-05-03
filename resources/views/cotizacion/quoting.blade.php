@@ -1752,7 +1752,9 @@
         </div>
     </div>
     <div>
-        <button id="adicionar" class="btn btn-lg btn-primary pull-right m-t-n-xs" type="button"><strong>Terminar</strong></button>
+        <a href="{{route('cotizacion.notificaciones')}}" class="btn btn-lg btn-primary pull-right m-t-n-xs">
+            <strong>Terminar</strong>
+        </a>{{-- <button id="adicionar" class="btn btn-lg btn-primary pull-right m-t-n-xs" type="button"><strong>Terminar</strong></button> --}}
     </div>
 </div>
 @endsection

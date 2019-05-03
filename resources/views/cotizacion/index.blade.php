@@ -76,7 +76,7 @@
                                         <i class="fa fa-trash"></i>
                                     </a>
                                     @if($ric->complexity > 1 && $ric->status ==1)
-                                        <a href="#" class="btn btn-outline-light delete" data-id="{{$ric->id}}">
+                                        <a href="#" class="btn btn-outline-light update" data-id="{{$ric->id}}">
                                             PMO
                                         </a>
                                     @endif

@@ -44,9 +44,9 @@
                                 ]) !!}
                             @endif
                                 <div class="form-group">
-                                    <label for="name">Nombre</label>
+                                    <label for="name">Contato</label>
                                     {!! Form::text('name',old('name'),[
-                            			'class'=>'form-control','placeholder'=>'Nombre',
+                            			'class'=>'form-control','placeholder'=>'Contato',
                             			 'autocomplete'=>'off', 'id' => 'name',
                             			 'data-required-error' => 'Este campo es obligatorio',
                             			 'required' => '', 'maxlength' => '100'
@@ -82,6 +82,76 @@
                             			'class'=>'form-control','placeholder'=>'Teléfono',
                             			'required'=>'', 'autocomplete'=>'off', 'id' => 'phone',
                             			'data-required-error' => 'Este campo es obligatorio', 'maxlength' => '15'
+                            		]) !!}
+                                    <div class="help-block with-errors"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="business_name">Razon social</label>
+                                    {!! Form::text('business_name',old('business_name'),[
+                            			'class'=>'form-control','placeholder'=>'Razon social',
+                            			'required'=>'', 'autocomplete'=>'off', 'id' => 'business_name',
+                            			'data-required-error' => 'Este campo es obligatorio','maxlength' => '100'
+                            		]) !!}
+                                    <div class="help-block with-errors"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="rfc">RFC</label>
+                                    {!! Form::text('rfc',old('rfc'),[
+                            			'class'=>'form-control','placeholder'=>'RFC',
+                            			'required'=>'', 'autocomplete'=>'off', 'id' => 'rfc',
+                            			'data-required-error' => 'Este campo es obligatorio','maxlength' => '100'
+                            		]) !!}
+                                    <div class="help-block with-errors"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="delivery_conditions">Condiciones de entrega</label>
+                                    {!! Form::text('delivery_conditions',old('delivery_conditions'),[
+                            			'class'=>'form-control','placeholder'=>'Condiciones de entrega',
+                            			'required'=>'', 'autocomplete'=>'off', 'id' => 'delivery_conditions',
+                            			'data-required-error' => 'Este campo es obligatorio','maxlength' => '100'
+                            		]) !!}
+                                    <div class="help-block with-errors"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="payment_conditions">Condiciones de pago</label>
+                                    {!! Form::text('payment_conditions',old('payment_conditions'),[
+                            			'class'=>'form-control','placeholder'=>'Condiciones de pago',
+                            			'required'=>'', 'autocomplete'=>'off', 'id' => 'payment_conditions',
+                            			'data-required-error' => 'Este campo es obligatorio','maxlength' => '100'
+                            		]) !!}
+                                    <div class="help-block with-errors"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="country">Pais</label>
+                                    {!! Form::text('country',old('country'),[
+                            			'class'=>'form-control','placeholder'=>'Pais',
+                            			'required'=>'', 'autocomplete'=>'off', 'id' => 'country',
+                            			'data-required-error' => 'Este campo es obligatorio','maxlength' => '100'
+                            		]) !!}
+                                    <div class="help-block with-errors"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="state">Estado</label>
+                                    {!! Form::text('state',old('state'),[
+                            			'class'=>'form-control','placeholder'=>'Estado',
+                            			'required'=>'', 'autocomplete'=>'off', 'id' => 'state',
+                            			'data-required-error' => 'Este campo es obligatorio','maxlength' => '100'
+                            		]) !!}
+                                    <div class="help-block with-errors"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="city">Ciudad</label>
+                                    {!! Form::text('city',old('city'),[
+                            			'class'=>'form-control','placeholder'=>'Condiciones de pago',
+                            			'required'=>'', 'autocomplete'=>'off', 'id' => 'city',
+                            			'data-required-error' => 'Este campo es obligatorio','maxlength' => '100'
                             		]) !!}
                                     <div class="help-block with-errors"></div>
                                 </div>

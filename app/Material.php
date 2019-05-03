@@ -22,4 +22,7 @@ class Material extends Model
     public function inventory(){
         return $this->hasMany(Inventory::class);
     }
+    public function materialEngineering(){
+        return $this->hasMany(MaterialEngieneering::class);
+    }
 }
