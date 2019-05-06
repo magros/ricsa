@@ -6,6 +6,7 @@ use App\Material;
 use App\Inventory;
 use App\MaterialType;
 use App\Libraries\Helpers;
+use App\MaterialEngineering;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -77,6 +78,17 @@ class MaterialController extends Controller
             'r_rc' => 'R',
             'material_type_id'=>$request->material_type_id
         ]);
+
+        // $engineering = MaterialEngineering::create([
+        //     'quantity'
+        //     'price'
+        //     'total'
+        //     'missing'
+        //     'material_id'
+        //     'inventory_id'
+        //     'ric_id'
+        // ]);
+
         $material->save();
         return redirect()->route('ingenieria.material.create')->with('alert', Helpers::alertData('success','','saveSuccess'));
     }

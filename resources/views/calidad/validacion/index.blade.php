@@ -9,11 +9,11 @@
 @endsection
 
 @section('meta_extra')
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="{{ csrf_token()}}">
 @stop
 
 @section('page_action')
-    
+
 @endsection
 
 @section('content')
@@ -21,7 +21,7 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Calidad Validacion en sistema</h5>
+                    <h5>Rics en sistema</h5>
                     <div class="ibox-tools">
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
@@ -40,27 +40,26 @@
                         </tr>
                         </thead>
                         <tbody>
-                        
-                            <tr class="gradeA" >
-                                <td>
-                                RIC_N19_005
-                                </td>
-                                <td>
-                                Equipo vertical
-                                </td>
-                                <td>
-                                En proceso
-                                </td>
-                                <td>
-                                    <a href="{{route('calidad.validation.create')}}" class="btn btn-outline-light">
-                                        <i class="fa fa-eye"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        
+                        @foreach($rics as $ric)
+                        <tr class="gradeA" id="item-{{$ric->id}}">
+                            <td>
+                                {{$ric->Nric}}
+                            </td>
+                            <td>
+                                {{$ric->name_proyect}}
+                            </td>
+                            <td>
+                                {{$ric->status}}
+                            </td>
+                            <td>
+                                <a href="{{route('calidad.validation.create')}}" class="btn btn-outline-light">
+                                    <i class="fa fa-eye"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        @endforeach
                         </tbody>
                     </table>
-
                 </div>
             </div>
         </div>
@@ -130,8 +129,6 @@
                 .fail(function() {
                     console.log(data);
                 });
-
-
         });
 
     });

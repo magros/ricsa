@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Calidad;
 
+use App\Ric;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -15,7 +16,7 @@ class ValidacionController extends Controller
     public function index()
     {
         $data = [
-            // 'prices' => Ric::all(),
+            'rics' => Ric::all(),
             'tab' => 'calidad',
             'subtab' => 'calivalidacion',
         ];

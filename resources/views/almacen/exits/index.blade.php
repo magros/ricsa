@@ -1,38 +1,15 @@
 @extends('layouts.admin.layout')
-
-
-
 @section('meta_title')
 Salida de material
 @endsection
-
-
-
-
-
 @section('page_title')
 Salida de material
 @endsection
-
-
-
-
-
 @section('meta_extra')
 <meta name="csrf-token" content="{{ csrf_token() }}">
-
-
 @stop
-
-
-
 @section('page_action')
 @endsection
-
-
-
-
-
 @section('content')
 <div class="row">
     <div class="col-lg-12">
@@ -324,7 +301,7 @@ Salida de material
                 var formData = new FormData();
                 formData.append('material_id', $("#material_id").val());
                 formData.append('cantidad', $("#quantity").val());
-                formData.append('id_ric','{{$ric}}');
+
                 formData.append('peso',$('#gross_weight').val());
                 formData.append('price',$('#price').val());
                 formData.append('name','cuerpo');
