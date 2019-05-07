@@ -32,7 +32,7 @@ Route::prefix('admin')->group(function(){
 });
 
 Route::prefix('cotizacion')->group(function(){
-    Route::middleware(['auth', 'role:super-administrador, cotizador'])->name('cotizacion.')->namespace('Cotizacion')->group(function()
+    Route::middleware(['cotizador'])->name('cotizacion.')->namespace('Cotizacion')->group(function()
     {
         Route::get('/', 'CotizacionCotroller@index');
         Route::get('propuestas', 'CotizacionCotroller@proyectos')->name('index');
