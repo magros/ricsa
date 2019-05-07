@@ -29,7 +29,7 @@
 </head>
 
 <body>
-
+<div id="app">
     <div id="wrapper" class="back-dash">
 
         <nav class="navbar-default navbar-static-side" role="navigation">
@@ -288,6 +288,7 @@
 
         </div>
         </div>
+</div>
 
     <!-- Mainly scripts -->
     {!! HTML::script('static/bower_components/jquery/dist/jquery.min.js') !!}
@@ -315,6 +316,9 @@
 
         });
     </script>
+
+    <script src="{{ elixir('js/app.js') }}"></script>
+
     {{-- <script type="text/javascript">
         $(document).ready(function() {
             $('#data-spanish').DataTable( {
