@@ -67,7 +67,9 @@
                         @endforeach
                         </tbody>
                     </table>
-
+                    <div class="text-center">
+                        {{ $clients->links() }}
+                    </div>
                 </div>
             </div>
         </div>
@@ -105,16 +107,9 @@
 @endsection
 
 @push('scripts')
-    {!! HTML::script('static/admin/js/plugins/dataTables/jquery.dataTables.js') !!}
-    {!! HTML::script('static/admin/js/plugins/dataTables/dataTables.bootstrap.js') !!}
-    {!! HTML::script('static/admin/js/plugins/dataTables/dataTables.responsive.js') !!}
-    {!! HTML::script('static/admin/js/plugins/dataTables/dataTables.tableTools.min.js') !!}
+
 <script type="text/javascript">
     $(function(){
-        $('.dataTables-users').dataTable({
-            responsive: true,
-        });
-
         $(".delete").click(function(event) {
             event.preventDefault();
             var id = $(this).data('id');
@@ -129,17 +124,13 @@
                 url: '{{url('cotizacion/cliente/delet')}}/'+id,
                 type: 'DELETE',
                 dataType: 'json',
-            })
-                .done(function(data) {
-                    $("#item-"+id).remove();
-                    $("#delete-modal").modal('hide');
-                    toastr.success('Se ha eliminado la información correctamente');
-                })
-                .fail(function() {
-                    console.log(data);
-                });
-
-
+            }).done(function(data) {
+                $("#item-"+id).remove();
+                $("#delete-modal").modal('hide');
+                toastr.success('Se ha eliminado la información correctamente');
+            }).fail(function() {
+                console.log(data);
+            });
         });
 
     });

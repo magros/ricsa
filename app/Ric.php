@@ -45,4 +45,27 @@ class Ric extends Model
         if(!is_null($complexity)) return $q->where('complexity',$complexity);
     }
 
+    public function getComplexityNameAttribute()
+    {
+        $complexity = $this->complexity;
+
+        switch ($complexity){
+            case 1:
+                return 'Baja Complejidad';
+            case 2;
+                return 'Mediana Complejidad';
+            case 3:
+                return 'Alta Complejidad';
+            default:
+                throw new \Exception("Invalid complexity: {$complexity}");
+        }
+    }
+
+    public function getStatusNameAttribute()
+    {
+        if($this->status == 1 || $this->status == 2 )
+            return 'Propuesta';
+        return 'Ric';
+    }
+
 }

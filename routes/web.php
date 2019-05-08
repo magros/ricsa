@@ -61,8 +61,8 @@ Route::prefix('cotizacion')->group(function(){
         Route::get('cliente','ClientController@index')->name('client');
         Route::get('cliente/create','ClientController@create')->name('client.alta');
         Route::post('cliente/save','ClientController@store')->name('client.save');
-        Route::get('cliente/{id}','ClientController@edit')->name('client.edit');
-        Route::patch('cliente/update/{id}','ClientController@update')->name('client.update');
+        Route::get('cliente/{client}/edit','ClientController@edit')->name('client.edit');
+        Route::patch('cliente/{client}/update','ClientController@update')->name('client.update');
         Route::DELETE('cliente/delet/{id}','ClientController@destroy');
 
     });

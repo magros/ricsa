@@ -30,7 +30,7 @@
                 </div>
                 <div class="ibox-content">
 
-                    <table class="table table-striped table-hover table-dark dataTables-users" >
+                    <table class="table table-striped table-hover table-dark" >
                         <thead class="thead-dark">
                         <tr>
                             <th>Nombre</th>
@@ -50,23 +50,10 @@
                                     {{$ric->customer->company}}
                                 </td>
                                 <td>
-                                    @if($ric->complexity == 1)
-                                        Baja Complejidad
-                                    @endif
-                                    @if($ric->complexity == 2)
-                                        Mediana Complejidad
-                                    @endif
-                                    @if($ric->complexity == 3)
-                                        Alta Complejidad
-                                    @endif
+                                   {{ $ric->complexity_name }}
                                 </td>
                                 <td>
-                                    @if($ric->status == 1 || $ric->status == 2 )
-                                        Propuesta
-                                    @endif
-                                    @if($ric->status == 3)
-                                        Ric
-                                    @endif
+                                    {{ $ric->status_name }}
                                 </td>
                                 <td>
                                     {{-- <a href="{{route('cotizacion.client.edit',[$ric->id])}}" class="btn btn-outline-light">
@@ -90,7 +77,9 @@
                         @endforeach
                         </tbody>
                     </table>
-
+                    <div class="text-center">
+                        {{ $rics->links() }}
+                    </div>
                 </div>
             </div>
         </div>
@@ -154,15 +143,8 @@
 @endsection
 
 @push('scripts')
-    {!! HTML::script('static/admin/js/plugins/dataTables/jquery.dataTables.js') !!}
-    {!! HTML::script('static/admin/js/plugins/dataTables/dataTables.bootstrap.js') !!}
-    {!! HTML::script('static/admin/js/plugins/dataTables/dataTables.responsive.js') !!}
-    {!! HTML::script('static/admin/js/plugins/dataTables/dataTables.tableTools.min.js') !!}
 <script type="text/javascript">
     $(function(){
-        $('.dataTables-users').dataTable({
-            responsive: true,
-        });
         /*
         Modal de autorizar proyecto PMO
         */
@@ -180,17 +162,13 @@
                 url: '{{url('cotizacion/autorizar')}}/'+id,
                 type: 'POST',
                 dataType: 'json',
-            })
-                .done(function(data) {
-                    $("#update-modal").modal('hide');
-                    toastr.success('Se ha autorizado la propuesta correctamente');
-                    location.reload();
-                })
-                .fail(function() {
-                    console.log(data);
-                });
-
-
+            }).done(function(data) {
+                $("#update-modal").modal('hide');
+                toastr.success('Se ha autorizado la propuesta correctamente');
+                location.reload();
+            }).fail(function() {
+                console.log(data);
+            });
         });
 
         /*

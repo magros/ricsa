@@ -133,13 +133,11 @@ class CotizacionCotroller extends Controller
         return abort(500);
     }
 
-    public function proyectos(){
-        $data = [
-            'rics' => Ric::all(),
-            'tab' => 'quotation',
-            'subtab' => 'quotations'
-        ];
-        return view('cotizacion.index')->with($data);
+    public function proyectos()
+    {
+        $rics = Ric::latest()->paginate(10);
+
+        return view('cotizacion.index', compact('rics'));
     }
 
     public function cotizador($id){

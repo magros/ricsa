@@ -17,12 +17,9 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $data = [
-            'clients' => Customer::all(),
-            'tab' => 'quotation',
-            'subtab' => 'clients'
-        ];
-        return view('cotizacion.clients.index')->with($data);
+        $clients = Customer::latest()->paginate(10);
+
+        return view('cotizacion.clients.index', compact('clients'));
     }
 
     /**
@@ -39,13 +36,7 @@ class ClientController extends Controller
         return view('cotizacion.clients.createoredit')->with($data);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    private function validateCreateOrSave(Request $request)
     {
         $request->validate([
             'email' => 'required|unique:users,email',
@@ -59,25 +50,22 @@ class ClientController extends Controller
             'state' => 'required',
             'city' => 'required',
             'business_name' => 'required'
+        ]);
+    }
 
-         ]);
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $this->validateCreateOrSave($request);
 
-        $client = Customer::create([
-            'name' => $request->name,
-            'company' => $request->company,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'rfc' => $request->phone,
-            'delivery_conditions' => $request->delivery_conditions,
-            'payment_conditions' => $request->payment_conditions,
-            'country' => $request->country,
-            'state' => $request->state,
-            'city' => $request->city,
-            'business_name' => $request->business_name
-         ]);
+        Customer::create($request->all());
 
-         return redirect()->route('cotizacion.client.alta')->with('alert',Helpers::alertData('success','','saveSuccess'));
-
+        return redirect()->route('cotizacion.client.alta')->with('alert',Helpers::alertData('success','','saveSuccess'));
     }
 
     /**
@@ -94,55 +82,25 @@ class ClientController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param Customer $client
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Customer $client)
     {
-        $data = [
-            'client' => Customer::find($id),
-            'tab' => 'quotation',
-            'subtab' => 'clients'
-        ];
-        return view('cotizacion.clients.createoredit')->with($data);
+        return view('cotizacion.clients.createoredit', compact('client'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param Customer $client
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Customer $client)
     {
-        $request->validate([
-            'email' => 'required|unique:users,email',
-            'name'=> 'required',
-            'company' => 'required',
-            'phone' => 'required',
-            'rfc' => 'required',
-            'delivery_conditions' => 'required',
-            'payment_conditions' => 'required',
-            'country' => 'required',
-            'state' => 'required',
-            'city' => 'required',
-            'business_name' => 'required'
-         ]);
-         $user = Customer::find($id);
-         $user->update([
-             'name' => $request->get('name'),
-             'company' => $request->get('company'),
-             'email' => $request->get('email'),
-             'phone' => $request->get('phone'),
-             'rfc' => $request->get('rfc'),
-             'delivery_conditions' => $request->get('delivery_conditions'),
-             'payment_conditions' => $request->get('payment_conditions'),
-             'country' => $request->get('country'),
-             'state' => $request->get('state'),
-             'city' => $request->get('city'),
-             'business_name' => $request->get('business_name')
-         ]);
+        $client->update($request->all());
+
         return redirect()->back()->with('alert',Helpers::alertData('success','','saveSuccess'));
     }
 
