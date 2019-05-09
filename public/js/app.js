@@ -1754,6 +1754,329 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/MaterialPricingComponent.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/MaterialPricingComponent.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "MaterialPricingComponent.vue",
+  props: ['materials', 'ricId'],
+  data: function data() {
+    return {};
+  },
+  methods: {
+    recalculateMaterialPricing: function recalculateMaterialPricing() {
+      console.log('calculating new pricing');
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/MaterialQuotingComponent.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/MaterialQuotingComponent.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "MaterialQuotingComponent.vue",
+  props: ['materials', 'ricId', 'typeQuoting'],
+  data: function data() {
+    return {
+      material: {
+        id: ''
+      },
+      materialLists: []
+    };
+  },
+  methods: {
+    getMaterialDetails: function getMaterialDetails() {
+      var _this = this;
+
+      var url = "/cotizacion/material/".concat(this.material.id);
+      window.axios.get(url).then(function (response) {
+        _this.material = response.data;
+      });
+    },
+    addMaterial: function addMaterial() {
+      var _this2 = this;
+
+      var url = "/cotizacion/list/material-v2";
+      window.axios.post(url, Object.assign(this.material, {
+        ricId: this.ricId,
+        name: this.typeQuoting
+      })).then(function (response) {
+        _this2.materialLists = response.data.material;
+        _this2.material = {
+          id: ''
+        };
+
+        _this2.$parent.recalculateMaterialPricing();
+      });
+    },
+    getRic: function getRic() {
+      var _this3 = this;
+
+      var url = "/cotizacion/list/material-v2";
+      window.axios.post(url, Object.assign(this.material, {
+        ricId: this.ricId,
+        name: this.typeQuoting
+      })).then(function (response) {
+        _this3.materialLists = response.data.material;
+        _this3.material = {
+          id: ''
+        };
+      });
+    }
+  },
+  mounted: function mounted() {
+    var _this4 = this;
+
+    var url = "/cotizacion/".concat(this.ricId, "/materials?type=").concat(this.typeQuoting);
+    window.axios.get(url).then(function (response) {
+      console.log(response);
+      _this4.materialLists = response.data;
+    });
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/QuotingComponent.vue?vue&type=script&lang=js&":
 /*!***************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/QuotingComponent.vue?vue&type=script&lang=js& ***!
@@ -1767,8 +2090,90 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "QuotingComponent.vue"
+  name: "QuotingComponent.vue",
+  props: ['materials', 'ricId'],
+  data: function data() {
+    return {
+      total: '',
+      priceKg: '',
+      weightRaw: '',
+      weight: ''
+    };
+  },
+  methods: {
+    recalculateMaterialPricing: function recalculateMaterialPricing() {
+      var _this = this;
+
+      var url = "/cotizacion/".concat(this.ricId, "/calculate-pricing");
+      window.axios.get(url).then(function (response) {
+        _this.total = response.data.total;
+        _this.priceKg = response.data.precio_kilo;
+        _this.weightRaw = response.data.peso_burto;
+        _this.weight = response.data.peso_neto;
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.recalculateMaterialPricing();
+  }
 });
 
 /***/ }),
@@ -22002,6 +22407,601 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/MaterialPricingComponent.vue?vue&type=template&id=a76070ee&scoped=true&":
+/*!***************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/MaterialPricingComponent.vue?vue&type=template&id=a76070ee&scoped=true& ***!
+  \***************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div")
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/MaterialQuotingComponent.vue?vue&type=template&id=18b86414&scoped=true&":
+/*!***************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/MaterialQuotingComponent.vue?vue&type=template&id=18b86414&scoped=true& ***!
+  \***************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "col-lg-12" }, [
+    _c("div", { staticClass: "ibox float-e-margins" }, [
+      _c("div", { staticClass: "ibox-title" }, [
+        _c("h5", { staticStyle: { "text-transform": "uppercase" } }, [
+          _vm._v(_vm._s(_vm.typeQuoting))
+        ]),
+        _vm._v(" "),
+        _vm._m(0)
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "ibox-content" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("form", { attrs: { "data-toggle": "validator" } }, [
+            _c("div", { staticClass: "col-sm-3" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "material_id" } }, [
+                  _vm._v("Descripcion:")
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "clearfix" }),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.material.id,
+                        expression: "material.id"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      id: "material_id",
+                      "data-required-error": "Este campo es obligatorio"
+                    },
+                    on: {
+                      change: [
+                        function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.material,
+                            "id",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        },
+                        _vm.getMaterialDetails
+                      ]
+                    }
+                  },
+                  [
+                    _c(
+                      "option",
+                      { attrs: { disabled: "", selected: "", value: "" } },
+                      [_vm._v("Selecciona")]
+                    ),
+                    _vm._v(" "),
+                    _vm._l(_vm.materials, function(item, index) {
+                      return _c("option", { domProps: { value: index } }, [
+                        _vm._v(_vm._s(item))
+                      ])
+                    })
+                  ],
+                  2
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "help-block with-errors" })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm-3" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "specification" } }, [
+                  _vm._v("Especificación")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.material.specification,
+                      expression: "material.specification"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    id: "specification",
+                    name: "specification",
+                    placeholder: "Especificación",
+                    "data-required-error": "Este campo es obligatorio",
+                    maxlength: "100",
+                    disabled: ""
+                  },
+                  domProps: { value: _vm.material.specification },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.material,
+                        "specification",
+                        $event.target.value
+                      )
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "help-block with-errors" })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm-3" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "quantity" } }, [
+                  _vm._v("cantidad:")
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "clearfix" }),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.material.quantity,
+                      expression: "material.quantity"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    name: "quantity",
+                    id: "quantity",
+                    placeholder: "Especificación",
+                    "data-required-error": "Este campo es obligatorio",
+                    maxlength: "100"
+                  },
+                  domProps: { value: _vm.material.quantity },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.material, "quantity", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "help-block with-errors" })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm-3" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "thickness" } }, [
+                  _vm._v("Esp Pulg:")
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "clearfix" }),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.material.thickness,
+                      expression: "material.thickness"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    id: "thickness",
+                    name: "thickness",
+                    placeholder: "Especificación",
+                    "data-required-error": "Este campo es obligatorio",
+                    maxlength: "100",
+                    disabled: ""
+                  },
+                  domProps: { value: _vm.material.thickness },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.material, "thickness", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "help-block with-errors" })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm-3" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "dimension" } }, [
+                  _vm._v("Di mm:")
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "clearfix" }),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.material.dimension,
+                      expression: "material.dimension"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    id: "dimension",
+                    name: "dimension",
+                    placeholder: "Especificación",
+                    "data-required-error": "Este campo es obligatorio",
+                    maxlength: "100",
+                    disabled: ""
+                  },
+                  domProps: { value: _vm.material.dimension },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.material, "dimension", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "help-block with-errors" })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm-3" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "lenght" } }, [_vm._v("Long mm:")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "clearfix" }),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.material.lenght,
+                      expression: "material.lenght"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    id: "lenght",
+                    name: "lenght",
+                    placeholder: "Especificación",
+                    "data-required-error": "Este campo es obligatorio",
+                    maxlength: "100",
+                    disabled: ""
+                  },
+                  domProps: { value: _vm.material.lenght },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.material, "lenght", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "help-block with-errors" })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm-3" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "net_weight" } }, [
+                  _vm._v("Peso neto:")
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "clearfix" }),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.material.net_weight,
+                      expression: "material.net_weight"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    id: "net_weight",
+                    name: "net_weight",
+                    placeholder: "Especificación",
+                    "data-required-error": "Este campo es obligatorio",
+                    maxlength: "100",
+                    disabled: ""
+                  },
+                  domProps: { value: _vm.material.net_weight },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.material, "net_weight", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "help-block with-errors" })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm-3" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "gross_weight" } }, [
+                  _vm._v("Peso bruto:")
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "clearfix" }),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.material.gross_weight,
+                      expression: "material.gross_weight"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    id: "gross_weight",
+                    name: "gross_weight",
+                    placeholder: "Especificación",
+                    "data-required-error": "Este campo es obligatorio",
+                    maxlength: "100",
+                    disabled: ""
+                  },
+                  domProps: { value: _vm.material.gross_weight },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.material,
+                        "gross_weight",
+                        $event.target.value
+                      )
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "help-block with-errors" })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm-3" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "price" } }, [
+                  _vm._v("Precio unitario:")
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "clearfix" }),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.material.price,
+                      expression: "material.price"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    id: "price",
+                    name: "price",
+                    placeholder: "Especificación",
+                    "data-required-error": "Este campo es obligatorio",
+                    maxlength: "100",
+                    disabled: ""
+                  },
+                  domProps: { value: _vm.material.price },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.material, "price", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "help-block with-errors" })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm-9" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-lg btn-primary pull-right m-t-15",
+                  attrs: {
+                    id: "adicionar",
+                    disabled: _vm.material.id === "",
+                    type: "button"
+                  },
+                  on: { click: _vm.addMaterial }
+                },
+                [_c("strong", [_vm._v("Agregar material")])]
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _vm.materialLists.length
+          ? _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-sm-12" }, [
+                _c(
+                  "table",
+                  {
+                    staticClass: "table table-stripped table-dark table-hover"
+                  },
+                  [
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _c(
+                      "tbody",
+                      { attrs: { id: "contenido" } },
+                      _vm._l(_vm.materialLists, function(item) {
+                        return _c(
+                          "tr",
+                          {
+                            staticClass: "gradeA",
+                            attrs: { id: "item-cuerpo-" + _vm.material.id }
+                          },
+                          [
+                            _c("td", [
+                              _vm._v(_vm._s(item.material.description))
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(_vm._s(item.material.specification))
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(item.quantity))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(item.material.dimension))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(item.material.length))]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(_vm._s(item.material.net_weight))
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(_vm._s(item.material.gross_weight))
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(item.material.price))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(item.total))]),
+                            _vm._v(" "),
+                            _vm._m(2, true)
+                          ]
+                        )
+                      }),
+                      0
+                    )
+                  ]
+                )
+              ])
+            ])
+          : _vm._e()
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "ibox-tools" }, [
+      _c("a", { staticClass: "collapse-link" }, [
+        _c("i", { staticClass: "fa fa-chevron-up" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "thead-dark" }, [
+      _c("tr", [
+        _c("th", [_vm._v("Descripcion")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Especificacion Material")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("cantidad")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Di mm")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Long mm:")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Peso neto")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Peso bruto")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Precio unitario")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Total")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Acciones")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c("div", { staticClass: "btn btn-dark" }, [
+        _c("i", { staticClass: "fa fa-trash" })
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/QuotingComponent.vue?vue&type=template&id=456c5da2&scoped=true&":
 /*!*******************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/QuotingComponent.vue?vue&type=template&id=456c5da2&scoped=true& ***!
@@ -22017,7 +23017,149 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c(
+    "div",
+    [
+      _c("material-quoting-component", {
+        attrs: {
+          materials: _vm.materials,
+          "ric-id": _vm.ricId,
+          "type-quoting": "cuerpo"
+        }
+      }),
+      _vm._v(" "),
+      _c("material-quoting-component", {
+        attrs: {
+          materials: _vm.materials,
+          "ric-id": _vm.ricId,
+          "type-quoting": "tapas"
+        }
+      }),
+      _vm._v(" "),
+      _c("material-quoting-component", {
+        attrs: {
+          materials: _vm.materials,
+          "ric-id": _vm.ricId,
+          "type-quoting": "soporte"
+        }
+      }),
+      _vm._v(" "),
+      _c("material-quoting-component", {
+        attrs: {
+          materials: _vm.materials,
+          "ric-id": _vm.ricId,
+          "type-quoting": "escalera"
+        }
+      }),
+      _vm._v(" "),
+      _c("material-quoting-component", {
+        attrs: {
+          materials: _vm.materials,
+          "ric-id": _vm.ricId,
+          "type-quoting": "registro"
+        }
+      }),
+      _vm._v(" "),
+      _c("material-quoting-component", {
+        attrs: {
+          materials: _vm.materials,
+          "ric-id": _vm.ricId,
+          "type-quoting": "boquillas"
+        }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-lg-12 m-b-25" }, [
+        _c("div", { staticClass: "ibox float-e-margins" }, [
+          _c("div", { staticClass: "ibox-content" }, [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-sm-12" }, [
+                _c("div", { staticClass: "col-sm-2" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "peso_neto" } }, [
+                      _vm._v("Total peso neto")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        name: "peso_neto",
+                        id: "peso_neto",
+                        placeholder: "Total peso neto",
+                        disabled: ""
+                      },
+                      domProps: { value: _vm.weight }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-sm-2" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "peso_bruto" } }, [
+                      _vm._v("Total peso bruto")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        name: "peso_bruto",
+                        id: "peso_bruto",
+                        placeholder: "Total peso bruto",
+                        disabled: ""
+                      },
+                      domProps: { value: _vm.weightRaw }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-sm-2" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "precio_kilo" } }, [
+                      _vm._v("Precio por kilo")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        name: "precio_kilo",
+                        id: "precio_kilo",
+                        placeholder: "Precio por kilo",
+                        disabled: ""
+                      },
+                      domProps: { value: _vm.priceKg }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-sm-2" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "total_material" } }, [
+                      _vm._v("Total")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        name: "total_material",
+                        id: "total_material",
+                        placeholder: "Total",
+                        disabled: ""
+                      },
+                      domProps: { value: _vm.total }
+                    })
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -34188,6 +35330,8 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
 Vue.component('quoting-component', __webpack_require__(/*! ./components/QuotingComponent.vue */ "./resources/js/components/QuotingComponent.vue")["default"]);
+Vue.component('material-quoting-component', __webpack_require__(/*! ./components/MaterialQuotingComponent.vue */ "./resources/js/components/MaterialQuotingComponent.vue")["default"]);
+Vue.component('material-pricing-component', __webpack_require__(/*! ./components/MaterialPricingComponent.vue */ "./resources/js/components/MaterialPricingComponent.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -34253,6 +35397,144 @@ if (token) {
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/components/MaterialPricingComponent.vue":
+/*!**************************************************************!*\
+  !*** ./resources/js/components/MaterialPricingComponent.vue ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _MaterialPricingComponent_vue_vue_type_template_id_a76070ee_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MaterialPricingComponent.vue?vue&type=template&id=a76070ee&scoped=true& */ "./resources/js/components/MaterialPricingComponent.vue?vue&type=template&id=a76070ee&scoped=true&");
+/* harmony import */ var _MaterialPricingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MaterialPricingComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/MaterialPricingComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _MaterialPricingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _MaterialPricingComponent_vue_vue_type_template_id_a76070ee_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _MaterialPricingComponent_vue_vue_type_template_id_a76070ee_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "a76070ee",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/MaterialPricingComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/MaterialPricingComponent.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/MaterialPricingComponent.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MaterialPricingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./MaterialPricingComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/MaterialPricingComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MaterialPricingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/MaterialPricingComponent.vue?vue&type=template&id=a76070ee&scoped=true&":
+/*!*********************************************************************************************************!*\
+  !*** ./resources/js/components/MaterialPricingComponent.vue?vue&type=template&id=a76070ee&scoped=true& ***!
+  \*********************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MaterialPricingComponent_vue_vue_type_template_id_a76070ee_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./MaterialPricingComponent.vue?vue&type=template&id=a76070ee&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/MaterialPricingComponent.vue?vue&type=template&id=a76070ee&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MaterialPricingComponent_vue_vue_type_template_id_a76070ee_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MaterialPricingComponent_vue_vue_type_template_id_a76070ee_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/MaterialQuotingComponent.vue":
+/*!**************************************************************!*\
+  !*** ./resources/js/components/MaterialQuotingComponent.vue ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _MaterialQuotingComponent_vue_vue_type_template_id_18b86414_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MaterialQuotingComponent.vue?vue&type=template&id=18b86414&scoped=true& */ "./resources/js/components/MaterialQuotingComponent.vue?vue&type=template&id=18b86414&scoped=true&");
+/* harmony import */ var _MaterialQuotingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MaterialQuotingComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/MaterialQuotingComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _MaterialQuotingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _MaterialQuotingComponent_vue_vue_type_template_id_18b86414_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _MaterialQuotingComponent_vue_vue_type_template_id_18b86414_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "18b86414",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/MaterialQuotingComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/MaterialQuotingComponent.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/MaterialQuotingComponent.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MaterialQuotingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./MaterialQuotingComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/MaterialQuotingComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MaterialQuotingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/MaterialQuotingComponent.vue?vue&type=template&id=18b86414&scoped=true&":
+/*!*********************************************************************************************************!*\
+  !*** ./resources/js/components/MaterialQuotingComponent.vue?vue&type=template&id=18b86414&scoped=true& ***!
+  \*********************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MaterialQuotingComponent_vue_vue_type_template_id_18b86414_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./MaterialQuotingComponent.vue?vue&type=template&id=18b86414&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/MaterialQuotingComponent.vue?vue&type=template&id=18b86414&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MaterialQuotingComponent_vue_vue_type_template_id_18b86414_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MaterialQuotingComponent_vue_vue_type_template_id_18b86414_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
 
 /***/ }),
 
