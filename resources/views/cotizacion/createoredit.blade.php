@@ -1,4 +1,4 @@
-@extends('layouts.admin.layout')
+@extends('layouts.admin.layout', ['tab' => 'quotation', 'subtab' => 'quotations'])
 
 @section('meta_title')
     @if(!isset($ric))

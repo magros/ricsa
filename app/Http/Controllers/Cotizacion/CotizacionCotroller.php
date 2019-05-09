@@ -33,17 +33,16 @@ class CotizacionCotroller extends Controller
      */
     public function create()
     {
-        $con = count(Ric::all()->where('status','=','3'))+1;
-        $pe = count(Ric::all()->where('status','=','1'))+1;
+        $con = Ric::where('status','=','3')->count() + 1;
+        $pe  = Ric::where('status','=','1')->count() + 1;
 
         $Ric = 'Ric-'.date('y').'-'.$con;
         $p = 'Pedido-'.date('y').'-'.$pe;
+
         $data = [
             'clients' => Customer::pluck('company','id'),
             'Nric' => $Ric,
-            'Npedido'=> $p,
-            'tab' => 'quotation',
-            'subtab' => 'quotations'
+            'Npedido'=> $p
         ];
         return view('cotizacion.createoredit')->with($data);
     }

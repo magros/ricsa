@@ -1,4 +1,4 @@
-@extends('layouts.admin.layout')
+@extends('layouts.admin.layout', ['tab' => 'quotation','subtab' => 'clients'])
 @section('meta_title')
     @if(!isset($client))
         Crear usuario
@@ -44,7 +44,7 @@
                                 ]) !!}
                             @endif
                                 <div class="form-group">
-                                    <label for="name">Contato</label>
+                                    <label for="name">Contacto</label>
                                     {!! Form::text('name',old('name'),[
                             			'class'=>'form-control','placeholder'=>'Contato',
                             			 'autocomplete'=>'off', 'id' => 'name',

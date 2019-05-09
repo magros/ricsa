@@ -1,4 +1,4 @@
-@extends('layouts.admin.layout')
+@extends('layouts.admin.layout', ['tab' => 'quotation','subtab' => 'clients'])
 
 @section('meta_title')
     Clientes

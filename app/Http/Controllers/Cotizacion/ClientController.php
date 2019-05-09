@@ -17,6 +17,7 @@ class ClientController extends Controller
      */
     public function index()
     {
+
         $clients = Customer::latest()->paginate(10);
 
         return view('cotizacion.clients.index', compact('clients'));
