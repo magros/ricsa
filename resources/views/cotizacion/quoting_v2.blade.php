@@ -17,7 +17,9 @@
 @endsection
 
 @section('content')
-    <quoting-component></quoting-component>
+
+    <quoting-component :materials="{{json_encode($materials->toArray())}}" :ric-id="{{$ric}}"></quoting-component>
+
 @endsection
 
 @push('scripts')

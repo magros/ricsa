@@ -48,13 +48,16 @@ Route::prefix('cotizacion')->group(function(){
         Route::post('save','MaterialController@store')->name('material.save');
         Route::DELETE('delet/{id}','MaterialController@destroy');
         Route::post('list/material','MaterialController@list')->name('material.cotizador');
+        Route::post('list/material-v2','MaterialController@listV2')->name('material.cotizador.v2');
+
         Route::post('mano','MaterialController@ManoObra')->name('mano.obra');
         Route::DELETE('delet/mano/{id}','MaterialController@deleteManoObra');
         Route::post('consumibles','MaterialController@consumibles')->name('consumibles');
         Route::DELETE('delet/consumible/{id}','MaterialController@deleteConsumible');
 
         Route::get('notificaciones','MaterialController@notificaciones')->name('notificaciones');
-
+        Route::get('{ric}/materials', 'CotizacionCotroller@getMaterialQuotationByType');
+        Route::get('{ric}/calculate-pricing', 'CotizacionCotroller@getPricingAndWeightEstimate');
 
         Route::get('rics', ['as'=>'rics', 'uses'=>'CotizacionCotroller@rics']);
 

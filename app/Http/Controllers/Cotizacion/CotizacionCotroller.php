@@ -140,66 +140,65 @@ class CotizacionCotroller extends Controller
         return view('cotizacion.index', compact('rics'));
     }
 
-    public function cotizador($id){
-                $peso_neto = 0;
-                $peso_bruto = 0;
-                $total = 0;
-                $precio_kilo = 0;
-                $total_fabricacion = 0;
-                $precio_unitario_ric = 0;
-                $total_venta= 0;
-                $precio_venta = 0;
-                $pe = MaterialQuotation::where('ric_id',$id)->get();
-                foreach ($pe as $p ) {
-                    $peso_neto = $peso_neto + $p->material->net_weight;
-                    $peso_bruto = $peso_bruto + $p->material->gross_weight;
-                    $total = $total + $p->total;
-                }
-                if($total>0 && $peso_neto>0){
-                    $precio_kilo = $total/$peso_neto;
-                }
-                $peso_neto_mo = 0;
-                $cadencia = 0;
-                $horas = 0;
-                $total_mo = 0;
-                $total_precio = 0;
-                $MO = Manpower::where('ric_id',$id)->get();
-                foreach ($MO as $m) {
-                    if($m->description!=5){
-                        $peso_neto_mo = $peso_neto_mo + $m->net_weight;
-                    }
-                    $horas = $horas + $m->hours;
-                    $total_mo = $total_mo + $m->total;
-                }
-                if($peso_neto_mo>0 && $horas && $total_mo>0 && $peso_neto > 0){
-                    $cadencia = $peso_neto_mo / $horas;
-                    $total_precio = $total_mo/$peso_neto;
-                }
+    public function getPricingAndWeightEstimate($ricId)
+    {
 
-                $total_consumible = 0;
-                $precio_consumible = 0;
-                $consumibles = Consumable::where('ric_id',$id)->get();
-                foreach ($consumibles as $con) {
-                    $total_consumible = $total_consumible + $con->total;
-                }
-                if($total_consumible> 0 && $peso_neto>0 && $total_fabricacion>0){
-                $precio_consumible = $total_consumible/$peso_neto;
-                $total_fabricacion = $total + $total_mo + $total_consumible;
-                $precio_unitario_ric = $total_fabricacion/$peso_neto;
+        $peso_neto = 0;
+        $peso_bruto = 0;
+        $total = 0;
+        $precio_kilo = 0;
+        $precio_unitario_ric = 0;
+        $total_venta= 0;
+        $precio_venta = 0;
+        $pe = MaterialQuotation::where('ric_id',$ricId)->get();
+        foreach ($pe as $p ) {
+            $peso_neto = $peso_neto + $p->material->net_weight;
+            $peso_bruto = $peso_bruto + $p->material->gross_weight;
+            $total = $total + $p->total;
+        }
+        if($total>0 && $peso_neto>0){
+            $precio_kilo = $total/$peso_neto;
+        }
 
-                }
+        $total_fabricacion = 0;
 
-                if($total_fabricacion > 0 && $total_venta>0 && $peso_neto>0){
-                    $total_venta = $total_fabricacion/(1-0.25);
-                    $precio_venta = $total_venta/$peso_neto;
-                }
-        $data = [
-            'cuerpo'=>MaterialQuotation::where('ric_id',$id)->where('name','cuerpo')->get(),
-            'tapas'=>MaterialQuotation::where('ric_id',$id)->where('name','tapas')->get(),
-            'soportes'=>MaterialQuotation::where('ric_id',$id)->where('name','soporte')->get(),
-            'escalera'=>MaterialQuotation::where('ric_id',$id)->where('name','escalera')->get(),
-            'registro'=>MaterialQuotation::where('ric_id',$id)->where('name','registro')->get(),
-            'boquillas'=>MaterialQuotation::where('ric_id',$id)->where('name','boquillas')->get(),
+        $peso_neto_mo = 0;
+        $cadencia = 0;
+        $horas = 0;
+        $total_mo = 0;
+        $total_precio = 0;
+        $MO = Manpower::where('ric_id',$ricId)->get();
+        foreach ($MO as $m) {
+            if($m->description!=5){
+                $peso_neto_mo = $peso_neto_mo + $m->net_weight;
+            }
+            $horas = $horas + $m->hours;
+            $total_mo = $total_mo + $m->total;
+        }
+        if($peso_neto_mo>0 && $horas && $total_mo>0 && $peso_neto > 0){
+            $cadencia = $peso_neto_mo / $horas;
+            $total_precio = $total_mo/$peso_neto;
+        }
+
+        $total_consumible = 0;
+        $precio_consumible = 0;
+        $consumibles = Consumable::where('ric_id',$ricId)->get();
+        foreach ($consumibles as $con) {
+            $total_consumible = $total_consumible + $con->total;
+        }
+        if($total_consumible> 0 && $peso_neto>0 && $total_fabricacion>0){
+            $precio_consumible = $total_consumible/$peso_neto;
+            $total_fabricacion = $total + $total_mo + $total_consumible;
+            $precio_unitario_ric = $total_fabricacion/$peso_neto;
+
+        }
+
+        if($total_fabricacion > 0 && $total_venta>0 && $peso_neto>0){
+            $total_venta = $total_fabricacion/(1-0.25);
+            $precio_venta = $total_venta/$peso_neto;
+        }
+
+        return [
             'mano_obra'=>$MO,
             'peso_neto'=>$peso_neto,
             'peso_burto'=>$peso_bruto,
@@ -216,13 +215,24 @@ class CotizacionCotroller extends Controller
             'precio_unitario_ric' => $precio_unitario_ric,
             'total_venta'=>$total_venta,
             'precio_venta'=> $precio_venta,
-            'materials' => Material::pluck('description','id'),
             'consumibles'=> $consumibles,
+        ];
+    }
+    public function cotizador($id)
+    {
+        $data = [
+            'cuerpo'=>MaterialQuotation::where('ric_id',$id)->where('name','cuerpo')->get(),
+            'tapas'=>MaterialQuotation::where('ric_id',$id)->where('name','tapas')->get(),
+            'soportes'=>MaterialQuotation::where('ric_id',$id)->where('name','soporte')->get(),
+            'escalera'=>MaterialQuotation::where('ric_id',$id)->where('name','escalera')->get(),
+            'registro'=>MaterialQuotation::where('ric_id',$id)->where('name','registro')->get(),
+            'boquillas'=>MaterialQuotation::where('ric_id',$id)->where('name','boquillas')->get(),
+            'materials' => Material::pluck('description','id'),
             'ric'=>$id,
             'tab' => 'quotation',
             'subtab' => 'quotations'
         ];
-        return view('cotizacion.quoting')->with($data);
+        return view('cotizacion.quoting_v2')->with(array_merge($data, $this->getPricingAndWeightEstimate($id) ));
     }
 
     public function material($id){
@@ -280,4 +290,15 @@ class CotizacionCotroller extends Controller
         }
         return abort(500);
     }
+
+    public function getMaterialQuotationByType(Request $request, $ricId)
+    {
+        $query = MaterialQuotation::where('ric_id',$ricId)->with('material');
+
+        if($type = $request->get('type')){
+            $query->where('name', $type);
+        }
+        return $query->get();
+    }
+
 }

@@ -21,6 +21,9 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
 Vue.component('quoting-component', require('./components/QuotingComponent.vue').default);
+Vue.component('material-quoting-component', require('./components/MaterialQuotingComponent.vue').default);
+Vue.component('material-pricing-component', require('./components/MaterialPricingComponent.vue').default);
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

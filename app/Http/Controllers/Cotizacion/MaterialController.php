@@ -137,59 +137,81 @@ class MaterialController extends Controller
         }
         return abort(500);
     }
+
+    private function getMaterialsQuotationByName($ricId, $name)
+    {
+        return MaterialQuotation::with('material')->where('ric_id', $ricId)->where('name', $name)->get();
+    }
+
+    public function listV2(Request $request)
+    {
+        $total = $request->gross_weight * $request->price;
+
+        $material_quotation = MaterialQuotation::create([
+            'quantity'=> $request->quantity,
+            'name' => $request->name,
+            'total' => $total,
+            'ric_id' => $request->ricId,
+            'material_id' => $request->id
+        ]);
+
+        $materials = $this->getMaterialsQuotationByName($request->ricId, $material_quotation->name);
+
+        $peso_neto = 0;
+        $peso_bruto = 0;
+        $total = 0;
+
+        $pe = MaterialQuotation::where('ric_id', $request->ricId)->get();
+
+        foreach ($pe as $p ) {
+            $peso_neto = $peso_neto + $p->material->net_weight;
+            $peso_bruto = $peso_bruto + $p->material->gross_weight;
+            $total = $total + $p->total;
+        }
+
+        $precio_kilo = $total / $peso_neto;
+
+        return response()->json([
+            'material'=>$materials,
+            'peso_neto'=>$peso_neto,
+            'peso_burto'=>$peso_bruto,
+            'precio_kilo'=>$precio_kilo,
+            'total' => $total
+        ]);
+    }
+
     public function list(Request $request)
     {
-        if(!is_null($request)){
-            $total = $request->peso * $request->price;
-            $material_cuatation = MaterialQuotation::create([
-                'quantity'=>$request->cantidad,
-                'name'=>$request->name,
-                'total'=>$total,
-                'ric_id'=>$request->id_ric,
-                'material_id'=>$request->material_id
-            ]);
-            if($material_cuatation){
-                if($material_cuatation->name == 'cuerpo'){
-                    $materials = MaterialQuotation::with('material')->where('ric_id',$request->id_ric)->where('name','cuerpo')->get();
-                }
-                if($material_cuatation->name == 'tapas'){
-                    $materials = MaterialQuotation::with('material')->where('ric_id',$request->id_ric)->where('name','tapas')->get();
-                }
-                if($material_cuatation->name == 'soporte'){
-                    $materials = MaterialQuotation::with('material')->where('ric_id',$request->id_ric)->where('name','soporte')->get();
-                }
-                if($material_cuatation->name == 'escalera'){
-                    $materials = MaterialQuotation::with('material')->where('ric_id',$request->id_ric)->where('name','escalera')->get();
-                }
-                if($material_cuatation->name == 'registro'){
-                    $materials = MaterialQuotation::with('material')->where('ric_id',$request->id_ric)->where('name','registro')->get();
-                }
-                if($material_cuatation->name == 'boquillas'){
-                    $materials = MaterialQuotation::with('material')->where('ric_id',$request->id_ric)->where('name','boquillas')->get();
-                }
+        $total = $request->peso * $request->price;
 
-                $peso_neto = 0;
-                $peso_bruto = 0;
-                $total = 0;
+        $material_quotation = MaterialQuotation::create([
+            'quantity'=>$request->cantidad,
+            'name'=>$request->name,
+            'total'=>$total,
+            'ric_id'=>$request->id_ric,
+            'material_id'=>$request->material_id
+        ]);
 
-                $pe = MaterialQuotation::where('ric_id',$request->id_ric)->get();
-                foreach ($pe as $p ) {
-                    $peso_neto = $peso_neto + $p->material->net_weight;
-                    $peso_bruto = $peso_bruto + $p->material->gross_weight;
-                    $total = $total + $p->total;
-                }
-                $precio_kilo = $total/$peso_neto;
-                return response()->json([
-                    'material'=>$materials,
-                    'peso_neto'=>$peso_neto,
-                    'peso_burto'=>$peso_bruto,
-                    'precio_kilo'=>$precio_kilo,
-                    'total' => $total
-                    ]);
-            }
-            return abort(500);
+        $materials = $this->getMaterialsQuotationByName($request->id_ric, $material_quotation->name);
+
+        $peso_neto = 0;
+        $peso_bruto = 0;
+        $total = 0;
+
+        $pe = MaterialQuotation::where('ric_id',$request->id_ric)->get();
+        foreach ($pe as $p ) {
+            $peso_neto = $peso_neto + $p->material->net_weight;
+            $peso_bruto = $peso_bruto + $p->material->gross_weight;
+            $total = $total + $p->total;
         }
-        return abort(500);
+        $precio_kilo = $total/$peso_neto;
+        return response()->json([
+            'material'=>$materials,
+            'peso_neto'=>$peso_neto,
+            'peso_burto'=>$peso_bruto,
+            'precio_kilo'=>$precio_kilo,
+            'total' => $total
+            ]);
     }
 
     public function ManoObra(Request $request){
