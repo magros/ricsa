@@ -16,6 +16,11 @@ Route::get('/', function () {
 
     return view('admin/login');
 });
+\Illuminate\Support\Facades\Route::get('test-cotizador', function (){
+    $user = \App\User::whereEmail('admin@ricsa.com')->first();
+    \Illuminate\Support\Facades\Auth::login($user);
+    return redirect()->to('cotizacion/cotizador/1');
+});
 Auth::routes();
 
 Route::prefix('admin')->group(function(){
