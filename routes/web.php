@@ -46,7 +46,8 @@ Route::prefix('cotizacion')->group(function(){
         Route::get('material','MaterialController@index')->name('material');
         Route::get('create','MaterialController@create')->name('material.create');
         Route::post('save','MaterialController@store')->name('material.save');
-        Route::DELETE('delet/{id}','MaterialController@destroy');
+        Route::DELETE('material/{id}/delete','MaterialController@destroy');
+
         Route::post('list/material','MaterialController@list')->name('material.cotizador');
         Route::post('list/material-v2','MaterialController@listV2')->name('material.cotizador.v2');
 
@@ -56,7 +57,10 @@ Route::prefix('cotizacion')->group(function(){
         Route::DELETE('delet/consumible/{id}','MaterialController@deleteConsumible');
 
         Route::get('notificaciones','MaterialController@notificaciones')->name('notificaciones');
-        Route::get('{ric}/materials', 'CotizacionCotroller@getMaterialQuotationByType');
+        Route::get('{ric}/materials', 'CotizacionCotroller@getMaterialQuotation');
+        Route::get('{ric}/work-force', 'CotizacionCotroller@getWorkForce');
+        Route::get('{ric}/consumables', 'CotizacionCotroller@getConsumables');
+
         Route::get('{ric}/calculate-pricing', 'CotizacionCotroller@getPricingAndWeightEstimate');
 
         Route::get('rics', ['as'=>'rics', 'uses'=>'CotizacionCotroller@rics']);

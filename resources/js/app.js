@@ -23,6 +23,9 @@ window.Vue = require('vue');
 Vue.component('quoting-component', require('./components/QuotingComponent.vue').default);
 Vue.component('material-quoting-component', require('./components/MaterialQuotingComponent.vue').default);
 Vue.component('material-pricing-component', require('./components/MaterialPricingComponent.vue').default);
+Vue.component('work-force-quoting-component', require('./components/WorkForceQuotingComponent.vue').default);
+Vue.component('testing-quoting-component', require('./components/TestingQuotingComponent.vue').default);
+
 
 
 /**

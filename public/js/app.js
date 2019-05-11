@@ -2013,15 +2013,57 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "MaterialQuotingComponent.vue",
-  props: ['materials', 'ricId', 'typeQuoting'],
+  props: ['materials', 'ricId'],
   data: function data() {
     return {
       material: {
-        id: ''
+        id: '',
+        family: ''
       },
-      materialLists: []
+      materialLists: [],
+      familyMaterials: [{
+        name: 'cuerpo',
+        description: 'Cuerpo'
+      }, {
+        name: 'tapas',
+        description: 'Tapas'
+      }, {
+        name: 'soporte',
+        description: 'Soportes'
+      }, {
+        name: 'escalera',
+        description: 'Escalera'
+      }, {
+        name: 'registro',
+        description: 'Registro de inspección'
+      }, {
+        name: 'boquillas',
+        description: 'Boquillas'
+      }]
     };
   },
   methods: {
@@ -2030,7 +2072,9 @@ __webpack_require__.r(__webpack_exports__);
 
       var url = "/cotizacion/material/".concat(this.material.id);
       window.axios.get(url).then(function (response) {
-        _this.material = response.data;
+        _this.material = Object.assign({
+          family: _this.material.family
+        }, response.data);
       });
     },
     addMaterial: function addMaterial() {
@@ -2039,39 +2083,39 @@ __webpack_require__.r(__webpack_exports__);
       var url = "/cotizacion/list/material-v2";
       window.axios.post(url, Object.assign(this.material, {
         ricId: this.ricId,
-        name: this.typeQuoting
+        name: this.material.family
       })).then(function (response) {
-        _this2.materialLists = response.data.material;
         _this2.material = {
-          id: ''
+          id: '',
+          family: ''
         };
+
+        _this2.getMaterials();
 
         _this2.$parent.recalculateMaterialPricing();
       });
     },
-    getRic: function getRic() {
+    deleteMaterial: function deleteMaterial(id) {
       var _this3 = this;
 
-      var url = "/cotizacion/list/material-v2";
-      window.axios.post(url, Object.assign(this.material, {
-        ricId: this.ricId,
-        name: this.typeQuoting
-      })).then(function (response) {
-        _this3.materialLists = response.data.material;
-        _this3.material = {
-          id: ''
-        };
+      var url = "/cotizacion/material/".concat(id, "/delete");
+      window.axios["delete"](url).then(function (response) {
+        _this3.getMaterials();
+
+        _this3.$parent.recalculateMaterialPricing();
+      });
+    },
+    getMaterials: function getMaterials() {
+      var _this4 = this;
+
+      var url = "/cotizacion/".concat(this.ricId, "/materials");
+      window.axios.get(url).then(function (response) {
+        _this4.materialLists = response.data;
       });
     }
   },
   mounted: function mounted() {
-    var _this4 = this;
-
-    var url = "/cotizacion/".concat(this.ricId, "/materials?type=").concat(this.typeQuoting);
-    window.axios.get(url).then(function (response) {
-      console.log(response);
-      _this4.materialLists = response.data;
-    });
+    this.getMaterials();
   }
 });
 
@@ -2147,6 +2191,165 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "QuotingComponent.vue",
   props: ['materials', 'ricId'],
@@ -2155,7 +2358,8 @@ __webpack_require__.r(__webpack_exports__);
       total: '',
       priceKg: '',
       weightRaw: '',
-      weight: ''
+      weight: '',
+      all: {}
     };
   },
   methods: {
@@ -2164,6 +2368,7 @@ __webpack_require__.r(__webpack_exports__);
 
       var url = "/cotizacion/".concat(this.ricId, "/calculate-pricing");
       window.axios.get(url).then(function (response) {
+        _this.all = response.data;
         _this.total = response.data.total;
         _this.priceKg = response.data.precio_kilo;
         _this.weightRaw = response.data.peso_burto;
@@ -2173,6 +2378,367 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.recalculateMaterialPricing();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TestingQuotingComponent.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TestingQuotingComponent.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "TestingQuotingComponent",
+  props: ['ricId'],
+  data: function data() {
+    return {
+      consumable: {
+        descripcion: '',
+        cantidad: '',
+        unit_price: ''
+      },
+      consumableList: []
+    };
+  },
+  methods: {
+    getConsumableLists: function getConsumableLists() {
+      var _this = this;
+
+      var url = "/cotizacion/".concat(this.ricId, "/consumables");
+      window.axios.get(url).then(function (response) {
+        _this.consumableList = response.data;
+      });
+    },
+    deleteConsumable: function deleteConsumable(id) {
+      var _this2 = this;
+
+      var url = "/cotizacion/delet/consumible/".concat(id);
+      window.axios["delete"](url).then(function (response) {
+        _this2.getConsumableLists();
+
+        _this2.$parent.recalculateMaterialPricing();
+      });
+    },
+    addConsumable: function addConsumable() {
+      var _this3 = this;
+
+      var url = "/cotizacion/consumibles";
+      window.axios.post(url, Object.assign(this.consumable, {
+        id_ric: this.ricId
+      })).then(function (response) {
+        _this3.consumable = {
+          descripcion: '',
+          cantidad: '',
+          unit_price: ''
+        };
+
+        _this3.getConsumableLists();
+
+        _this3.$parent.recalculateMaterialPricing();
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.getConsumableLists();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/WorkForceQuotingComponent.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/WorkForceQuotingComponent.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "WorkForceQuotingComponent",
+  props: ['ricId'],
+  data: function data() {
+    return {
+      precio_hora: '',
+      peso: '',
+      cadencia: '',
+      workForce: {
+        description: '',
+        precio_hora: '',
+        id_ric: this.ricId,
+        peso: '',
+        cadencia: ''
+      },
+      workForceList: []
+    };
+  },
+  methods: {
+    getWorkForceList: function getWorkForceList() {
+      var _this = this;
+
+      var url = "/cotizacion/".concat(this.ricId, "/work-force");
+      window.axios.get(url).then(function (response) {
+        _this.workForceList = response.data;
+      });
+    },
+    addWorkForce: function addWorkForce() {
+      var _this2 = this;
+
+      var url = "/cotizacion/mano";
+      window.axios.post(url, this.workForce).then(function (response) {
+        console.log(response.data);
+        _this2.workForce = {
+          description: '',
+          precio_hora: '',
+          id_ric: _this2.ricId,
+          peso: '',
+          cadencia: ''
+        };
+
+        _this2.getWorkForceList();
+
+        _this2.$parent.recalculateMaterialPricing();
+      });
+    },
+    deleteWorkForce: function deleteWorkForce(id) {
+      var _this3 = this;
+
+      var url = "/cotizacion/delet/mano/".concat(id);
+      window.axios["delete"](url).then(function (response) {
+        _this3.getWorkForceList();
+
+        _this3.$parent.recalculateMaterialPricing();
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.getWorkForceList();
   }
 });
 
@@ -22446,503 +23012,557 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-lg-12" }, [
-    _c("div", { staticClass: "ibox float-e-margins" }, [
-      _c("div", { staticClass: "ibox-title" }, [
-        _c("h5", { staticStyle: { "text-transform": "uppercase" } }, [
-          _vm._v(_vm._s(_vm.typeQuoting))
-        ]),
-        _vm._v(" "),
-        _vm._m(0)
+  return _c("div", { staticClass: "ibox" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "ibox-content" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("form", { attrs: { "data-toggle": "validator" } }, [
+          _c("div", { staticClass: "col-sm-3" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "material_id" } }, [
+                _vm._v("Parte:")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "clearfix" }),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.material.family,
+                      expression: "material.family"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    id: "family",
+                    "data-required-error": "Este campo es obligatorio"
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.material,
+                        "family",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                [
+                  _c(
+                    "option",
+                    { attrs: { disabled: "", selected: "", value: "" } },
+                    [_vm._v("Selecciona")]
+                  ),
+                  _vm._v(" "),
+                  _vm._l(_vm.familyMaterials, function(family) {
+                    return _c("option", { domProps: { value: family.name } }, [
+                      _vm._v(
+                        _vm._s(family.description) +
+                          "\n                            "
+                      )
+                    ])
+                  })
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "help-block with-errors" })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-3" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "material_id" } }, [
+                _vm._v("Descripcion:")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "clearfix" }),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.material.id,
+                      expression: "material.id"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    id: "material_id",
+                    "data-required-error": "Este campo es obligatorio"
+                  },
+                  on: {
+                    change: [
+                      function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.material,
+                          "id",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      },
+                      _vm.getMaterialDetails
+                    ]
+                  }
+                },
+                [
+                  _c(
+                    "option",
+                    { attrs: { disabled: "", selected: "", value: "" } },
+                    [_vm._v("Selecciona")]
+                  ),
+                  _vm._v(" "),
+                  _vm._l(_vm.materials, function(item, index) {
+                    return _c("option", { domProps: { value: index } }, [
+                      _vm._v(_vm._s(item))
+                    ])
+                  })
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "help-block with-errors" })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-3" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "specification" } }, [
+                _vm._v("Especificación")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.material.specification,
+                    expression: "material.specification"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  id: "specification",
+                  name: "specification",
+                  placeholder: "Especificación",
+                  "data-required-error": "Este campo es obligatorio",
+                  maxlength: "100",
+                  disabled: ""
+                },
+                domProps: { value: _vm.material.specification },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.material, "specification", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "help-block with-errors" })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-3" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "quantity" } }, [
+                _vm._v("cantidad:")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "clearfix" }),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.material.quantity,
+                    expression: "material.quantity"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "number",
+                  name: "quantity",
+                  required: "",
+                  id: "quantity",
+                  placeholder: "Especificación",
+                  "data-required-error": "Este campo es obligatorio",
+                  maxlength: "100"
+                },
+                domProps: { value: _vm.material.quantity },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.material, "quantity", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "help-block with-errors" })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-3" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "thickness" } }, [
+                _vm._v("Esp Pulg:")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "clearfix" }),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.material.thickness,
+                    expression: "material.thickness"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  id: "thickness",
+                  name: "thickness",
+                  placeholder: "Especificación",
+                  "data-required-error": "Este campo es obligatorio",
+                  maxlength: "100",
+                  disabled: ""
+                },
+                domProps: { value: _vm.material.thickness },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.material, "thickness", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "help-block with-errors" })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-3" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "dimension" } }, [_vm._v("Di mm:")]),
+              _vm._v(" "),
+              _c("div", { staticClass: "clearfix" }),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.material.dimension,
+                    expression: "material.dimension"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  id: "dimension",
+                  name: "dimension",
+                  placeholder: "Especificación",
+                  "data-required-error": "Este campo es obligatorio",
+                  maxlength: "100",
+                  disabled: ""
+                },
+                domProps: { value: _vm.material.dimension },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.material, "dimension", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "help-block with-errors" })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-3" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "lenght" } }, [_vm._v("Long mm:")]),
+              _vm._v(" "),
+              _c("div", { staticClass: "clearfix" }),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.material.lenght,
+                    expression: "material.lenght"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  id: "lenght",
+                  name: "lenght",
+                  placeholder: "Especificación",
+                  "data-required-error": "Este campo es obligatorio",
+                  maxlength: "100",
+                  disabled: ""
+                },
+                domProps: { value: _vm.material.lenght },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.material, "lenght", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "help-block with-errors" })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-3" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "net_weight" } }, [
+                _vm._v("Peso neto:")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "clearfix" }),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.material.net_weight,
+                    expression: "material.net_weight"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  id: "net_weight",
+                  name: "net_weight",
+                  placeholder: "Especificación",
+                  "data-required-error": "Este campo es obligatorio",
+                  maxlength: "100",
+                  disabled: ""
+                },
+                domProps: { value: _vm.material.net_weight },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.material, "net_weight", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "help-block with-errors" })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-3" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "gross_weight" } }, [
+                _vm._v("Peso bruto:")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "clearfix" }),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.material.gross_weight,
+                    expression: "material.gross_weight"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  id: "gross_weight",
+                  name: "gross_weight",
+                  placeholder: "Especificación",
+                  "data-required-error": "Este campo es obligatorio",
+                  maxlength: "100",
+                  disabled: ""
+                },
+                domProps: { value: _vm.material.gross_weight },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.material, "gross_weight", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "help-block with-errors" })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-3" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "price" } }, [
+                _vm._v("Precio unitario:")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "clearfix" }),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.material.price,
+                    expression: "material.price"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  id: "price",
+                  name: "price",
+                  placeholder: "Especificación",
+                  "data-required-error": "Este campo es obligatorio",
+                  maxlength: "100",
+                  disabled: ""
+                },
+                domProps: { value: _vm.material.price },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.material, "price", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "help-block with-errors" })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-6" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-lg btn-primary pull-right m-t-15",
+                attrs: {
+                  id: "adicionar",
+                  disabled: !(
+                    _vm.material.id &&
+                    _vm.material.id &&
+                    _vm.material.quantity
+                  ),
+                  type: "button"
+                },
+                on: { click: _vm.addMaterial }
+              },
+              [_c("strong", [_vm._v("Agregar material")])]
+            )
+          ])
+        ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "ibox-content" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("form", { attrs: { "data-toggle": "validator" } }, [
-            _c("div", { staticClass: "col-sm-3" }, [
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", { attrs: { for: "material_id" } }, [
-                  _vm._v("Descripcion:")
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "clearfix" }),
-                _vm._v(" "),
-                _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.material.id,
-                        expression: "material.id"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      id: "material_id",
-                      "data-required-error": "Este campo es obligatorio"
-                    },
-                    on: {
-                      change: [
-                        function($event) {
-                          var $$selectedVal = Array.prototype.filter
-                            .call($event.target.options, function(o) {
-                              return o.selected
-                            })
-                            .map(function(o) {
-                              var val = "_value" in o ? o._value : o.value
-                              return val
-                            })
-                          _vm.$set(
-                            _vm.material,
-                            "id",
-                            $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          )
-                        },
-                        _vm.getMaterialDetails
-                      ]
-                    }
-                  },
-                  [
-                    _c(
-                      "option",
-                      { attrs: { disabled: "", selected: "", value: "" } },
-                      [_vm._v("Selecciona")]
-                    ),
-                    _vm._v(" "),
-                    _vm._l(_vm.materials, function(item, index) {
-                      return _c("option", { domProps: { value: index } }, [
-                        _vm._v(_vm._s(item))
-                      ])
-                    })
-                  ],
-                  2
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "help-block with-errors" })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-3" }, [
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", { attrs: { for: "specification" } }, [
-                  _vm._v("Especificación")
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.material.specification,
-                      expression: "material.specification"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "text",
-                    id: "specification",
-                    name: "specification",
-                    placeholder: "Especificación",
-                    "data-required-error": "Este campo es obligatorio",
-                    maxlength: "100",
-                    disabled: ""
-                  },
-                  domProps: { value: _vm.material.specification },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.material,
-                        "specification",
-                        $event.target.value
-                      )
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "help-block with-errors" })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-3" }, [
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", { attrs: { for: "quantity" } }, [
-                  _vm._v("cantidad:")
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "clearfix" }),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.material.quantity,
-                      expression: "material.quantity"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "text",
-                    name: "quantity",
-                    id: "quantity",
-                    placeholder: "Especificación",
-                    "data-required-error": "Este campo es obligatorio",
-                    maxlength: "100"
-                  },
-                  domProps: { value: _vm.material.quantity },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.material, "quantity", $event.target.value)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "help-block with-errors" })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-3" }, [
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", { attrs: { for: "thickness" } }, [
-                  _vm._v("Esp Pulg:")
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "clearfix" }),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.material.thickness,
-                      expression: "material.thickness"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "text",
-                    id: "thickness",
-                    name: "thickness",
-                    placeholder: "Especificación",
-                    "data-required-error": "Este campo es obligatorio",
-                    maxlength: "100",
-                    disabled: ""
-                  },
-                  domProps: { value: _vm.material.thickness },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.material, "thickness", $event.target.value)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "help-block with-errors" })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-3" }, [
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", { attrs: { for: "dimension" } }, [
-                  _vm._v("Di mm:")
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "clearfix" }),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.material.dimension,
-                      expression: "material.dimension"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "text",
-                    id: "dimension",
-                    name: "dimension",
-                    placeholder: "Especificación",
-                    "data-required-error": "Este campo es obligatorio",
-                    maxlength: "100",
-                    disabled: ""
-                  },
-                  domProps: { value: _vm.material.dimension },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.material, "dimension", $event.target.value)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "help-block with-errors" })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-3" }, [
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", { attrs: { for: "lenght" } }, [_vm._v("Long mm:")]),
-                _vm._v(" "),
-                _c("div", { staticClass: "clearfix" }),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.material.lenght,
-                      expression: "material.lenght"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "text",
-                    id: "lenght",
-                    name: "lenght",
-                    placeholder: "Especificación",
-                    "data-required-error": "Este campo es obligatorio",
-                    maxlength: "100",
-                    disabled: ""
-                  },
-                  domProps: { value: _vm.material.lenght },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.material, "lenght", $event.target.value)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "help-block with-errors" })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-3" }, [
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", { attrs: { for: "net_weight" } }, [
-                  _vm._v("Peso neto:")
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "clearfix" }),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.material.net_weight,
-                      expression: "material.net_weight"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "text",
-                    id: "net_weight",
-                    name: "net_weight",
-                    placeholder: "Especificación",
-                    "data-required-error": "Este campo es obligatorio",
-                    maxlength: "100",
-                    disabled: ""
-                  },
-                  domProps: { value: _vm.material.net_weight },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.material, "net_weight", $event.target.value)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "help-block with-errors" })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-3" }, [
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", { attrs: { for: "gross_weight" } }, [
-                  _vm._v("Peso bruto:")
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "clearfix" }),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.material.gross_weight,
-                      expression: "material.gross_weight"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "text",
-                    id: "gross_weight",
-                    name: "gross_weight",
-                    placeholder: "Especificación",
-                    "data-required-error": "Este campo es obligatorio",
-                    maxlength: "100",
-                    disabled: ""
-                  },
-                  domProps: { value: _vm.material.gross_weight },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.material,
-                        "gross_weight",
-                        $event.target.value
-                      )
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "help-block with-errors" })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-3" }, [
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", { attrs: { for: "price" } }, [
-                  _vm._v("Precio unitario:")
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "clearfix" }),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.material.price,
-                      expression: "material.price"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "text",
-                    id: "price",
-                    name: "price",
-                    placeholder: "Especificación",
-                    "data-required-error": "Este campo es obligatorio",
-                    maxlength: "100",
-                    disabled: ""
-                  },
-                  domProps: { value: _vm.material.price },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.material, "price", $event.target.value)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "help-block with-errors" })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-9" }, [
+      _vm._m(1),
+      _vm._v(" "),
+      _vm.materialLists.length
+        ? _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-sm-12" }, [
               _c(
-                "button",
-                {
-                  staticClass: "btn btn-lg btn-primary pull-right m-t-15",
-                  attrs: {
-                    id: "adicionar",
-                    disabled: _vm.material.id === "",
-                    type: "button"
-                  },
-                  on: { click: _vm.addMaterial }
-                },
-                [_c("strong", [_vm._v("Agregar material")])]
+                "table",
+                { staticClass: "table table-stripped table-dark table-hover" },
+                [
+                  _vm._m(2),
+                  _vm._v(" "),
+                  _c(
+                    "tbody",
+                    { attrs: { id: "contenido" } },
+                    _vm._l(_vm.materialLists, function(item) {
+                      return _c("tr", { staticClass: "gradeA" }, [
+                        _c("td", [_vm._v(_vm._s(item.name))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(item.material.description))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(item.material.specification))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(item.quantity))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(item.material.dimension))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(item.material.length))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(item.material.net_weight))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(item.material.gross_weight))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(item.material.price))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(item.total))]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c(
+                            "div",
+                            {
+                              staticClass: "btn btn-dark",
+                              on: {
+                                click: function($event) {
+                                  return _vm.deleteMaterial(item.id)
+                                }
+                              }
+                            },
+                            [_c("i", { staticClass: "fa fa-trash" })]
+                          )
+                        ])
+                      ])
+                    }),
+                    0
+                  )
+                ]
               )
             ])
           ])
-        ]),
-        _vm._v(" "),
-        _vm.materialLists.length
-          ? _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-sm-12" }, [
-                _c(
-                  "table",
-                  {
-                    staticClass: "table table-stripped table-dark table-hover"
-                  },
-                  [
-                    _vm._m(1),
-                    _vm._v(" "),
-                    _c(
-                      "tbody",
-                      { attrs: { id: "contenido" } },
-                      _vm._l(_vm.materialLists, function(item) {
-                        return _c(
-                          "tr",
-                          {
-                            staticClass: "gradeA",
-                            attrs: { id: "item-cuerpo-" + _vm.material.id }
-                          },
-                          [
-                            _c("td", [
-                              _vm._v(_vm._s(item.material.description))
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(_vm._s(item.material.specification))
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(item.quantity))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(item.material.dimension))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(item.material.length))]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(_vm._s(item.material.net_weight))
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(_vm._s(item.material.gross_weight))
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(item.material.price))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(item.total))]),
-                            _vm._v(" "),
-                            _vm._m(2, true)
-                          ]
-                        )
-                      }),
-                      0
-                    )
-                  ]
-                )
-              ])
-            ])
-          : _vm._e()
-      ])
+        : _vm._e()
     ])
   ])
 }
@@ -22951,9 +23571,27 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "ibox-tools" }, [
-      _c("a", { staticClass: "collapse-link" }, [
-        _c("i", { staticClass: "fa fa-chevron-up" })
+    return _c("div", { staticClass: "ibox-title" }, [
+      _c("h5", { staticStyle: { "text-transform": "uppercase" } }, [
+        _vm._v("Materiales")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "ibox-tools" }, [
+        _c("a", { staticClass: "collapse-link" }, [
+          _c("i", { staticClass: "fa fa-chevron-up" })
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-lg-12" }, [
+        _c("hr"),
+        _vm._v(" "),
+        _c("h3", [_vm._v("Desglose de materiales")])
       ])
     ])
   },
@@ -22963,6 +23601,8 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", { staticClass: "thead-dark" }, [
       _c("tr", [
+        _c("th", [_vm._v("Parte")]),
+        _vm._v(" "),
         _c("th", [_vm._v("Descripcion")]),
         _vm._v(" "),
         _c("th", [_vm._v("Especificacion Material")]),
@@ -22982,16 +23622,6 @@ var staticRenderFns = [
         _c("th", [_vm._v("Total")]),
         _vm._v(" "),
         _c("th", [_vm._v("Acciones")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("div", { staticClass: "btn btn-dark" }, [
-        _c("i", { staticClass: "fa fa-trash" })
       ])
     ])
   }
@@ -23017,151 +23647,1080 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("material-quoting-component", {
-        attrs: {
-          materials: _vm.materials,
-          "ric-id": _vm.ricId,
-          "type-quoting": "cuerpo"
-        }
-      }),
+  return _c("div", { staticStyle: { "margin-bottom": "80px" } }, [
+    _c("div", { staticClass: "row" }, [
+      _c(
+        "div",
+        { staticClass: "col-lg-9" },
+        [
+          _c("material-quoting-component", {
+            attrs: { materials: _vm.materials, "ric-id": _vm.ricId }
+          })
+        ],
+        1
+      ),
       _vm._v(" "),
-      _c("material-quoting-component", {
-        attrs: {
-          materials: _vm.materials,
-          "ric-id": _vm.ricId,
-          "type-quoting": "tapas"
-        }
-      }),
-      _vm._v(" "),
-      _c("material-quoting-component", {
-        attrs: {
-          materials: _vm.materials,
-          "ric-id": _vm.ricId,
-          "type-quoting": "soporte"
-        }
-      }),
-      _vm._v(" "),
-      _c("material-quoting-component", {
-        attrs: {
-          materials: _vm.materials,
-          "ric-id": _vm.ricId,
-          "type-quoting": "escalera"
-        }
-      }),
-      _vm._v(" "),
-      _c("material-quoting-component", {
-        attrs: {
-          materials: _vm.materials,
-          "ric-id": _vm.ricId,
-          "type-quoting": "registro"
-        }
-      }),
-      _vm._v(" "),
-      _c("material-quoting-component", {
-        attrs: {
-          materials: _vm.materials,
-          "ric-id": _vm.ricId,
-          "type-quoting": "boquillas"
-        }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-lg-12 m-b-25" }, [
+      _c("div", { staticClass: "col-lg-3" }, [
         _c("div", { staticClass: "ibox float-e-margins" }, [
+          _vm._m(0),
+          _vm._v(" "),
           _c("div", { staticClass: "ibox-content" }, [
             _c("div", { staticClass: "row" }, [
               _c("div", { staticClass: "col-sm-12" }, [
-                _c("div", { staticClass: "col-sm-2" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "peso_neto" } }, [
-                      _vm._v("Total peso neto")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      staticClass: "form-control",
-                      attrs: {
-                        type: "text",
-                        name: "peso_neto",
-                        id: "peso_neto",
-                        placeholder: "Total peso neto",
-                        disabled: ""
-                      },
-                      domProps: { value: _vm.weight }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-2" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "peso_bruto" } }, [
-                      _vm._v("Total peso bruto")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      staticClass: "form-control",
-                      attrs: {
-                        type: "text",
-                        name: "peso_bruto",
-                        id: "peso_bruto",
-                        placeholder: "Total peso bruto",
-                        disabled: ""
-                      },
-                      domProps: { value: _vm.weightRaw }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-2" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "precio_kilo" } }, [
-                      _vm._v("Precio por kilo")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      staticClass: "form-control",
-                      attrs: {
-                        type: "text",
-                        name: "precio_kilo",
-                        id: "precio_kilo",
-                        placeholder: "Precio por kilo",
-                        disabled: ""
-                      },
-                      domProps: { value: _vm.priceKg }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-2" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "total_material" } }, [
-                      _vm._v("Total")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      staticClass: "form-control",
-                      attrs: {
-                        type: "text",
-                        name: "total_material",
-                        id: "total_material",
-                        placeholder: "Total",
-                        disabled: ""
-                      },
-                      domProps: { value: _vm.total }
-                    })
-                  ])
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "peso_neto" } }, [
+                    _vm._v("Total peso neto")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      name: "peso_neto",
+                      id: "peso_neto",
+                      placeholder: "Total peso neto",
+                      disabled: ""
+                    },
+                    domProps: { value: _vm.weight }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-12" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "peso_bruto" } }, [
+                    _vm._v("Total peso bruto")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      name: "peso_bruto",
+                      id: "peso_bruto",
+                      placeholder: "Total peso bruto",
+                      disabled: ""
+                    },
+                    domProps: { value: _vm.weightRaw }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-12" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "precio_kilo" } }, [
+                    _vm._v("Precio por kilo")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      name: "precio_kilo",
+                      id: "precio_kilo",
+                      placeholder: "Precio por kilo",
+                      disabled: ""
+                    },
+                    domProps: { value: _vm.priceKg }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-12" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "total_material" } }, [
+                    _vm._v("Total")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      name: "total_material",
+                      id: "total_material",
+                      placeholder: "Total",
+                      disabled: ""
+                    },
+                    domProps: { value: _vm.total }
+                  })
                 ])
               ])
             ])
           ])
         ])
       ])
-    ],
-    1
-  )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c(
+        "div",
+        { staticClass: "col-lg-9" },
+        [
+          _c("work-force-quoting-component", { attrs: { "ric-id": _vm.ricId } })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-lg-3" }, [
+        _c("div", { staticClass: "ibox float-e-margins" }, [
+          _vm._m(1),
+          _vm._v(" "),
+          _c("div", { staticClass: "ibox-content" }, [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-sm-12" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "peso_neto_m" } }, [
+                    _vm._v("Total peso neto")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      name: "peso_neto_m",
+                      id: "peso_neto_m",
+                      placeholder: "Total peso neto",
+                      disabled: ""
+                    },
+                    domProps: { value: _vm.all.total_peso_neto_mo }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "help-block with-errors" })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-12" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "total_candecia" } }, [
+                    _vm._v("Total cadencia")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      name: "total_candecia",
+                      id: "total_candecia",
+                      placeholder: "Total peso bruto",
+                      disabled: ""
+                    },
+                    domProps: { value: _vm.all.cadencia }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "help-block with-errors" })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-12" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "total_horas" } }, [
+                    _vm._v("Total horas")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      name: "total_horas",
+                      id: "total_horas",
+                      placeholder: "Precio por kilo",
+                      disabled: ""
+                    },
+                    domProps: { value: _vm.all.total_horas }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "help-block with-errors" })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-12" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "precio" } }, [
+                    _vm._v("Total precio")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      name: "precio",
+                      id: "precio",
+                      placeholder: "Precio por kilo",
+                      disabled: ""
+                    },
+                    domProps: { value: _vm.all.total_precio_mo }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "help-block with-errors" })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-12" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "total_mano_obra" } }, [
+                    _vm._v("Total")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      name: "total_mano_obra",
+                      id: "total_mano_obra",
+                      placeholder: "Total",
+                      disabled: ""
+                    },
+                    domProps: { value: _vm.all.total_mo }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "help-block with-errors" })
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c(
+        "div",
+        { staticClass: "col-lg-9" },
+        [_c("testing-quoting-component", { attrs: { "ric-id": _vm.ricId } })],
+        1
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-lg-3" }, [
+        _c("div", { staticClass: "ibox float-e-margins" }, [
+          _vm._m(2),
+          _vm._v(" "),
+          _c("div", { staticClass: "ibox-content" }, [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-sm-12" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "precio_consumible" } }, [
+                    _vm._v("Precio unitario")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      name: "precio_consumible",
+                      id: "precio_consumible",
+                      placeholder: "Total peso neto",
+                      disabled: ""
+                    },
+                    domProps: { value: _vm.all.precio_consumible }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "help-block with-errors" })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-12" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "total_consumible" } }, [
+                    _vm._v("Total")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      name: "total_consumible",
+                      id: "total_consumible",
+                      placeholder: "Total peso bruto",
+                      disabled: ""
+                    },
+                    domProps: { value: _vm.all.total_consumible }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "help-block with-errors" })
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-lg-6" }, [
+        _c("div", { staticClass: "ibox" }, [
+          _vm._m(3),
+          _vm._v(" "),
+          _c("div", { staticClass: "ibox-content" }, [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-sm-12" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "precio_consumible" } }, [
+                    _vm._v("Precio unitario")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      name: "precio_unitario_ric",
+                      id: "precio_unitario_ric",
+                      placeholder: "Total peso neto",
+                      disabled: ""
+                    },
+                    domProps: { value: _vm.all.precio_unitario_ric }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "help-block with-errors" })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-12" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "total_consumible" } }, [
+                    _vm._v("Total")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      name: "total_fabricacion",
+                      id: "total_fabricacion",
+                      placeholder: "Total peso bruto",
+                      disabled: ""
+                    },
+                    domProps: { value: _vm.all.total_fabricacion }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "help-block with-errors" })
+                ])
+              ])
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-lg-6" }, [
+        _c("div", { staticClass: "ibox" }, [
+          _vm._m(4),
+          _vm._v(" "),
+          _c("div", { staticClass: "ibox-content" }, [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-sm-12" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "precio_consumible" } }, [
+                    _vm._v("Precio unitario")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      name: "precio_venta",
+                      id: "precio_venta",
+                      placeholder: "Total peso neto",
+                      disabled: ""
+                    },
+                    domProps: { value: _vm.all.precio_venta }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-12" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "total_consumible" } }, [
+                    _vm._v("Total")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      name: "total_venta",
+                      id: "total_venta",
+                      placeholder: "Total peso bruto",
+                      disabled: ""
+                    },
+                    domProps: { value: _vm.all.total_venta }
+                  })
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "ibox-title" }, [
+      _c("h5", [_vm._v("Total materiales")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "ibox-tools" }, [
+        _c("a", { staticClass: "collapse-link" }, [
+          _c("i", { staticClass: "fa fa-chevron-up" })
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "ibox-title" }, [
+      _c("h5", [_vm._v("Total mano de obra")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "ibox-tools" }, [
+        _c("a", { staticClass: "collapse-link" }, [
+          _c("i", { staticClass: "fa fa-chevron-up" })
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "ibox-title" }, [
+      _c("h5", [_vm._v("Total consumibles y pruebas")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "ibox-tools" }, [
+        _c("a", { staticClass: "collapse-link" }, [
+          _c("i", { staticClass: "fa fa-chevron-up" })
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "ibox-title" }, [
+      _c("h5", [_vm._v("Costo de fabricación")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "ibox-tools" }, [
+        _c("a", { staticClass: "collapse-link" }, [
+          _c("i", { staticClass: "fa fa-chevron-up" })
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "ibox-title" }, [
+      _c("h5", [_vm._v("Precio de venta")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "ibox-tools" }, [
+        _c("a", { staticClass: "collapse-link" }, [
+          _c("i", { staticClass: "fa fa-chevron-up" })
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TestingQuotingComponent.vue?vue&type=template&id=1b0bec59&scoped=true&":
+/*!**************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TestingQuotingComponent.vue?vue&type=template&id=1b0bec59&scoped=true& ***!
+  \**************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "ibox" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "ibox-content" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-sm-3" }, [
+          _c("div", { staticClass: "form-group" }, [
+            _c("div", { staticClass: "clearfix" }),
+            _vm._v(" "),
+            _c("label", { attrs: { for: "descripcion" } }, [
+              _vm._v("Descripcion")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.consumable.descripcion,
+                  expression: "consumable.descripcion"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                type: "text",
+                id: "descripcion",
+                name: "cantidad",
+                "data-required-error": "Este campo es obligatorio",
+                maxlength: "100"
+              },
+              domProps: { value: _vm.consumable.descripcion },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.consumable, "descripcion", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "help-block with-errors" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-sm-3" }, [
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "cantidad" } }, [_vm._v("Cantidad")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.consumable.cantidad,
+                  expression: "consumable.cantidad"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                type: "number",
+                id: "cantidad",
+                name: "cantidad",
+                "data-required-error": "Este campo es obligatorio",
+                maxlength: "100"
+              },
+              domProps: { value: _vm.consumable.cantidad },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.consumable, "cantidad", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "help-block with-errors" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-sm-3" }, [
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "unit_price" } }, [
+              _vm._v("Precio unitario")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.consumable.unit_price,
+                  expression: "consumable.unit_price"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                type: "number",
+                id: "unit_price",
+                name: "unit_price",
+                "data-required-error": "Este campo es obligatorio",
+                maxlength: "100"
+              },
+              domProps: { value: _vm.consumable.unit_price },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.consumable, "unit_price", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "help-block with-errors" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-sm-3" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-lg btn-primary mt-3",
+              attrs: { type: "button" },
+              on: {
+                click: function($event) {
+                  return _vm.addConsumable()
+                }
+              }
+            },
+            [_c("strong", [_vm._v("Agregar")])]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _vm._m(1),
+      _vm._v(" "),
+      _vm.consumableList.length
+        ? _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-sm-12" }, [
+              _c(
+                "table",
+                { staticClass: "table table-stripped table-dark table-hover" },
+                [
+                  _vm._m(2),
+                  _vm._v(" "),
+                  _c(
+                    "tbody",
+                    { attrs: { id: "contenido" } },
+                    _vm._l(_vm.consumableList, function(item) {
+                      return _c("tr", { staticClass: "gradeA" }, [
+                        _c("td", [_vm._v(_vm._s(item.description))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(item.quantity))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(item.unit_price))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(item.total))]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c(
+                            "div",
+                            {
+                              staticClass: "btn btn-dark",
+                              on: {
+                                click: function($event) {
+                                  return _vm.deleteConsumable(item.id)
+                                }
+                              }
+                            },
+                            [_c("i", { staticClass: "fa fa-trash" })]
+                          )
+                        ])
+                      ])
+                    }),
+                    0
+                  )
+                ]
+              )
+            ])
+          ])
+        : _vm._e()
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "ibox-title" }, [
+      _c("h5", { staticStyle: { "text-transform": "uppercase" } }, [
+        _vm._v("Consumibles y pruebas")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-lg-12" }, [
+        _c("hr"),
+        _vm._v(" "),
+        _c("h3", [_vm._v("Desglose de pruebas y consumibles")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "thead-dark" }, [
+      _c("tr", [
+        _c("th", [_vm._v("Descripción")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Cantidad")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Precio unitario")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Total")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Acciones")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/WorkForceQuotingComponent.vue?vue&type=template&id=e1996f3a&scoped=true&":
+/*!****************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/WorkForceQuotingComponent.vue?vue&type=template&id=e1996f3a&scoped=true& ***!
+  \****************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "ibox" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "ibox-content" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("form", [
+          _c("div", { staticClass: "col-sm-3" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "description" } }, [
+                _vm._v("Descripcion:")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "clearfix" }),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.workForce.description,
+                      expression: "workForce.description"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { name: "description", id: "description" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.workForce,
+                        "description",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                [
+                  _c("option", { attrs: { value: "", disabled: "" } }, [
+                    _vm._v("---Selecionar---")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "1" } }, [
+                    _vm._v("cuerpo y tapas")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "2" } }, [_vm._v("soportes")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "3" } }, [
+                    _vm._v("escaleras y barandales")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "4" } }, [
+                    _vm._v("boquillas")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "5" } }, [
+                    _vm._v("ingeniería")
+                  ])
+                ]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-3" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "precio_hora" } }, [
+                _vm._v("Precio por hora:")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "clearfix" }),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.workForce.precio_hora,
+                    expression: "workForce.precio_hora"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "number",
+                  name: "precio_hora",
+                  required: "",
+                  id: "precio_hora",
+                  placeholder: "Especificación",
+                  "data-required-error": "Este campo es obligatorio",
+                  maxlength: "100"
+                },
+                domProps: { value: _vm.workForce.precio_hora },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.workForce, "precio_hora", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "help-block with-errors" })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-3" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "peso" } }, [_vm._v("Precio neto:")]),
+              _vm._v(" "),
+              _c("div", { staticClass: "clearfix" }),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.workForce.peso,
+                    expression: "workForce.peso"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "number",
+                  name: "peso",
+                  required: "",
+                  id: "peso",
+                  placeholder: "Especificación",
+                  "data-required-error": "Este campo es obligatorio",
+                  maxlength: "100"
+                },
+                domProps: { value: _vm.workForce.peso },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.workForce, "peso", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "help-block with-errors" })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-3" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "cadencia" } }, [
+                _vm._v("Cadencia: ")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "clearfix" }),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.workForce.cadencia,
+                    expression: "workForce.cadencia"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "number",
+                  name: "cadencia",
+                  required: "",
+                  id: "cadencia",
+                  placeholder: "Especificación",
+                  "data-required-error": "Este campo es obligatorio",
+                  maxlength: "100"
+                },
+                domProps: { value: _vm.workForce.cadencia },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.workForce, "cadencia", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "help-block with-errors" })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-3" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-lg btn-primary",
+                attrs: {
+                  id: "adicionar",
+                  disabled: !(
+                    _vm.workForce.description &&
+                    _vm.workForce.precio_hora &&
+                    _vm.workForce.peso &&
+                    _vm.workForce.cadencia
+                  ),
+                  type: "button"
+                },
+                on: {
+                  click: function($event) {
+                    return _vm.addWorkForce()
+                  }
+                }
+              },
+              [_c("strong", [_vm._v("Agregar mano de obra")])]
+            )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _vm._m(1),
+      _vm._v(" "),
+      _vm.workForceList.length
+        ? _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-sm-12" }, [
+              _c(
+                "table",
+                { staticClass: "table table-stripped table-dark table-hover" },
+                [
+                  _vm._m(2),
+                  _vm._v(" "),
+                  _c(
+                    "tbody",
+                    { attrs: { id: "contenido" } },
+                    _vm._l(_vm.workForceList, function(item) {
+                      return _c("tr", { staticClass: "gradeA" }, [
+                        _c("td", [_vm._v(_vm._s(item.description_name))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(item.price_hour))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(item.net_weight))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(item.cadence))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(item.hours))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(item.costo))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(item.total))]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c("div", { staticClass: "btn btn-dark" }, [
+                            _c("i", {
+                              staticClass: "fa fa-trash",
+                              on: {
+                                click: function($event) {
+                                  return _vm.deleteWorkForce(item.id)
+                                }
+                              }
+                            })
+                          ])
+                        ])
+                      ])
+                    }),
+                    0
+                  )
+                ]
+              )
+            ])
+          ])
+        : _vm._e()
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "ibox-title" }, [
+      _c("h5", { staticStyle: { "text-transform": "uppercase" } }, [
+        _vm._v("Mano de obra")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-lg-12" }, [
+        _c("hr"),
+        _vm._v(" "),
+        _c("h3", [_vm._v("Desglose de materiales")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "thead-dark" }, [
+      _c("tr", [
+        _c("th", [_vm._v("Descripción")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("$/H")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Peso neto")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Cadencia")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Horas")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Porcentaje")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Total")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Acciones")])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -35332,6 +36891,8 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 Vue.component('quoting-component', __webpack_require__(/*! ./components/QuotingComponent.vue */ "./resources/js/components/QuotingComponent.vue")["default"]);
 Vue.component('material-quoting-component', __webpack_require__(/*! ./components/MaterialQuotingComponent.vue */ "./resources/js/components/MaterialQuotingComponent.vue")["default"]);
 Vue.component('material-pricing-component', __webpack_require__(/*! ./components/MaterialPricingComponent.vue */ "./resources/js/components/MaterialPricingComponent.vue")["default"]);
+Vue.component('work-force-quoting-component', __webpack_require__(/*! ./components/WorkForceQuotingComponent.vue */ "./resources/js/components/WorkForceQuotingComponent.vue")["default"]);
+Vue.component('testing-quoting-component', __webpack_require__(/*! ./components/TestingQuotingComponent.vue */ "./resources/js/components/TestingQuotingComponent.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -35602,6 +37163,144 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_QuotingComponent_vue_vue_type_template_id_456c5da2_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_QuotingComponent_vue_vue_type_template_id_456c5da2_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/TestingQuotingComponent.vue":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/TestingQuotingComponent.vue ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _TestingQuotingComponent_vue_vue_type_template_id_1b0bec59_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TestingQuotingComponent.vue?vue&type=template&id=1b0bec59&scoped=true& */ "./resources/js/components/TestingQuotingComponent.vue?vue&type=template&id=1b0bec59&scoped=true&");
+/* harmony import */ var _TestingQuotingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TestingQuotingComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/TestingQuotingComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _TestingQuotingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _TestingQuotingComponent_vue_vue_type_template_id_1b0bec59_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _TestingQuotingComponent_vue_vue_type_template_id_1b0bec59_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "1b0bec59",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/TestingQuotingComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/TestingQuotingComponent.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/TestingQuotingComponent.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TestingQuotingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./TestingQuotingComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TestingQuotingComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TestingQuotingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/TestingQuotingComponent.vue?vue&type=template&id=1b0bec59&scoped=true&":
+/*!********************************************************************************************************!*\
+  !*** ./resources/js/components/TestingQuotingComponent.vue?vue&type=template&id=1b0bec59&scoped=true& ***!
+  \********************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TestingQuotingComponent_vue_vue_type_template_id_1b0bec59_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./TestingQuotingComponent.vue?vue&type=template&id=1b0bec59&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TestingQuotingComponent.vue?vue&type=template&id=1b0bec59&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TestingQuotingComponent_vue_vue_type_template_id_1b0bec59_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TestingQuotingComponent_vue_vue_type_template_id_1b0bec59_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/WorkForceQuotingComponent.vue":
+/*!***************************************************************!*\
+  !*** ./resources/js/components/WorkForceQuotingComponent.vue ***!
+  \***************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _WorkForceQuotingComponent_vue_vue_type_template_id_e1996f3a_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./WorkForceQuotingComponent.vue?vue&type=template&id=e1996f3a&scoped=true& */ "./resources/js/components/WorkForceQuotingComponent.vue?vue&type=template&id=e1996f3a&scoped=true&");
+/* harmony import */ var _WorkForceQuotingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./WorkForceQuotingComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/WorkForceQuotingComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _WorkForceQuotingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _WorkForceQuotingComponent_vue_vue_type_template_id_e1996f3a_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _WorkForceQuotingComponent_vue_vue_type_template_id_e1996f3a_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "e1996f3a",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/WorkForceQuotingComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/WorkForceQuotingComponent.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/components/WorkForceQuotingComponent.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_WorkForceQuotingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./WorkForceQuotingComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/WorkForceQuotingComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_WorkForceQuotingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/WorkForceQuotingComponent.vue?vue&type=template&id=e1996f3a&scoped=true&":
+/*!**********************************************************************************************************!*\
+  !*** ./resources/js/components/WorkForceQuotingComponent.vue?vue&type=template&id=e1996f3a&scoped=true& ***!
+  \**********************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_WorkForceQuotingComponent_vue_vue_type_template_id_e1996f3a_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./WorkForceQuotingComponent.vue?vue&type=template&id=e1996f3a&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/WorkForceQuotingComponent.vue?vue&type=template&id=e1996f3a&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_WorkForceQuotingComponent_vue_vue_type_template_id_e1996f3a_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_WorkForceQuotingComponent_vue_vue_type_template_id_e1996f3a_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

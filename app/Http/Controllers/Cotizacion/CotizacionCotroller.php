@@ -290,7 +290,7 @@ class CotizacionCotroller extends Controller
         return abort(500);
     }
 
-    public function getMaterialQuotationByType(Request $request, $ricId)
+    public function getMaterialQuotation(Request $request, $ricId)
     {
         $query = MaterialQuotation::where('ric_id',$ricId)->with('material');
 
@@ -298,6 +298,19 @@ class CotizacionCotroller extends Controller
             $query->where('name', $type);
         }
         return $query->get();
+    }
+
+    public function getWorkForce(Request $request, $ricId)
+    {
+        $manPower = Manpower::where('ric_id',$ricId)->get();
+        $manPower->each(function($instance) { $instance->append('description_name'); });
+//        $manPower->append('description_name');
+        return $manPower;
+    }
+
+    public function getConsumables(Request $request, $ricId)
+    {
+        return Consumable::where('ric_id',$ricId)->get();
     }
 
 }
