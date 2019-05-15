@@ -2033,8 +2033,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "MaterialQuotingComponent.vue",
   props: ['materials', 'ricId'],
@@ -2042,7 +2040,9 @@ __webpack_require__.r(__webpack_exports__);
     return {
       material: {
         id: '',
-        family: ''
+        family: '',
+        specification: '',
+        description: ''
       },
       materialLists: [],
       familyMaterials: [{
@@ -2067,6 +2067,12 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    getMaterialsBySpecification: function getMaterialsBySpecification() {
+      var url = "/cotizacion/materials?specification=".concat(this.material.specification);
+      window.axios.get(url).then(function (response) {
+        console.log(response); // this.material = Object.assign({family: this.material.family}, response.data);
+      });
+    },
     getMaterialDetails: function getMaterialDetails() {
       var _this = this;
 
@@ -23087,8 +23093,8 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "col-sm-3" }, [
             _c("div", { staticClass: "form-group" }, [
-              _c("label", { attrs: { for: "material_id" } }, [
-                _vm._v("Descripcion:")
+              _c("label", { attrs: { for: "specification" } }, [
+                _vm._v("Especificación:")
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "clearfix" }),
@@ -23100,13 +23106,13 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.material.id,
-                      expression: "material.id"
+                      value: _vm.material.specification,
+                      expression: "material.specification"
                     }
                   ],
                   staticClass: "form-control",
                   attrs: {
-                    id: "material_id",
+                    id: "specification",
                     "data-required-error": "Este campo es obligatorio"
                   },
                   on: {
@@ -23122,13 +23128,13 @@ var render = function() {
                           })
                         _vm.$set(
                           _vm.material,
-                          "id",
+                          "specification",
                           $event.target.multiple
                             ? $$selectedVal
                             : $$selectedVal[0]
                         )
                       },
-                      _vm.getMaterialDetails
+                      _vm.getMaterialsBySpecification
                     ]
                   }
                 },
@@ -23154,39 +23160,64 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "col-sm-3" }, [
             _c("div", { staticClass: "form-group" }, [
-              _c("label", { attrs: { for: "specification" } }, [
-                _vm._v("Especificación")
+              _c("label", { attrs: { for: "description" } }, [
+                _vm._v("Descripción")
               ]),
               _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.material.specification,
-                    expression: "material.specification"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: {
-                  type: "text",
-                  id: "specification",
-                  name: "specification",
-                  placeholder: "Especificación",
-                  "data-required-error": "Este campo es obligatorio",
-                  maxlength: "100",
-                  disabled: ""
-                },
-                domProps: { value: _vm.material.specification },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.material.description,
+                      expression: "material.description"
                     }
-                    _vm.$set(_vm.material, "specification", $event.target.value)
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    id: "description",
+                    "data-required-error": "Este campo es obligatorio"
+                  },
+                  on: {
+                    change: [
+                      function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.material,
+                          "description",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      },
+                      _vm.getMaterialsBySpecification
+                    ]
                   }
-                }
-              }),
+                },
+                [
+                  _c(
+                    "option",
+                    { attrs: { disabled: "", selected: "", value: "" } },
+                    [_vm._v("Selecciona")]
+                  ),
+                  _vm._v(" "),
+                  _vm._l(_vm.materials, function(item, index) {
+                    return _c("option", { domProps: { value: index } }, [
+                      _vm._v(_vm._s(item))
+                    ])
+                  })
+                ],
+                2
+              ),
               _vm._v(" "),
               _c("div", { staticClass: "help-block with-errors" })
             ])
@@ -23216,6 +23247,7 @@ var render = function() {
                   required: "",
                   id: "quantity",
                   placeholder: "Especificación",
+                  disabled: "",
                   "data-required-error": "Este campo es obligatorio",
                   maxlength: "100"
                 },
@@ -23298,8 +23330,7 @@ var render = function() {
                   name: "dimension",
                   placeholder: "Especificación",
                   "data-required-error": "Este campo es obligatorio",
-                  maxlength: "100",
-                  disabled: ""
+                  maxlength: "100"
                 },
                 domProps: { value: _vm.material.dimension },
                 on: {
@@ -23338,8 +23369,7 @@ var render = function() {
                   name: "lenght",
                   placeholder: "Especificación",
                   "data-required-error": "Este campo es obligatorio",
-                  maxlength: "100",
-                  disabled: ""
+                  maxlength: "100"
                 },
                 domProps: { value: _vm.material.lenght },
                 on: {
@@ -37313,7 +37343,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/marco/Proyectos/ros/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/marco/Proyectos/ricsa/resources/js/app.js */"./resources/js/app.js");
 
 
 /***/ })

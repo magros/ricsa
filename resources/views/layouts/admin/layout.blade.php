@@ -72,7 +72,7 @@
                     </li>
                     {{-- Cotizaciones --}}
                     <li class="{{isset($tab)&&$tab=='quotation'?'active':''}} w-100" >
-                        <a href="#"><i class="fa fa-cogs "></i> <span class="nav-label">Cotizacones</span> <span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-cogs "></i> <span class="nav-label">Cotizaciones</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li class="{{isset($subtab)&&$subtab=='clients'?'active':''}}">
                                 <a href="{{route('cotizacion.client')}}">Clientes</a>

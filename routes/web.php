@@ -55,7 +55,7 @@ Route::prefix('cotizacion')->group(function(){
 
         Route::post('list/material','MaterialController@list')->name('material.cotizador');
         Route::post('list/material-v2','MaterialController@listV2')->name('material.cotizador.v2');
-
+        Route::get('materials','MaterialController@getMaterials');
         Route::post('mano','MaterialController@ManoObra')->name('mano.obra');
         Route::DELETE('delet/mano/{id}','MaterialController@deleteManoObra');
         Route::post('consumibles','MaterialController@consumibles')->name('consumibles');
@@ -217,7 +217,9 @@ Route::prefix('compras')->group(function(){
 
     });
 });
+Route::prefix('materials')->group(function(){
 
+});
 Route::prefix('contabilidad')->group(function(){
     Route::middleware(['contabilidad'])->name('contabilidad.')->namespace('Contabilidad')->group(function()
     {

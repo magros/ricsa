@@ -30,12 +30,12 @@
 
                     <div class="col-sm-3">
                         <div class="form-group">
-                            <label for="material_id">Descripcion:</label>
+                            <label for="specification">Especificación:</label>
                             <div class="clearfix"></div>
-                            <select id="material_id"
+                            <select id="specification"
                                     data-required-error="Este campo es obligatorio"
-                                    v-model="material.id"
-                                    @change="getMaterialDetails"
+                                    v-model="material.specification"
+                                    @change="getMaterialsBySpecification"
                                     class="form-control">
                                 <option disabled selected value="">Selecciona</option>
                                 <option v-for="(item, index) in materials" v-bind:value="index">{{ item }}</option>
@@ -46,16 +46,15 @@
 
                     <div class="col-sm-3">
                         <div class="form-group">
-                            <label for="specification">Especificación</label>
-                            <input type="text"
-                                   id="specification"
-                                   name="specification"
-                                   v-model="material.specification"
-                                   class="form-control"
-                                   placeholder="Especificación"
-                                   data-required-error="Este campo es obligatorio"
-                                   maxlength="100"
-                                   disabled>
+                            <label for="description">Descripción</label>
+                            <select id="description"
+                                    data-required-error="Este campo es obligatorio"
+                                    v-model="material.description"
+                                    @change="getMaterialsBySpecification"
+                                    class="form-control">
+                                <option disabled selected value="">Selecciona</option>
+                                <option v-for="(item, index) in materials" v-bind:value="index">{{ item }}</option>
+                            </select>
                             <div class="help-block with-errors"></div>
                         </div>
                     </div>
@@ -71,6 +70,7 @@
                                    id="quantity"
                                    class="form-control"
                                    placeholder="Especificación"
+                                   disabled
                                    data-required-error="Este campo es obligatorio"
                                    maxlength="100">
                             <div class="help-block with-errors"></div>
@@ -105,8 +105,7 @@
                                    v-model="material.dimension"
                                    placeholder="Especificación"
                                    data-required-error="Este campo es obligatorio"
-                                   maxlength="100"
-                                   disabled>
+                                   maxlength="100">
                             <div class="help-block with-errors"></div>
                         </div>
                     </div>
@@ -122,8 +121,7 @@
                                    class="form-control"
                                    placeholder="Especificación"
                                    data-required-error="Este campo es obligatorio"
-                                   maxlength="100"
-                                   disabled>
+                                   maxlength="100">
                             <div class="help-block with-errors"></div>
                         </div>
                     </div>
@@ -247,7 +245,7 @@
         props: ['materials', 'ricId'],
         data: function () {
             return {
-                material: {id: '', family: ''},
+                material: {id: '', family: '', specification: '', description: ''},
                 materialLists: [],
                 familyMaterials: [
                     {name: 'cuerpo', description: 'Cuerpo'},
@@ -260,6 +258,13 @@
             }
         },
         methods: {
+            getMaterialsBySpecification(){
+                let url = `/cotizacion/materials?specification=${this.material.specification}`;
+                window.axios.get(url).then(response => {
+                    console.log(response);
+                    // this.material = Object.assign({family: this.material.family}, response.data);
+                });
+            },
             getMaterialDetails() {
                 let url = `/cotizacion/material/${this.material.id}`;
                 window.axios.get(url).then(response => {

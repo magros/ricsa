@@ -339,4 +339,13 @@ class MaterialController extends Controller
             return redirect()->back()->with('alert',Helpers::alertData('warning','','saveError'));
         }
     }
+
+    public function getMaterials(Request $request)
+    {
+        $specification = $request->get('specification');
+        if($specification){
+            return Material::whereSpecification($specification)->get();
+        }
+        return Material::all();
+    }
 }

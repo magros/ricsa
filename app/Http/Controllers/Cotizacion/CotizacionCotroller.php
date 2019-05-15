@@ -220,18 +220,19 @@ class CotizacionCotroller extends Controller
     public function cotizador($id)
     {
         $data = [
-            'cuerpo'=>MaterialQuotation::where('ric_id',$id)->where('name','cuerpo')->get(),
-            'tapas'=>MaterialQuotation::where('ric_id',$id)->where('name','tapas')->get(),
-            'soportes'=>MaterialQuotation::where('ric_id',$id)->where('name','soporte')->get(),
-            'escalera'=>MaterialQuotation::where('ric_id',$id)->where('name','escalera')->get(),
-            'registro'=>MaterialQuotation::where('ric_id',$id)->where('name','registro')->get(),
-            'boquillas'=>MaterialQuotation::where('ric_id',$id)->where('name','boquillas')->get(),
-            'materials' => Material::pluck('description','id'),
+//            'cuerpo'=>MaterialQuotation::where('ric_id',$id)->where('name','cuerpo')->get(),
+//            'tapas'=>MaterialQuotation::where('ric_id',$id)->where('name','tapas')->get(),
+//            'soportes'=>MaterialQuotation::where('ric_id',$id)->where('name','soporte')->get(),
+//            'escalera'=>MaterialQuotation::where('ric_id',$id)->where('name','escalera')->get(),
+//            'registro'=>MaterialQuotation::where('ric_id',$id)->where('name','registro')->get(),
+//            'boquillas'=>MaterialQuotation::where('ric_id',$id)->where('name','boquillas')->get(),
+            'materials' => Material::pluck('specification','specification'),
             'ric'=>$id,
             'tab' => 'quotation',
             'subtab' => 'quotations'
         ];
-        return view('cotizacion.quoting_v2')->with(array_merge($data, $this->getPricingAndWeightEstimate($id) ));
+//        $data = array_merge($data, $this->getPricingAndWeightEstimate($id) );
+        return view('cotizacion.quoting_v2', $data);
     }
 
     public function material($id){
@@ -244,7 +245,8 @@ class CotizacionCotroller extends Controller
         return abort(500);
     }
 
-    public function rics(Request $request){
+    public function rics(Request $request)
+    {
         DB::connection()->enableQueryLog();
         $clients = null;
         if($request->has('c')){
